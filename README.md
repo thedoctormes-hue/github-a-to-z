@@ -1,9 +1,9 @@
 # 🚀 GitHub от А до Я: Полный практический курс
 
-> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга и AI-агентов через MCP.**  
+> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга, AI-агентов через MCP и человеко-агентных команд.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.2-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.3-success?style=flat-square)](#)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
@@ -32,7 +32,7 @@
          │
          └──> [Уровень 9: Архитектура] ──> [Уровень 10: Production-стандарты]
                                                         │
-[Уровень 12: AI-кодинг & Вайбкодинг] <── [Уровень 11: Гигиена & Docs-as-Code]
+[Уровень 13: Команды & Hybrid] <── [Уровень 12: AI-кодинг & MCP] <── [Уровень 11: Гигиена & Docs]
 ```
 
 ### 📍 [Модуль 0: Разведка на местности (Зачем тебе GitHub)](docs/00-intro/README.md)
@@ -112,7 +112,8 @@
 * **Модели каталогизации:**
   * Слоистая архитектура против Вертикальных слайсов (Vertical Slice Architecture).
   * Feature-Sliced Design (FSD): понятный путеводитель по уровням `app/` ➔ `pages/` ➔ `widgets/` ➔ `features/` ➔ `entities/` ➔ `shared/` и золотое правило однонаправленного импорта.
-* **Архитектурный журнал решений (ADR — Architecture Decision Records):** шаблон и культура фиксации ключевых решений («почему мы выбрали X вместо Y»).\n* **Антипаттерны и инженерный сленг:**
+* **Архитектурный журнал решений (ADR — Architecture Decision Records):** шаблон и культура фиксации ключевых решений («почему мы выбрали X вместо Y»).
+* **Антипаттерны и инженерный сленг:**
   * Спагетти-код: симптомы клубка и пошаговый рефакторинг.
   * Костыли, Велосипеды и Технический долг: когда это допустимо и как не утонуть в процентах.
   * **Карго-культ (Cargo Cult Programming):** бездумное копирование чужих паттернов, микросервисов и оверинжиниринг.
@@ -120,7 +121,8 @@
 
 ### 📍 [Модуль 10: Production-стандарты & Командный аудит (Кроссплатформенность, Защита и Чистая история)](docs/10-production-standards/README.md)
 * **Война окончаний строк (CRLF против LF):** как избежать ложного коммита на 10 000 строк и настроить обязательный `.gitattributes`.
-* **Три стратегии слияния PR:** Merge Commit vs Rebase vs **Squash and Merge** (почему прод выбирает «Один PR = Один атомарный коммит»).\n* **Conventional Commits:** стандарты семантических сообщений коммитов (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`, `BREAKING CHANGE:`).
+* **Три стратегии слияния PR:** Merge Commit vs Rebase vs **Squash and Merge** (почему прод выбирает «Один PR = Один атомарный коммит»).
+* **Conventional Commits:** стандарты семантических сообщений коммитов (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`, `BREAKING CHANGE:`).
 * **Цифровой нотариус (Commit Signing):** подпись коммитов через SSH-ключ или GPG, верифицированный бейдж `Verified` на GitHub и защита от спуфинга автора.
 * **Автономная безопасность с Dependabot:** авто-сканирование уязвимостей в зависимостях (`package.json`, `requirements.txt`, `go.mod`) и автоматические PR с фиксами.
 * **Правила защиты веток (Branch Protection & Rulesets):** обязательный Code Review перед слиянием, прохождение CI-чеков и жесткий запрет `force-push` в прод.
@@ -150,6 +152,20 @@
 * **Кибербезопасность (AI OPSEC):** векторы Indirect Prompt Injection через тикеты (Issues) и защита изоляцией.
 * **Железный закон HITL (Human-in-the-Loop):** ИИ генерирует код, но Человек всегда держит палец на кнопке слияния.
 
+### 📍 [Модуль 13: Синтез разумов: Человеко-агентные команды & Hybrid Engineering](docs/13-human-agent-teams/README.md)
+* **Сравнительная анатомия:** Люди против ИИ-агентов (сильные стороны, уязвимости, комплементарность).
+* **Адаптация практик человеческих команд (Agile / Scrum для ИИ):**
+  * Спецификация как контракт (Spec-Driven Development) вместо расплывчатых диалогов.
+  * Definition of Ready (DoR) и жесткий Definition of Done (DoD) для агентов.
+  * Блокировка регрессий и контрактные тесты (Safety Harness).
+* **Архитектурный паттерн «Агентная Триада» (Agent Triad Pattern):**
+  * Planner (Архитектор) ➔ Builder (Инженер) ➔ Auditor (Красная Команда / Red Team) ➔ Human TL (Режиссер и слияние).
+* **Специфические патологии ИИ и методы купирования:**
+  * Сикофантия (Sycophancy) и соглашательство — как заставить агента сомневаться и спорить.
+  * Дрейф контекста (Context Drift) в длинных цепочках вызовов.
+  * Опасность Automation Bias (слепое доверие человека к сгенерированному артефакту).
+* **GitHub как Single Pane of Glass:** единая панель управления для гибридной команды (Issue Ops, PR Reviews, Projects, Discussions).
+
 ---
 
 ## 🧪 Лабораторные полигоны (Hands-on Labs)
@@ -170,6 +186,7 @@
 | **[Lab 10](labs/lab-10-production/README.md)** | Настроить `.gitattributes`, включить SSH Commit Signing и сделать PR со Squash | `.gitattributes`, Commit Signing, Conventional Commits |
 | **[Lab 11](labs/lab-11-hygiene-docs/README.md)** | Настроить `~/.gitignore_global`, автоудаление веток, pre-commit и синхронный CHANGELOG | Pre-commit, Docs-as-Code, Keep a Changelog |
 | **[Lab 12](labs/lab-12-ai-mcp/README.md)** | Настроить `copilot-instructions.md`, `AGENTS.md`, MCP и прогнать цикл «От Issue к PR» с аудитом | AI Context, MCP, HITL Audit |
+| **[Lab 13](labs/lab-13-human-agent-teams/README.md)** | Сформировать DoD, прогнать цикл Триады (Planner ➔ Builder ➔ Auditor) и провести финальный HITL-ревью | Hybrid Engineering, Agent Triad, Sycophancy Mitigation |
 
 ---
 
@@ -184,14 +201,14 @@ github-a-to-z/
 ├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
 ├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
-├── docs/                       # Теоретические и практические главы (00 - 12)
+├── docs/                       # Теоретические и практические главы (00 - 13)
 │   ├── ...
-│   ├── 11-hygiene-and-docs/
-│   └── 12-ai-coding-mcp/
-├── labs/                       # Шаблоны и задания лабораторных работ (01 - 12)
+│   ├── 12-ai-coding-mcp/
+│   └── 13-human-agent-teams/
+├── labs/                       # Шаблоны и задания лабораторных работ (01 - 13)
 │   ├── ...
-│   ├── lab-11-hygiene-docs/
-│   └── lab-12-ai-mcp/
+│   ├── lab-12-ai-mcp/
+│   └── lab-13-human-agent-teams/
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
     ├── copilot-instructions.md # Конфигурация стандартов для GitHub Copilot
     ├── ISSUE_TEMPLATE/
