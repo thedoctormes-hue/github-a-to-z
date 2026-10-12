@@ -231,6 +231,8 @@ github-a-to-z/
 │   ├── ...
 │   ├── lab-13-human-agent-teams/
 │   └── lab-14-security-insights/
+├── scripts/                    # Автоматизация и валидация целостности ссылок
+│   └── validate_links.py
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
     ├── copilot-instructions.md # Конфигурация стандартов для GitHub Copilot
     ├── PULL_REQUEST_TEMPLATE.md# Шаблон оформления Pull Request (100% Community Standards)

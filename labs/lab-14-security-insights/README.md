@@ -146,7 +146,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript-typescript', 'python' ]
+        language: [ 'python' ]
 
     steps:
     - name: Checkout repository
@@ -162,6 +162,14 @@ jobs:
       with:
         category: "/language:${{matrix.language}}"
 ```
+
+> [!IMPORTANT]
+> **Золотое правило чистоты матрицы CodeQL:**  
+> В параметре `strategy.matrix.language` следует объявлять **исключительно те языки, исходный код которых реально присутствует в вашем репозитории**.  
+> Если указать язык вслепую (например, оставить шаблонный `javascript-typescript` в проекте, где нет `.js`/`.ts` файлов), CodeQL завершится с фатальной ошибкой:  
+> `Error: No source code was seen and extracted to make up a database`.  
+> В нашем репозитории CodeQL анализирует служебные скрипты автоматизации на Python (`scripts/validate_links.py`).
+
 
 ---
 
