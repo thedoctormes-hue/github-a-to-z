@@ -5,7 +5,7 @@
 
 [![Status](https://img.shields.io/badge/Module-12-blue?style=flat-square)](#)
 [![Topic](https://img.shields.io/badge/Topic-AI%20Coding%20%26%20Vibe%20Coding-purple?style=flat-square)](#)
-[![Protocol](https://img.shields.io/badge/Standard-Model%20Context%20Protocol%20(MCP)-orange?style=flat-square)](https://modelcontextprotocol.io/)
+[![Protocol](https://img.shields.io/badge/Standard-Model%20Context%20Protocol%20%28MCP%29-orange?style=flat-square)](https://modelcontextprotocol.io/)
 
 ---
 
