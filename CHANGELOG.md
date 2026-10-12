@@ -10,6 +10,23 @@
 ## [Unreleased]
 
 ### Added
+- **Модуль 12 (Новая эра: AI-кодинг, Вайбкодинг, GitHub Copilot, Google Jules и протокол MCP):**
+  - Феномен вайбкодинга (Vibe Coding) Андрея Карпатого: переход от ручного кодинга к дирижированию моделями.
+  - Две стороны медали: сверхзвуковая скорость прототипирования против накопления AI Slop и угрозы Package Hallucinations.
+  - Экосистема GitHub Copilot: Copilot Workspace (от Issue к плану и PR в браузере), Copilot Edits, Copilot PR Summaries и Code Review.
+  - Автономный облачный инженер Google Jules: цикл решения тикетов в изолированной облачной песочнице с автотестами.
+  - Model Context Protocol (MCP): открытый индустриальный стандарт Anthropic, архитектура Host-Client-Server, GitHub MCP Server.
+  - Контекстная инженерия репозитория: конфигурация `.github/copilot-instructions.md`, `AGENTS.md` и `.cursorrules`.
+  - Кибербезопасность в эпоху AI (AI OPSEC): векторы Indirect Prompt Injection через Issues/PR и непреложный закон HITL (Human-in-the-Loop).
+- **Лабораторная работа №12:**
+  - Настройка `.github/copilot-instructions.md`, манифеста `AGENTS.md`, конфигурации MCP и отработка полного цикла «От Issue к PR» с проверкой на галлюцинации и ручным слиянием HITL.
+- Корневой файл `.github/copilot-instructions.md` в репозитории как образцовая конфигурация для ИИ.
+
+---
+
+## [1.2.0] - 2026-10-12
+
+### Added
 - **Модуль 11 (Инженерная гигиена & Культура документации):**
   - Принцип «Пишем то, что делаем, делаем то, что пишем» и ликвидация документационного дрифта (Documentation Drift).
   - Разоблачение мифа о «самодокументированном коде» (разница между «КАК» и «ЗАЧЕМ»).
