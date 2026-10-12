@@ -3,7 +3,8 @@
 > **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга, AI-агентов через MCP, человеко-агентных команд и цитадели безопасности.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.4-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.5-success?style=flat-square)](#)
+[![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
@@ -17,6 +18,7 @@
 
 ## 🧭 Навигатор курса
 
+* ⚡ **[Шпаргалка разработчика (CHEATSHEET.md)](CHEATSHEET.md)** — карманный экспресс-навигатор по всем командам Git, GitHub CLI, трюкам и стандартам курса.
 * 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
 * 📜 **[Журнал изменений (CHANGELOG.md)](CHANGELOG.md)** — официальная хроника обновлений по канону Keep a Changelog.
 * ⚖️ **[Лицензия проекта (MIT)](LICENSE)** — юридический статус материалов курса.
@@ -216,6 +218,7 @@
 ```text
 github-a-to-z/
 ├── README.md                   # Главная страница и навигатор по курсу
+├── CHEATSHEET.md              # Интерактивная шпаргалка и быстрый навигатор по курсу
 ├── GLOSSARY.md                 # Карманный словарь терминов с аналогиями
 ├── CHANGELOG.md                # Официальный журнал изменений (Keep a Changelog)
 ├── LICENSE                     # Официальная лицензия MIT
@@ -245,4 +248,4 @@ github-a-to-z/
 
 ## 🚦 С чего начать?
 
-Переходите к **[Модулю 0: Разведка на местности](docs/00-intro/README.md)** или загляните в **[Словарь терминов](GLOSSARY.md)**!
+Переходите к **[Модулю 0: Разведка на местности](docs/00-intro/README.md)**, держите под рукой **[Шпаргалку разработчика](CHEATSHEET.md)** или загляните в **[Словарь терминов](GLOSSARY.md)**!
