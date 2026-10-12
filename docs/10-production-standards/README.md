@@ -151,6 +151,11 @@ git config --global commit.gpgsign true
 
 ## 6. Защита веток от катастроф: Rulesets & Branch Protection 🧱
 
+> [!IMPORTANT]
+> **⚠️ Тарифный радар: Branch Protection в Private-репозиториях**  
+> Правила защиты веток (Branch Protection Rules и Rulesets) бесплатны **только для публичных репозиториев (Public)**.  
+> В приватных репозиториях на бесплатном тарифе Free эта функция недоступна: попытка настройки в интерфейсе выдает требование перехода на GitHub Pro, а API отвечает `403 Forbidden: Upgrade to GitHub Pro or make this repository public`. Для отработки правил защиты переводите учебный проект в статус Public.
+
 В командной разработке нельзя полагаться на честное слово: кто-нибудь обязательно случайно нажмет `git push origin main` и сломает проект.
 
 Для этого в репозитории настраивается **Защита веток (Branch Protection)**:

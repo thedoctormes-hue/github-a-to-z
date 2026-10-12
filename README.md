@@ -217,6 +217,8 @@
 
 ```text
 github-a-to-z/
+├── .gitignore                  # Первая линия обороны: исключение мусора ОС, секретов и кэша
+├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
 ├── README.md                   # Главная страница и навигатор по курсу
 ├── CHEATSHEET.md              # Интерактивная шпаргалка и быстрый навигатор по курсу
 ├── GLOSSARY.md                 # Карманный словарь терминов с аналогиями
@@ -224,7 +226,6 @@ github-a-to-z/
 ├── LICENSE                     # Официальная лицензия MIT
 ├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
-├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
 ├── SECURITY.md                 # Официальная политика безопасности (Responsible Disclosure)
 ├── docs/                       # Теоретические и практические главы (00 - 14)
 │   ├── ...
@@ -236,12 +237,13 @@ github-a-to-z/
 │   └── lab-14-security-insights/
 ├── scripts/                    # Автоматизация и валидация целостности ссылок
 │   └── validate_links.py
-└── .github/                    # Рабочие шаблоны GitHub для репозитория
+└── .github/                    # Рабочая конфигурация GitHub для репозитория
+    ├── dependabot.yml          # Еженедельный мониторинг версий GitHub Actions
     ├── copilot-instructions.md # Конфигурация стандартов для GitHub Copilot
-    ├── PULL_REQUEST_TEMPLATE.md# Шаблон оформления Pull Request (100% Community Standards)
+    ├── PULL_REQUEST_TEMPLATE.md# Шаблон оформления Pull Request
     ├── ISSUE_TEMPLATE/
     └── workflows/
-        └── codeql.yml          # Автоматический SAST-сканер уязвимостей CodeQL
+        └── ci.yml              # Автоматический CI-валидатор целостности гиперссылок
 ```
 
 ---

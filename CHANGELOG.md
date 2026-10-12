@@ -11,45 +11,29 @@
 
 ## [1.5.0] - 2026-10-12
 
+### 🛡️ Санация антипаттернов & Устранение тарифных слепых зон (Red Team Audit)
+- **Создан корневой `.gitignore`**: Первая линия обороны проекта — исключение системного мусора (.DS_Store, Thumbs.db), артефактов Python (__pycache__, venv), секретов (.env) и кэша IDE.
+- **Внедрен `.github/dependabot.yml`**: Еженедельный автоматический мониторинг безопасности и версий используемых GitHub Actions.
+- **Развернут боевой CI-воркфлоу `.github/workflows/ci.yml`**: Реальный, проходящий CI конвейер, автоматически валидирующий все ссылки, относительные пути и анкоры через `scripts/validate_links.py`.
+- **Временно нейтрализован `codeql.yml`**: Устранен ложный запуск CodeQL на приватном репозитории Free-тарифа (требующем GHAS). Добавлено разъяснение о возврате сканера при переводе проекта в Public.
+- **Санирован `SECURITY.md`**: Удален личный ящик Gmail; регламент переведен на защищенный канал GitHub Private Vulnerability Reporting (PVR).
+- **Внедрен «Тарифный радар» (Tariff Matrix)**: В модули и лабы 04, 06, 10, 14 добавлены предупреждения о различиях тарифов Free vs Pro/Team и видимости Public vs Private (Push Protection, Pages, Branch Protection, CodeQL).
+- **Уточнена механика `git reflog` в Модуле 07**: Разъяснены сроки жизни записей (30–90 дней) и физическое удаление висячих коммитов сборщиком `git gc`.
+
 ### Added
-- **`CHEATSHEET.md`**: Интерактивная экспресс-шпаргалка разработчика — карманный навигатор по всем 14 модулям курса, команды Git, GitHub CLI `gh`, OPSEC, Conventional Commits, Семантическое версионирование, Troubleshooting-матрица и навигация.
-- **`CONTRIBUTING.md`**: Официальное руководство для студентов и контрибьюторов по сдаче лабораторных работ, правилам форков, ветвлению, Conventional Commits и стандартам Definition of Done.
+- **`CHEATSHEET.md`**: Интерактивная экспресс-шпаргалка разработчика (карманный справочник по всем 14 модулям курса, команды Git, GitHub CLI `gh`, OPSEC, Conventional Commits, SemVer, Troubleshooting-матрица).
+- **`CONTRIBUTING.md`**: Официальное руководство для студентов и контрибьюторов по сдаче лабораторных работ, правилам форков, Conventional Commits и стандартам Definition of Done.
 - **`scripts/validate_links.py`**: Автоматический валидатор целостности относительных путей, якорей заголовков и переходов курса.
-- **Двусторонняя навигация в лабораториях (Labs Navigation Matrix)**: В каждую из 14 лабораторных работ добавлен блок «🧭 Навигация» с прямыми переходами назад к теории соответствующего модуля, к следующему модулю курса и на главную страницу `README.md`.
-- **Модуль 14 (Цитадель безопасности & Телеметрия штаба: Security and quality, Insights, CodeQL, SBOM и OSINT репозитория):**
-  - Подробный разбор вкладки **Security and quality**: политика `SECURITY.md`, Responsible Disclosure, запрет публичных тикетов для эксплойтов.
-  - Канал Private Vulnerability Reporting (PVR) и процесс безопасного патчинга через Temporary Private Fork.
-  - Регистрация международных CVE и публикация бюллетеней в GitHub Security Advisories (GHSA).
-  - Превентивное сканирование секретов (Secret Scanning) и блокировка пушей с токенами (Push Protection).
-  - Семантический статический анализ кода движком CodeQL (SAST): поиск уязвимостей (SQLi, XSS, RCE, Path Traversal) на графе AST и потоках данных (Source ➔ Taint ➔ Sink).
-  - Активация графа зависимостей (Dependency Graph), алерты Dependabot и экспорт цифрового паспорта ПО SBOM (SPDX/CycloneDX).
-  - Подробный разбор вкладки **Insights**: оперативный срез Pulse (24ч, 7 дней, месяц), график активности Contributors и расчет Bus Factor (фактора автобуса).
-  - Официальный скоринг Community Standards и получение рейтинга 100%.
-  - Раздел Traffic: метрики уникальных посетителей, клонов, Top Referrers (источники трафика) и Popular Content (ограничение 14 дней).
-  - Частота кода (Code Frequency), карта коммитов, рентген сети и форков (Network Graph & Forks).
-  - Экономика и производительность Actions usage & performance metrics.
-- **Лабораторная работа №14:**
-  - Активация Dependency Graph и Dependabot alerts в веб-интерфейсе.
-  - Развертывание корневого файла `SECURITY.md` с политикой Responsible Disclosure и контактами безопасности.
-  - Создание официального шаблона Pull Request `.github/PULL_REQUEST_TEMPLATE.md` для взятия 100% Community Standards.
-  - Настройка боевого воркфлоу CodeQL Analysis (`.github/workflows/codeql.yml`).
-  - Практический аудит вкладки Insights (Traffic, Bus Factor, Community score).
-- Корневой файл политики безопасности `SECURITY.md`.
-- Официальный шаблон Pull Request `.github/PULL_REQUEST_TEMPLATE.md`.
-- CI/CD воркфлоу статического сканирования `.github/workflows/codeql.yml`.
+- **Двусторонняя навигация в лабораториях (Labs Navigation Matrix)**: В каждую из 14 лабораторных работ добавлен блок «🧭 Навигация» с прямыми переходами назад к теории, к следующему модулю и на главную страницу `README.md`.
+- **Модуль 14 & Лабораторная работа №14**: Комплексная защита репозитория (Security and quality) и телеметрия штаба (Insights).
 
 ### Fixed
-- **Калибровка матрицы CodeQL (CodeQL Matrix Alignment)**: В `.github/workflows/codeql.yml` матрица приведена в строгое соответствие с реальным стеком репозитория (`language: [ 'python' ]`), устранена ложная попытка анализа несуществующего JS/TS кода.
 - **Целостность относительных ссылок (Relative Path Integrity)**: Исправлены некорректные относительные пути `../labs/` на `../../labs/` в модулях `docs/02` — `docs/10`.
 - **Связность Модуля 1 и Лабораторной 1**: Добавлен прямой переход из `docs/01-web-basics/README.md` в `labs/lab-01-profile/README.md`.
-- **Анкоры кириллических заголовков и пунктуации (Slug Integrity)**:
-  - `GLOSSARY.md`: исправлены анкоры алфавитного указателя (`#английские-термины-az`, `#русские-термины-ая`) и терминов с разделителями (`/`, `&`).
-  - `docs/11-hygiene-and-docs/README.md`: исправлен анкор раздела с тире (один дефис вместо двух).
-  - `docs/14-security-insights/README.md`: нормализованы 10 анкоров оглавления, содержавших разделитель `&` (один дефис вместо двойного).
+- **Анкоры кириллических заголовков и пунктуации (Slug Integrity)**: Исправлены анкоры в `GLOSSARY.md`, `docs/11-hygiene-and-docs/README.md` и `docs/14-security-insights/README.md`.
 
 ### Changed
-- Обновлен `GLOSSARY.md` (добавлены термины CodeQL, Community Standards, CVE, Dependency Graph, GHSA, Network Graph, PVR, Pulse, SAST, SBOM, Secret Scanning, Security Policy, Top Referrers, Traffic).
-- Актуализирована витрина `README.md` (версия v1.5, бейдж и навигация к `CHEATSHEET.md`, дорожная карта 14 уровней, матрица 14 лабораторий, бейджи, дерево репозитория).
+- Обновлен `GLOSSARY.md` и актуализирована витрина `README.md` (дерево репозитория, бейджи, ссылки на `CHEATSHEET.md`).
 
 ---
 
