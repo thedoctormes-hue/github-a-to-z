@@ -99,3 +99,10 @@ git push -u origin 1-docs-add-rules
 3. Создан Issue с лейблом `documentation`.
 4. Issue был автоматически закрыт слиянием Pull Request с ключевым словом `Closes #...`.
 5. Карточка на доске перешла в статус `Done`.
+---
+
+## 🧭 Навигация
+
+* 🔙 **Теория модуля:** [Модуль 5: Проектный штаб](../../docs/05-project-management/README.md)
+* 🗺️ **Навигатор курса:** [Главная страница курса](../../README.md)
+* ⏭️ **Следующий модуль:** [Модуль 6: Роботы на службе (CI/CD & Pages)](../../docs/06-actions-pages/README.md)
