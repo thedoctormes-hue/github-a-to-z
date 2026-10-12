@@ -1,6 +1,6 @@
 # 🚀 GitHub от А до Я: Полный практический курс
 
-> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий и AI-агентов через MCP.**  
+> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры и AI-агентов через MCP.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.0-success?style=flat-square)](#)
@@ -27,6 +27,8 @@
 [Уровень 1: Веб-орбита] ──> [Уровень 2: Консоль & SSH / gh] ──> [Уровень 3: Ветки & PR]
                                                                           │
 [Уровень 8: Релизы & Лицензии] <── [Уровень 7: CLI & MCP] <── [Уровень 4-6: OPSEC, Штаб & CI/CD]
+         │
+         └──> [Уровень 9: Архитектура & Синхронизация] ──> [Уровень 10: Production-стандарты & Аудит]
 ```
 
 ### 📍 [Модуль 0: Разведка на местности (Зачем тебе GitHub)](docs/00-intro/README.md)
@@ -45,8 +47,7 @@
 
 ### 📍 [Модуль 2: Мост к терминалу (Консоль, SSH & легкий вход через gh)](docs/02-terminal-ssh/README.md)
 * Установка Git (Windows, macOS, Linux).
-* Базовая идентификация: `user.name` и `user.email`.
-* Безопасная аутентификация:
+* Базовая идентификация: `user.name` и `user.email`.\n* Безопасная аутентификация:
   * Классический путь: генерация ключей SSH (`ed25519`).
   * Современный экспресс-путь: моментальный вход через GitHub CLI (`gh auth login`).
 * Золотой цикл Git: `git init` ➔ `git status` ➔ `git add` ➔ `git commit` ➔ `git push`.
@@ -100,6 +101,28 @@
 * **Юридический щит (Лицензии):** парадокс «All Rights Reserved», подробный разбор MIT, Apache 2.0, GNU GPL v3 и Unlicense.
 * **Анатомия официального релиза:** Семантическое версионирование (SemVer `vMAJOR.MINOR.PATCH`), теги в терминале (`git tag`) и публикация GitHub Releases с автогенерацией Release Notes.
 
+### 📍 [Модуль 9: Инженерная гигиена & Архитектура (Синхронизация, FSD, ADR и борьба с хаосом)](docs/09-architecture-hygiene/README.md)
+* **Синхронизация локального и удаленного репозитория:** почему `git fetch` безопаснее слепого `git pull`, ювелирный `git pull --rebase`, спасительный карман `git stash` и генеральная уборка мертвых веток через `git fetch --prune`.
+* **Гигиена корня и организация каталогов:** запрет на «свалку в корне», разделение ответственности (`src/`, `docs/`, `tests/`, `scripts/`, `assets/`, `configs/`).
+* **Модели каталогизации:**
+  * Слоистая архитектура против Вертикальных слайсов (Vertical Slice Architecture).
+  * Feature-Sliced Design (FSD): понятный путеводитель по уровням `app/` ➔ `pages/` ➔ `widgets/` ➔ `features/` ➔ `entities/` ➔ `shared/` и золотое правило однонаправленного импорта.
+* **Архитектурный журнал решений (ADR — Architecture Decision Records):** шаблон и культура фиксации ключевых решений («почему мы выбрали X вместо Y»).
+* **Антипаттерны и инженерный сленг:**
+  * Спагетти-код: симптомы клубка и пошаговый рефакторинг.
+  * Костыли, Велосипеды и Технический долг: когда это допустимо и как не утонуть в процентах.
+  * **Карго-культ (Cargo Cult Programming):** бездумное копирование чужих паттернов, микросервисов и оверинжиниринг.
+  * Разговорный словарь разработчика (Пуллреквест, Дропнуть, Черипик, Откатить, Задеплоить, Хотфикс, Прод).
+
+### 📍 [Модуль 10: Production-стандарты & Командный аудит (Кроссплатформенность, Защита и Чистая история)](docs/10-production-standards/README.md)
+* **Война окончаний строк (CRLF против LF):** как избежать ложного коммита на 10 000 строк и настроить обязательный `.gitattributes`.
+* **Три стратегии слияния PR:** Merge Commit vs Rebase vs **Squash and Merge** (почему прод выбирает «Один PR = Один атомарный коммит»).
+* **Conventional Commits:** стандарты семантических сообщений коммитов (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`, `BREAKING CHANGE:`).
+* **Цифровой нотариус (Commit Signing):** подпись коммитов через SSH-ключ или GPG, верифицированный бейдж `Verified` на GitHub и защита от спуфинга автора.
+* **Автономная безопасность с Dependabot:** авто-сканирование уязвимостей в зависимостях (`package.json`, `requirements.txt`, `go.mod`) и автоматические PR с фиксами.
+* **Правила защиты веток (Branch Protection & Rulesets):** обязательный Code Review перед слиянием, прохождение CI-чеков и жесткий запрет `force-push` в прод.
+* **Культура Code Review и Suggested Changes:** как предлагать точечные правки в один клик прямо в интерфейсе GitHub PR.
+
 ---
 
 ## 🧪 Лабораторные полигоны (Hands-on Labs)
@@ -116,6 +139,8 @@
 | **[Lab 06](labs/lab-06-actions/README.md)** | Написать GitHub Action с таймаутом и опубликовать сайт на Pages | CI/CD, GitHub Pages |
 | **[Lab 07](labs/lab-07-cli-mcp/README.md)** | Работа в `gh` CLI, воскрешение ветки через `reflog` и конфиг MCP | GitHub CLI, Reflog, MCP Security |
 | **[Lab 08](labs/lab-08-release/README.md)** | Добавить лицензию MIT, поставить тег `v1.0.0` и выпустить Release | Licenses, SemVer, GitHub Releases |
+| **[Lab 09](labs/lab-09-architecture/README.md)** | Отработать `stash`, `prune`, навести порядок в корне и написать ADR | Git Sync, Root Hygiene, ADR |
+| **[Lab 10](labs/lab-10-production/README.md)** | Настроить `.gitattributes`, включить SSH Commit Signing и сделать PR со Squash | `.gitattributes`, Commit Signing, Conventional Commits |
 
 ---
 
@@ -128,8 +153,30 @@ github-a-to-z/
 ├── LICENSE                     # Официальная лицензия MIT
 ├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
-├── docs/                       # Теоретические и практические главы (00 - 08)
-├── labs/                       # Шаблоны и задания лабораторных работ (01 - 08)
+├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
+├── docs/                       # Теоретические и практические главы (00 - 10)
+│   ├── 00-intro/
+│   ├── 01-web-basics/
+│   ├── 02-terminal-ssh/
+│   ├── 03-branches-pr/
+│   ├── 04-security-opsec/
+│   ├── 05-project-management/
+│   ├── 06-actions-pages/
+│   ├── 07-pro-tools/
+│   ├── 08-releases-licenses/
+│   ├── 09-architecture-hygiene/
+│   └── 10-production-standards/
+├── labs/                       # Шаблоны и задания лабораторных работ (01 - 10)
+│   ├── lab-01-profile/
+│   ├── lab-02-terminal/
+│   ├── lab-03-conflicts/
+│   ├── lab-04-security/
+│   ├── lab-05-projects/
+│   ├── lab-06-actions/
+│   ├── lab-07-cli-mcp/
+│   ├── lab-08-release/
+│   ├── lab-09-architecture/
+│   └── lab-10-production/
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
     ├── ISSUE_TEMPLATE/
     └── workflows/
