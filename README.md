@@ -1,9 +1,9 @@
 # 🚀 GitHub от А до Я: Полный практический курс
 
-> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены и AI-агентов через MCP.**  
+> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга и AI-агентов через MCP.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.1-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.2-success?style=flat-square)](#)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
@@ -30,7 +30,9 @@
                                                                           │
 [Уровень 8: Релизы & Лицензии] <── [Уровень 7: CLI & MCP] <── [Уровень 4-6: OPSEC, Штаб & CI/CD]
          │
-         └──> [Уровень 9: Архитектура] ──> [Уровень 10: Production-стандарты] ──> [Уровень 11: Гигиена & Docs-as-Code]
+         └──> [Уровень 9: Архитектура] ──> [Уровень 10: Production-стандарты]
+                                                        │
+[Уровень 12: AI-кодинг & Вайбкодинг] <── [Уровень 11: Гигиена & Docs-as-Code]
 ```
 
 ### 📍 [Модуль 0: Разведка на местности (Зачем тебе GitHub)](docs/00-intro/README.md)
@@ -110,8 +112,7 @@
 * **Модели каталогизации:**
   * Слоистая архитектура против Вертикальных слайсов (Vertical Slice Architecture).
   * Feature-Sliced Design (FSD): понятный путеводитель по уровням `app/` ➔ `pages/` ➔ `widgets/` ➔ `features/` ➔ `entities/` ➔ `shared/` и золотое правило однонаправленного импорта.
-* **Архитектурный журнал решений (ADR — Architecture Decision Records):** шаблон и культура фиксации ключевых решений («почему мы выбрали X вместо Y»).
-* **Антипаттерны и инженерный сленг:**
+* **Архитектурный журнал решений (ADR — Architecture Decision Records):** шаблон и культура фиксации ключевых решений («почему мы выбрали X вместо Y»).\n* **Антипаттерны и инженерный сленг:**
   * Спагетти-код: симптомы клубка и пошаговый рефакторинг.
   * Костыли, Велосипеды и Технический долг: когда это допустимо и как не утонуть в процентах.
   * **Карго-культ (Cargo Cult Programming):** бездумное копирование чужих паттернов, микросервисов и оверинжиниринг.
@@ -119,8 +120,7 @@
 
 ### 📍 [Модуль 10: Production-стандарты & Командный аудит (Кроссплатформенность, Защита и Чистая история)](docs/10-production-standards/README.md)
 * **Война окончаний строк (CRLF против LF):** как избежать ложного коммита на 10 000 строк и настроить обязательный `.gitattributes`.
-* **Три стратегии слияния PR:** Merge Commit vs Rebase vs **Squash and Merge** (почему прод выбирает «Один PR = Один атомарный коммит»).
-* **Conventional Commits:** стандарты семантических сообщений коммитов (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`, `BREAKING CHANGE:`).
+* **Три стратегии слияния PR:** Merge Commit vs Rebase vs **Squash and Merge** (почему прод выбирает «Один PR = Один атомарный коммит»).\n* **Conventional Commits:** стандарты семантических сообщений коммитов (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`, `BREAKING CHANGE:`).
 * **Цифровой нотариус (Commit Signing):** подпись коммитов через SSH-ключ или GPG, верифицированный бейдж `Verified` на GitHub и защита от спуфинга автора.
 * **Автономная безопасность с Dependabot:** авто-сканирование уязвимостей в зависимостях (`package.json`, `requirements.txt`, `go.mod`) и автоматические PR с фиксами.
 * **Правила защиты веток (Branch Protection & Rulesets):** обязательный Code Review перед слиянием, прохождение CI-чеков и жесткий запрет `force-push` в прод.
@@ -138,6 +138,17 @@
 * **Атомарность коммитов:** категорический запрет на смешивание рефакторинга с правкой бизнес-логики.
 * **Гигиена зависимостей и борьба с Bloat:** поучительный кейс `left-pad`, коммит lock-файлов и сканирование уязвимостей.
 * **Гигиена внимания (Notification Fatigue):** победа над спамом в GitHub через правильный выбор режимов Watch (Participating vs Releases) и Inbox Zero.
+
+### 📍 [Модуль 12: Новая эра: AI-кодинг, Вайбкодинг, GitHub Copilot, Google Jules и протокол MCP](docs/12-ai-coding-mcp/README.md)
+* **Революция Вайбкодинга (Vibe Coding):** манифест Андрея Карпатого — от написания строк к дирижированию ансамблем ИИ-агентов.
+* **Две стороны медали:** сверхзвуковое прототипирование за 2 часа против AI Slop, потери контроля и галлюцинаций библиотек (Package Hallucination).
+* **Экосистема GitHub Copilot:** Copilot Workspace (решение Issue в спецификацию, план и PR в облаке), Copilot Edits, автогенерация описаний PR и автоматическое ревью.
+* **Настройка репозитория для Copilot:** `.github/copilot-instructions.md` как проектный брендбук для ИИ.
+* **Google Jules:** автономный облачный AI-инженер, решающий задачи в изолированных песочницах с прогоном тестов.
+* **Model Context Protocol (MCP):** архитектура открытого USB-C стандарта (Host ➔ Client ➔ Servers), GitHub MCP Server и безопасное разграничение прав.
+* **Контекстная инженерия репозитория:** создание `AGENTS.md` и `.cursorrules` для ликвидации галлюцинаций.
+* **Кибербезопасность (AI OPSEC):** векторы Indirect Prompt Injection через тикеты (Issues) и защита изоляцией.
+* **Железный закон HITL (Human-in-the-Loop):** ИИ генерирует код, но Человек всегда держит палец на кнопке слияния.
 
 ---
 
@@ -158,6 +169,7 @@
 | **[Lab 09](labs/lab-09-architecture/README.md)** | Отработать `stash`, `prune`, навести порядок в корне и написать ADR | Git Sync, Root Hygiene, ADR |
 | **[Lab 10](labs/lab-10-production/README.md)** | Настроить `.gitattributes`, включить SSH Commit Signing и сделать PR со Squash | `.gitattributes`, Commit Signing, Conventional Commits |
 | **[Lab 11](labs/lab-11-hygiene-docs/README.md)** | Настроить `~/.gitignore_global`, автоудаление веток, pre-commit и синхронный CHANGELOG | Pre-commit, Docs-as-Code, Keep a Changelog |
+| **[Lab 12](labs/lab-12-ai-mcp/README.md)** | Настроить `copilot-instructions.md`, `AGENTS.md`, MCP и прогнать цикл «От Issue к PR» с аудитом | AI Context, MCP, HITL Audit |
 
 ---
 
@@ -172,32 +184,16 @@ github-a-to-z/
 ├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
 ├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
-├── docs/                       # Теоретические и практические главы (00 - 11)
-│   ├── 00-intro/
-│   ├── 01-web-basics/
-│   ├── 02-terminal-ssh/
-│   ├── 03-branches-pr/
-│   ├── 04-security-opsec/
-│   ├── 05-project-management/
-│   ├── 06-actions-pages/
-│   ├── 07-pro-tools/
-│   ├── 08-releases-licenses/
-│   ├── 09-architecture-hygiene/
-│   ├── 10-production-standards/
-│   └── 11-hygiene-and-docs/
-├── labs/                       # Шаблоны и задания лабораторных работ (01 - 11)
-│   ├── lab-01-profile/
-│   ├── lab-02-terminal/
-│   ├── lab-03-conflicts/
-│   ├── lab-04-security/
-│   ├── lab-05-projects/
-│   ├── lab-06-actions/
-│   ├── lab-07-cli-mcp/
-│   ├── lab-08-release/
-│   ├── lab-09-architecture/
-│   ├── lab-10-production/
-│   └── lab-11-hygiene-docs/
+├── docs/                       # Теоретические и практические главы (00 - 12)
+│   ├── ...
+│   ├── 11-hygiene-and-docs/
+│   └── 12-ai-coding-mcp/
+├── labs/                       # Шаблоны и задания лабораторных работ (01 - 12)
+│   ├── ...
+│   ├── lab-11-hygiene-docs/
+│   └── lab-12-ai-mcp/
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
+    ├── copilot-instructions.md # Конфигурация стандартов для GitHub Copilot
     ├── ISSUE_TEMPLATE/
     └── workflows/
 ```
