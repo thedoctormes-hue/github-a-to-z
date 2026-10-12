@@ -7,6 +7,7 @@
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat-square)](CODE_OF_CONDUCT.md)
 [![Audience](https://img.shields.io/badge/Level-From%20Zero%20to%20Hero-purple?style=flat-square)](#)
 
 ---
@@ -15,6 +16,7 @@
 
 * 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
 * ⚖️ **[Лицензия проекта (MIT)](LICENSE)** — юридический статус материалов курса.
+* 🛡️ **[Кодекс поведения (CODE_OF_CONDUCT)](CODE_OF_CONDUCT.md)** — стандарты уважения, этикет и правила сообщества.
 * 🤝 **[Правила участия (CONTRIBUTING)](CONTRIBUTING.md)** — как сдавать домашние задания и оформлять PR.
 
 ---
@@ -60,11 +62,18 @@
 
 ### 📍 [Модуль 4: Цифровой щит & OPSEC (Безопасность)](docs/04-security-opsec/README.md)
 * Анатомия ловушки: почему удаление файла в Git не удаляет пароли из истории.
-* Правило OPSEC: «Скомпрометированный ключ = Мертвый ключ (Revoke & Rotate)».\n* Идеальный `.gitignore` для учебного и боевого проекта.\n* Паттерн `.env` (секреты) против `.env.example` (публичный шаблон).\n* Облачный радар GitHub: включение **Push Protection**.\n* Стратегия «Лаборатория против Витрины» (The Clean-Slate Release): как выпустить чистый релиз v1.0.0 без мусорной истории черновика.
+* Правило OPSEC: «Скомпрометированный ключ = Мертвый ключ (Revoke & Rotate)».
+* Идеальный `.gitignore` для учебного и боевого проекта.
+* Паттерн `.env` (секреты) против `.env.example` (публичный шаблон).
+* Облачный радар GitHub: включение **Push Protection**.
+* Стратегия «Лаборатория против Витрины» (The Clean-Slate Release): как выпустить чистый релиз v1.0.0 без мусорной истории черновика.
 
 ### 📍 [Модуль 5: Проектный штаб (Issue Ops, Discussions & Projects)](docs/05-project-management/README.md)
 * **Лейблы (Labels):** цветовая семафора, глобальный маяк `good first issue` для новичков и фильтрация.
 * Разделение этикета: **Issues** (баги и задачи) против **Discussions** (вопросы и общение).
+* **Эмоциональный щит и деэскалация:** почему мы благодарим даже за агрессивные тикеты («принцип айкидо») и отделение фактов от шума.
+* **Штатные инструменты модерации:** Hide comment, Lock conversation, Block user.
+* **Кодекс поведения (Code of Conduct):** защита сообщества через `CODE_OF_CONDUCT.md`.
 * Два подхода превращения задачи в код: магические слова `Closes #ID` vs кнопка `Create a branch`.
 * GitHub Projects (v2): Канбан-доски с автопилотом статусов и трассируемостью.
 * Команда: Коллабораторы (Write access) vs Контрибьюторы (Fork + PR).
@@ -117,6 +126,7 @@ github-a-to-z/
 ├── README.md                   # Главная страница и навигатор по курсу
 ├── GLOSSARY.md                 # Карманный словарь терминов с аналогиями
 ├── LICENSE                     # Официальная лицензия MIT
+├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
 ├── docs/                       # Теоретические и практические главы (00 - 08)
 ├── labs/                       # Шаблоны и задания лабораторных работ (01 - 08)
