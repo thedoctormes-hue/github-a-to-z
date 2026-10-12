@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "💬 Вопросы и обсуждения по курсу"
+    url: "https://github.com/thedoctormes-hue/github-a-to-z/discussions"
+    about: "Задавайте любые вопросы по коду и главам курса во вкладке Discussions"
