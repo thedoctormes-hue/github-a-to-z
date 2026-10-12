@@ -1,0 +1,119 @@
+# 🧪 Лабораторная работа №6: Настройка первого CI-робота и публикация на Pages
+
+> **Цель работы:** Написать свой первый сценарий автоматизации в GitHub Actions, настроить защиту от зависания (`timeout-minutes`), увидеть прохождение тестов в облаке и опубликовать рабочий сайт через GitHub Pages.
+
+---
+
+## 📋 Пошаговый сценарий
+
+### Шаг 1. Создание веб-страницы проекта
+Перейди в свой учебный репозиторий на компьютере и убедись, что находишься в ветке `main`:
+```bash
+cd test-git-lab
+git switch main
+git pull
+```
+
+Создай файл `index.html` в корне проекта:
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой первый сайт на GitHub Pages</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #0d1117; color: #58a6ff; }
+        .card { text-align: center; border: 1px solid #30363d; padding: 40px; border-radius: 12px; background: #161b22; }
+        h1 { margin-bottom: 8px; color: #f0f6fc; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🚀 Мой проект в эфире!</h1>
+        <p>Этот сайт автоматически опубликован через <b>GitHub Pages</b>.</p>
+        <p>Проверено роботом <b>GitHub Actions</b> ✅</p>
+    </div>
+</body>
+</html>
+```
+
+---
+
+### Шаг 2. Создание первого сценария автоматизации
+Создай специальную папку `.github/workflows/`:
+```bash
+mkdir -p .github/workflows
+```
+
+Внутри этой папки создай файл `ci.yml`:
+```yaml
+name: Проверка проекта (CI)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'index.html'
+      - '.github/workflows/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5 # Защита от зависания и сжигания квоты минут!
+
+    steps:
+      - name: 1. Скачать репозиторий
+        uses: actions/checkout@v4
+
+      - name: 2. Проверить наличие главного файла
+        run: |
+          if [ -f index.html ]; then
+            echo "✅ Файл index.html успешно найден!"
+          else
+            echo "❌ Ошибка: файл index.html отсутствует!"
+            exit 1
+          fi
+
+      - name: 3. Отчет о проверке
+        run: echo "Все автоматические проверки пройдены успешно!"
+```
+
+---
+
+### Шаг 3. Отправка сценария в облако
+Закоммить файлы и отправь их на GitHub:
+```bash
+git add index.html .github/workflows/ci.yml
+git commit -m "ci: добавлен первый workflow проверки и стартовая страница index.html"
+git push origin main
+```
+
+---
+
+### Шаг 4. Наблюдение за работой робота
+1. Открой свой репозиторий в браузере на GitHub.
+2. Перейди во вкладку **Actions**.
+3. Ты увидишь, как запустился твой рабочий процесс `Проверка проекта (CI)`!
+4. Кликни по нему: ты увидишь логи выполнения каждого шага в реальном времени.
+5. Через 15–20 секунд задание загорится яркой зеленой галочкой: **Completed: Success**!
+
+---
+
+### Шаг 5. Включение хостинга GitHub Pages
+1. В репозитории перейди во вкладку **Settings**.
+2. В левой колонке найди раздел **Pages**.
+3. В блоке **Build and deployment**:
+   * **Source:** выбери `Deploy from a branch`.
+   * **Branch:** выбери `main` и папку `/(root)`.
+4. Нажми кнопку **Save**.
+5. Подожди около минуты и обнови страницу: сверху появится зеленая плашка с прямой ссылкой на твой сайт вида:  
+   `https://твой-логин.github.io/test-git-lab/`
+6. Открой эту ссылку на компьютере или смартфоне — твой сайт работает в открытом интернете! 🎉
+
+---
+
+## ✅ Критерии успешного выполнения
+1. В репозитории создан файл `.github/workflows/ci.yml`.
+2. В сценарии корректно настроены параметры `timeout-minutes: 5` и фильтр `paths:`.
+3. Во вкладке **Actions** отображается успешный запуск с зеленой галочкой.
+4. Включен GitHub Pages, и сайт `index.html` доступен по публичной ссылке в интернете.
