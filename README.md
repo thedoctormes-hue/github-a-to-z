@@ -3,23 +3,18 @@
 > **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до GitHub CLI и AI-агентов через MCP.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Draft%20%2F%20Closed%20Alpha-red?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.0-success?style=flat-square)](#)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
-[![Audience](https://img.shields.io/badge/Level-From%20Zero%20to%20Hero-success?style=flat-square)](#)
-[![License](https://img.shields.io/badge/License-MIT-purple?style=flat-square)](#)
+[![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
+[![Audience](https://img.shields.io/badge/Level-From%20Zero%20to%20Hero-purple?style=flat-square)](#)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](#)
 
 ---
 
-## 🧭 Манифест и философия курса
+## 🧭 Навигатор курса
 
-Этот курс построен по принципу **«Самодокументируемой среды»**:
-1. **Иммерсивность:** Каждая тема изучается там, где она применяется. Читаем про Issues — открываем Issue. Читаем про Pull Requests — отправляем PR. Читаем про Actions — запускаем автоматическую проверку.
-2. **От простого к мощному:** Мы начинаем с нуля — без заумного сленга, с дружелюбного веб-интерфейса и первого клика. Но доходим до боевой автоматизации, CI/CD, консольного штурвала `gh` и управления репозиторием через AI-агентов по протоколу MCP.
-3. **Zero-Footgun (Защита от граблей):** С первых шагов прививаем профессиональную культуру: чистые коммиты, гигиену веток, защиту секретов и спокойное решение конфликтов.
-4. **Эволюция инженера:** Показываем три поколения работы с кодом:
-   * **Мышь & Браузер:** веб-интерфейс для новичков и визуальной витрины.
-   * **Клавиатура & Терминал:** Git и GitHub CLI (`gh`) для скорости.
-   * **AI & MCP:** интеграция ИИ-ассистентов напрямую с репозиторием через Model Context Protocol.
+* 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
+* 🤝 **[Правила участия (CONTRIBUTING)](CONTRIBUTING.md)** — как сдавать домашние задания и оформлять PR.
 
 ---
 
@@ -38,6 +33,7 @@
 
 ### 📍 [Модуль 1: Веб-орбита (GitHub без консоли)](docs/01-web-basics/README.md)
 * Регистрация и правила выбора никнейма (твой персональный бренд).
+* Три золотых правила старта проекта (Закон бункера: Private First, README-First, Цифровой нотариус).
 * Секретный репозиторий `username/username`: визитка твоего профиля.
 * Волшебная клавиша `.` (VS Code for Web прямо в браузере).
 * Экспресс-шпаргалка по Markdown за 5 минут.
@@ -53,41 +49,43 @@
 * Синхронизация изменений: `git pull` и `git fetch`.
 
 ### 📍 [Модуль 3: Командная инженерия (Ветки, PR & Конфликты)](docs/03-branches-pr/README.md)
-* Метафора параллельных миров: зачем нужны ветки (`branch`, `switch`, `checkout`).
-* Клонирование (`clone`) против Форка (`fork`): в чем разница и когда что выбирать.
-* Анатомия Pull Request: как оформить PR, чтобы коллеги сказали спасибо.
-* Code Review: комментарии к строкам, обсуждения и аппрувы.
+* Синдром «Бешеного экскаватора»: почему `main` неприкосновенен.
+* Ветка как «Карантин» для безопасных экспериментов (`git switch -c`).
+* Pull Request: как читать Diff (зеленые и красные строки).
+* Принцип HITL (Human-in-the-Loop): «Агент предлагает — Человек утверждает».
+* Клонирование (`clone`) против Форка (`fork`).
 * Разбор конфликтов слияния: препарируем `<<<<<<< HEAD` спокойно и без паники.
 
 ### 📍 [Модуль 4: Цифровой щит & OPSEC (Безопасность)](docs/04-security-opsec/README.md)
-* Файл `.gitignore`: как защитить проект от случайной утечки паролей, `.env` и мусора.
-* Что делать, если секрет/пароль ВСЁ-ТАКИ утек в публичный доступ (план перехвата).
-* Двухфакторная аутентификация (2FA) и токены доступа (Personal Access Tokens).
-* Криптографическая подпись коммитов: получаем заветный зеленый бейдж `Verified`.
-* Правила защиты веток (Branch Protection Rules & Rulesets).
+* Анатомия ловушки: почему удаление файла в Git не удаляет пароли из истории.
+* Правило OPSEC: «Скомпрометированный ключ = Мертвый ключ (Revoke & Rotate)».
+* Идеальный `.gitignore` для учебного и боевого проекта.
+* Паттерн `.env` (секреты) против `.env.example` (публичный шаблон).
+* Облачный радар GitHub: включение **Push Protection**.
+* Стратегия «Лаборатория против Витрины» (The Clean-Slate Release): как выпустить чистый релиз v1.0.0 без мусорной истории черновика.
 
 ### 📍 [Модуль 5: Проектный штаб (Issue Ops, Discussions & Projects)](docs/05-project-management/README.md)
-* В чем разница между Issues и Discussions: этикет сообщества (где сообщать о багах, а где задавать вопросы).
-* Трекер задач: Issues, теги (labels), вехи (milestones).
-* Создание стандартизированных шаблонов задач (`.github/ISSUE_TEMPLATE`).
-* GitHub Projects (v2): интерактивные Канбан-доски и трекинг прогресса без сторонних сервисов.
+* Разделение этикета: **Issues** (баги и задачи) против **Discussions** (вопросы и общение).
+* Два подхода превращения задачи в код: магические слова `Closes #ID` vs кнопка `Create a branch`.
+* GitHub Projects (v2): Канбан-доски с автопилотом статусов и трассируемостью.
+* Команда: Коллабораторы (Write access) vs Контрибьюторы (Fork + PR).
+* Секретный репозиторий `username/.github`: глобальные шаблоны для всех проектов сразу.
 
 ### 📍 [Модуль 6: Роботы на службе (GitHub Actions & Pages)](docs/06-actions-pages/README.md)
-* Что такое CI/CD простыми словами: «Зачем проекту автопилот?».
-* Анатомия первого workflow: триггеры, джобы, шаги (`.github/workflows/`).
-* Практика: автоматическая проверка синтаксиса Markdown при каждом PR.
-* GitHub Pages: бесплатная публикация личного сайта/портфолио прямо из репозитория.
+* Что такое CI/CD на пальцах: конвейер вместо ручного труда.
+* Экономика минут: безлимит для Public, 2000 минут/месяц для Private.
+* 4 правила экономии: `timeout-minutes: 5`, фильтры `paths:`, кэш зависимостей.
+* **Self-Hosted Runners:** собственный сервер за 0 минут списания (+ закон безопасности OPSEC).
+* Анатомия YAML: `on`, `jobs`, `runs-on`, `steps`.
+* Бесплатный хостинг сайтов через GitHub Pages за 60 секунд.
 
 ### 📍 [Модуль 7: Арсенал инженера будущего (CLI, MCP & AI-агенты)](docs/07-pro-tools/README.md)
-* **GitHub CLI (`gh`):**
-  * Управление Pull Requests из терминала (`gh pr create`, `gh pr checkout`).
-  * Просмотр и создание Issues без открытия браузера.
-* **Model Context Protocol (MCP) и GitHub:**
-  * Что такое MCP простыми словами: открытый стандарт взаимодействия нейросетей с инструментами.
-  * Как подключить GitHub MCP к AI-ассистенту (Cursor, Antigravity, Claude Code).
-  * Автономные сценарии: поручаем ИИ-агенту создание веток, поиск багов и оформление PR через протокол MCP.
-* Горячие клавиши GitHub, умный поиск по коду, постоянные ссылки на строки (`permalink`).
-* Спасение утопающих: базовое знакомство с `git reflog` и отмена фатальных ошибок.
+* **GitHub CLI (`gh`):** топ-5 консольных команд для скорости.
+* **Model Context Protocol (MCP) и ИИ-агенты:**
+  * 🟢 Зеленая зона (Must Have): безопасные инструменты для ИИ.
+  * 🔴 Красная зона (Must Disable): почему категорически запрещены `merge_pull_request`, `delete_*` и прямой пуш в `main`.
+* **Черная магия Git (`git reflog`):** воскрешение случайно удаленных веток и коммитов за 2 шага.
+* Финальный чек-лист выпускника курса.
 
 ---
 
@@ -97,13 +95,13 @@
 
 | Полигон | Задание | Навык |
 | :--- | :--- | :--- |
-| **Lab 01** | Создать README-визитку профиля с динамическими бейджами | Web UI, Markdown, Git Profile |
-| **Lab 02** | Связать терминал с GitHub (SSH или `gh auth`) и запушить локальный проект | Terminal, SSH, `gh`, `git push` |
-| **Lab 03** | Создать ветку, смоделировать конфликт слияния и решить его через PR | Branches, Merge Conflicts, PR |
-| **Lab 04** | Сконфигурировать идеальный `.gitignore` и настроить Branch Protection | OPSEC, Git Hygiene |
-| **Lab 05** | Развернуть доску GitHub Projects и настроить шаблоны Issue | Issue Ops, Discussions, Projects |
-| **Lab 06** | Написать GitHub Action для проверки файлов и опубликовать сайт на Pages | CI/CD, GitHub Pages |
-| **Lab 07** | Управление репозиторием через `gh` CLI и настройка MCP для AI-агента | GitHub CLI, MCP, AI Workflows |
+| **[Lab 01](labs/lab-01-profile/README.md)** | Создать README-визитку профиля с динамическими бейджами | Web UI, Markdown, Git Profile |
+| **[Lab 02](labs/lab-02-terminal/README.md)** | Связать терминал с GitHub (SSH или `gh auth`) и запушить проект | Terminal, SSH, `gh`, `git push` |
+| **[Lab 03](labs/lab-03-conflicts/README.md)** | Создать ветку, смоделировать конфликт слияния и решить его | Branches, Merge Conflicts, PR |
+| **[Lab 04](labs/lab-04-security/README.md)** | Сконфигурировать `.gitignore` и протестировать Push Protection | OPSEC, Git Hygiene |
+| **[Lab 05](labs/lab-05-projects/README.md)** | Развернуть доску GitHub Projects, связать Issue и PR через `Closes #` | Issue Ops, Projects v2 |
+| **[Lab 06](labs/lab-06-actions/README.md)** | Написать GitHub Action с таймаутом и опубликовать сайт на Pages | CI/CD, GitHub Pages |
+| **[Lab 07](labs/lab-07-cli-mcp/README.md)** | Работа в `gh` CLI, воскрешение ветки через `reflog` и конфиг MCP | GitHub CLI, Reflog, MCP Security |
 
 ---
 
@@ -112,27 +110,12 @@
 ```text
 github-a-to-z/
 ├── README.md                   # Главная страница и навигатор по курсу
+├── GLOSSARY.md                 # Карманный словарь терминов с аналогиями
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
-├── docs/                       # Теоретические и практические главы
-│   ├── 00-intro/
-│   ├── 01-web-basics/
-│   ├── 02-terminal-ssh/
-│   ├── 03-branches-pr/
-│   ├── 04-security-opsec/
-│   ├── 05-project-management/
-│   ├── 06-actions-pages/
-│   └── 07-pro-tools/
-├── labs/                       # Шаблоны и задания лабораторных работ
-│   ├── lab-01-profile/
-│   ├── lab-02-terminal/
-│   ├── lab-03-conflicts/
-│   ├── lab-04-security/
-│   ├── lab-05-projects/
-│   ├── lab-06-actions/
-│   └── lab-07-cli-mcp/
+├── docs/                       # Теоретические и практические главы (00 - 07)
+├── labs/                       # Шаблоны и задания лабораторных работ (01 - 07)
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
     ├── ISSUE_TEMPLATE/
-    ├── PULL_REQUEST_TEMPLATE.md
     └── workflows/
 ```
 
@@ -140,4 +123,4 @@ github-a-to-z/
 
 ## 🚦 С чего начать?
 
-Переходите к **[Модулю 0: Разведка на местности](docs/00-intro/README.md)** и приступайте к погружению!
+Переходите к **[Модулю 0: Разведка на местности](docs/00-intro/README.md)** или загляните в **[Словарь терминов](GLOSSARY.md)**!
