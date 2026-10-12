@@ -1,10 +1,11 @@
 # 🚀 GitHub от А до Я: Полный практический курс
 
-> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры и AI-агентов через MCP.**  
+> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены и AI-агентов через MCP.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.0-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.1-success?style=flat-square)](#)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
+[![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat-square)](CODE_OF_CONDUCT.md)
@@ -15,6 +16,7 @@
 ## 🧭 Навигатор курса
 
 * 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
+* 📜 **[Журнал изменений (CHANGELOG.md)](CHANGELOG.md)** — официальная хроника обновлений по канону Keep a Changelog.
 * ⚖️ **[Лицензия проекта (MIT)](LICENSE)** — юридический статус материалов курса.
 * 🛡️ **[Кодекс поведения (CODE_OF_CONDUCT)](CODE_OF_CONDUCT.md)** — стандарты уважения, этикет и правила сообщества.
 * 🤝 **[Правила участия (CONTRIBUTING)](CONTRIBUTING.md)** — как сдавать домашние задания и оформлять PR.
@@ -28,7 +30,7 @@
                                                                           │
 [Уровень 8: Релизы & Лицензии] <── [Уровень 7: CLI & MCP] <── [Уровень 4-6: OPSEC, Штаб & CI/CD]
          │
-         └──> [Уровень 9: Архитектура & Синхронизация] ──> [Уровень 10: Production-стандарты & Аудит]
+         └──> [Уровень 9: Архитектура] ──> [Уровень 10: Production-стандарты] ──> [Уровень 11: Гигиена & Docs-as-Code]
 ```
 
 ### 📍 [Модуль 0: Разведка на местности (Зачем тебе GitHub)](docs/00-intro/README.md)
@@ -47,7 +49,8 @@
 
 ### 📍 [Модуль 2: Мост к терминалу (Консоль, SSH & легкий вход через gh)](docs/02-terminal-ssh/README.md)
 * Установка Git (Windows, macOS, Linux).
-* Базовая идентификация: `user.name` и `user.email`.\n* Безопасная аутентификация:
+* Базовая идентификация: `user.name` и `user.email`.
+* Безопасная аутентификация:
   * Классический путь: генерация ключей SSH (`ed25519`).
   * Современный экспресс-путь: моментальный вход через GitHub CLI (`gh auth login`).
 * Золотой цикл Git: `git init` ➔ `git status` ➔ `git add` ➔ `git commit` ➔ `git push`.
@@ -123,6 +126,19 @@
 * **Правила защиты веток (Branch Protection & Rulesets):** обязательный Code Review перед слиянием, прохождение CI-чеков и жесткий запрет `force-push` в прод.
 * **Культура Code Review и Suggested Changes:** как предлагать точечные правки в один клик прямо в интерфейсе GitHub PR.
 
+### 📍 [Модуль 11: Инженерная гигиена & Культура документации (Docs-as-Code & Санитарные кордоны)](docs/11-hygiene-and-docs/README.md)
+* **Главный закон надежности:** «Пишем то, что делаем, делаем то, что пишем» (культура Single Source of Truth).
+* **Анатомия катастрофы: Documentation Drift (Гниение документации):** почему старая документация хуже её отсутствия и почему новичок теряет 4 часа на несуществующих флагах.
+* **Закон неразрывного PR (Atomic Docs & Code):** обязательное обновление документации в том же коммите/PR, где изменился код.
+* **Разоблачение мифа о «самодокументированном коде»:** код отвечает на вопрос *КАК*, но документация раскрывает *ЗАЧЕМ* и бизнес-контекст.
+* **Культура Docs-as-Code и стандарт Keep a Changelog:** профессиональное ведение `CHANGELOG.md` (`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`).
+* **Санитария рабочей машины (`~/.gitignore_global`):** защита от позорных коммитов `.DS_Store`, `Thumbs.db` и `.idea/` во все репозитории мира.
+* **Санитарный кордон Pre-commit хуков:** автоматический барьер против небрежного форматирования и утечек секретов до создания коммита.
+* **Гигиена веточных кладбищ:** автоматическое удаление веток на GitHub (`Automatically delete head branches`) и чистка локальных веток через `git branch -d`.
+* **Атомарность коммитов:** категорический запрет на смешивание рефакторинга с правкой бизнес-логики.
+* **Гигиена зависимостей и борьба с Bloat:** поучительный кейс `left-pad`, коммит lock-файлов и сканирование уязвимостей.
+* **Гигиена внимания (Notification Fatigue):** победа над спамом в GitHub через правильный выбор режимов Watch (Participating vs Releases) и Inbox Zero.
+
 ---
 
 ## 🧪 Лабораторные полигоны (Hands-on Labs)
@@ -141,6 +157,7 @@
 | **[Lab 08](labs/lab-08-release/README.md)** | Добавить лицензию MIT, поставить тег `v1.0.0` и выпустить Release | Licenses, SemVer, GitHub Releases |
 | **[Lab 09](labs/lab-09-architecture/README.md)** | Отработать `stash`, `prune`, навести порядок в корне и написать ADR | Git Sync, Root Hygiene, ADR |
 | **[Lab 10](labs/lab-10-production/README.md)** | Настроить `.gitattributes`, включить SSH Commit Signing и сделать PR со Squash | `.gitattributes`, Commit Signing, Conventional Commits |
+| **[Lab 11](labs/lab-11-hygiene-docs/README.md)** | Настроить `~/.gitignore_global`, автоудаление веток, pre-commit и синхронный CHANGELOG | Pre-commit, Docs-as-Code, Keep a Changelog |
 
 ---
 
@@ -150,11 +167,12 @@
 github-a-to-z/
 ├── README.md                   # Главная страница и навигатор по курсу
 ├── GLOSSARY.md                 # Карманный словарь терминов с аналогиями
+├── CHANGELOG.md                # Официальный журнал изменений (Keep a Changelog)
 ├── LICENSE                     # Официальная лицензия MIT
 ├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
 ├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
-├── docs/                       # Теоретические и практические главы (00 - 10)
+├── docs/                       # Теоретические и практические главы (00 - 11)
 │   ├── 00-intro/
 │   ├── 01-web-basics/
 │   ├── 02-terminal-ssh/
@@ -165,8 +183,9 @@ github-a-to-z/
 │   ├── 07-pro-tools/
 │   ├── 08-releases-licenses/
 │   ├── 09-architecture-hygiene/
-│   └── 10-production-standards/
-├── labs/                       # Шаблоны и задания лабораторных работ (01 - 10)
+│   ├── 10-production-standards/
+│   └── 11-hygiene-and-docs/
+├── labs/                       # Шаблоны и задания лабораторных работ (01 - 11)
 │   ├── lab-01-profile/
 │   ├── lab-02-terminal/
 │   ├── lab-03-conflicts/
@@ -176,7 +195,8 @@ github-a-to-z/
 │   ├── lab-07-cli-mcp/
 │   ├── lab-08-release/
 │   ├── lab-09-architecture/
-│   └── lab-10-production/
+│   ├── lab-10-production/
+│   └── lab-11-hygiene-docs/
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
     ├── ISSUE_TEMPLATE/
     └── workflows/
