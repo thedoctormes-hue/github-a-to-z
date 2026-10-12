@@ -427,7 +427,7 @@ git log --show-signature -n 1
 * **Private Vulnerability Reporting (PVR)** — приватный канал сообщения об уязвимостях.
 * **Temporary Private Fork** — изолированная песочница для совместной подготовки патча без утечки информации.
 * **Dependabot & Dependency Graph** — мониторинг уязвимых библиотек и генерация SBOM.
-* **CodeQL SAST Analysis** — глубокий статический анализ кода на уровне семантического AST в [`.github/workflows/codeql.yml`](.github/workflows/codeql.yml).
+* **Автоматизированный CI-конвейер** — непрерывная проверка целостности структуры и ссылок в [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (с поддержкой CodeQL SAST при переводе репозитория в Public).
 
 ---
 
