@@ -7,8 +7,8 @@
 
 ## 🧭 Быстрый алфавитный указатель
 
-* [A-Z (Английские термины)](#-английские-термины-a-z)
-* [А-Я (Русские термины)](#-русские-термины-а-я)
+* [A-Z (Английские термины)](#английские-термины-az)
+* [А-Я (Русские термины)](#русские-термины-ая)
 
 ---
 
@@ -572,7 +572,7 @@
 * См. [Network Graph](#network-graph-граф-сети).
 
 ### Деградация контекста
-* См. [Context Drift / Decay](#context-drift--decay-деградация-контекста).
+* См. [Context Drift / Decay](#context-drift-decay-деградация-контекста).
 
 ### Деэскалация (De-escalation)
 * См. [De-escalation](#de-escalation-деэскалация).
@@ -593,7 +593,7 @@
 * См. [CHANGELOG.md](#changelogmd-журнал-изменений).
 
 ### Индекс
-* См. [Staging Area](#staging-area-индекс--стейдж).
+* См. [Staging Area](#staging-area-индекс-стейдж).
 
 ### Инструкции Copilot
 * См. [Copilot Instructions](#copilot-instructions-githubcopilot-instructionsmd).
@@ -633,7 +633,7 @@
 * См. [Модуль 9: Архитектурный порядок](docs/09-architecture-hygiene/README.md).
 
 ### Лейбл (Label)
-* См. [Label](#label-лейбл--ярлык).
+* См. [Label](#label-лейбл-ярлык).
 
 ### Лицензия
 * См. [License](#license-лицензия).
@@ -647,7 +647,7 @@
 * См. [Overengineering](#overengineering-оверинжиниринг).
 
 ### Подпись коммитов
-* См. [Commit Signing](#commit-signing--verified-подпись-коммитов).
+* См. [Commit Signing](#commit-signing-verified-подпись-коммитов).
 
 ### Политика безопасности (SECURITY.md)
 * См. [Security Policy](#security-policy-securitymd).
@@ -671,7 +671,7 @@
 * См. [Release](#release-релиз-на-github).
 
 ### Репозиторий
-* См. [Repository](#repository-репозиторий--репо).
+* См. [Repository](#repository-репозиторий-репо).
 
 ### Рефакторинг
 * См. [Refactoring](#refactoring-рефакторинг).
@@ -686,7 +686,7 @@
 * См. [CodeQL](#codeql) и [SAST](#sast-static-application-security-testing).
 
 ### Сканирование секретов (Secret Scanning)
-* См. [Secret Scanning & Push Protection](#secret-scanning--push-protection).
+* См. [Secret Scanning & Push Protection](#secret-scanning-push-protection).
 
 ### Стандарты сообщества
 * См. [Community Standards](#community-standards-стандарты-сообщества).
@@ -716,7 +716,7 @@
 * См. [Notification Fatigue](#notification-fatigue-усталость-от-уведомлений).
 
 ### Фактор автобуса (Bus Factor)
-* См. [Contributors & Bus Factor](docs/14-security-insights/README.md#32-contributors--оценка-bus-factor-фактора-автобуса).
+* См. [Contributors & Bus Factor](docs/14-security-insights/README.md#32-contributors-оценка-bus-factor-фактора-автобуса).
 
 ### Форк
 * См. [Fork](#fork-форк).
@@ -731,7 +731,7 @@
 * См. [FSD](#fsd-feature-sliced-design).
 
 ### Хэш коммита
-* См. [SHA / Hash](#sha--hash-хэш-коммита).
+* См. [SHA / Hash](#sha-hash-хэш-коммита).
 
 ### Черрипик
 * См. [Cherry-pick](#cherry-pick-черрипик).
