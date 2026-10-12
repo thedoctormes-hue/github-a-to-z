@@ -10,6 +10,37 @@
 ## [Unreleased]
 
 ### Added
+- **Модуль 14 (Цитадель безопасности & Телеметрия штаба: Security and quality, Insights, CodeQL, SBOM и OSINT репозитория):**
+  - Подробный разбор вкладки **Security and quality**: политика `SECURITY.md`, Responsible Disclosure, запрет публичных тикетов для эксплойтов.
+  - Канал Private Vulnerability Reporting (PVR) и процесс безопасного патчинга через Temporary Private Fork.
+  - Регистрация международных CVE и публикация бюллетеней в GitHub Security Advisories (GHSA).
+  - Превентивное сканирование секретов (Secret Scanning) и блокировка пушей с токенами (Push Protection).
+  - Семантический статический анализ кода движком CodeQL (SAST): поиск уязвимостей (SQLi, XSS, RCE, Path Traversal) на графе AST и потоках данных (Source ➔ Taint ➔ Sink).
+  - Активация графа зависимостей (Dependency Graph), алерты Dependabot и экспорт цифрового паспорта ПО SBOM (SPDX/CycloneDX).
+  - Подробный разбор вкладки **Insights**: оперативный срез Pulse (24ч, 7 дней, месяц), график активности Contributors и расчет Bus Factor (фактора автобуса).
+  - Официальный скоринг Community Standards и получение рейтинга 100%.
+  - Раздел Traffic: метрики уникальных посетителей, клонов, Top Referrers (источники трафика) и Popular Content (ограничение 14 дней).
+  - Частота кода (Code Frequency), карта коммитов, рентген сети и форков (Network Graph & Forks).
+  - Экономика и производительность Actions usage & performance metrics.
+- **Лабораторная работа №14:**
+  - Активация Dependency Graph и Dependabot alerts в веб-интерфейсе.
+  - Развертывание корневого файла `SECURITY.md` с политикой Responsible Disclosure и контактами безопасности.
+  - Создание официального шаблона Pull Request `.github/PULL_REQUEST_TEMPLATE.md` для взятия 100% Community Standards.
+  - Настройка боевого воркфлоу CodeQL Analysis (`.github/workflows/codeql.yml`).
+  - Практический аудит вкладки Insights (Traffic, Bus Factor, Community score).
+- Корневой файл политики безопасности `SECURITY.md`.
+- Официальный шаблон Pull Request `.github/PULL_REQUEST_TEMPLATE.md`.
+- CI/CD воркфлоу статического сканирования `.github/workflows/codeql.yml`.
+
+### Changed
+- Обновлен `GLOSSARY.md` (добавлены термины CodeQL, Community Standards, CVE, Dependency Graph, GHSA, Network Graph, PVR, Pulse, SAST, SBOM, Secret Scanning, Security Policy, Top Referrers, Traffic).
+- Актуализирована витрина `README.md` (дорожная карта 14 уровней, матрица 14 лабораторий, бейджи, дерево репозитория).
+
+---
+
+## [1.4.0] - 2026-10-12
+
+### Added
 - **Модуль 13 (Синтез разумов: Человеко-агентные команды & Hybrid Engineering):**
   - Сравнительная анатомия: Человек-инженер против ИИ-агента (скорость, выносливость, амнезия контекста, эго, ответственность).
   - Перенос институтов человеческой командной инженерии на ИИ: онбординг через `AGENTS.md`, постановка задач через Definition of Done (DoD).
