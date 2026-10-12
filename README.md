@@ -1,19 +1,20 @@
 # 🚀 GitHub от А до Я: Полный практический курс
 
-> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до GitHub CLI и AI-агентов через MCP.**  
+> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий и AI-агентов через MCP.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.0-success?style=flat-square)](#)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 [![Audience](https://img.shields.io/badge/Level-From%20Zero%20to%20Hero-purple?style=flat-square)](#)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](#)
 
 ---
 
 ## 🧭 Навигатор курса
 
 * 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
+* ⚖️ **[Лицензия проекта (MIT)](LICENSE)** — юридический статус материалов курса.
 * 🤝 **[Правила участия (CONTRIBUTING)](CONTRIBUTING.md)** — как сдавать домашние задания и оформлять PR.
 
 ---
@@ -23,7 +24,7 @@
 ```
 [Уровень 1: Веб-орбита] ──> [Уровень 2: Консоль & SSH / gh] ──> [Уровень 3: Ветки & PR]
                                                                           │
-[Уровень 7: CLI, MCP & AI] <── [Уровень 6: CI/CD Actions] <── [Уровень 4-5: OPSEC & Менеджмент]
+[Уровень 8: Релизы & Лицензии] <── [Уровень 7: CLI & MCP] <── [Уровень 4-6: OPSEC, Штаб & CI/CD]
 ```
 
 ### 📍 [Модуль 0: Разведка на местности (Зачем тебе GitHub)](docs/00-intro/README.md)
@@ -85,7 +86,11 @@
   * 🟢 Зеленая зона (Must Have): безопасные инструменты для ИИ.
   * 🔴 Красная зона (Must Disable): почему категорически запрещены `merge_pull_request`, `delete_*` и прямой пуш в `main`.
 * **Черная магия Git (`git reflog`):** воскрешение случайно удаленных веток и коммитов за 2 шага.
-* Финальный чек-лист выпускника курса.
+
+### 📍 [Модуль 8: Выход на орбиту (Релизы, Лицензии & Ground Rules)](docs/08-releases-licenses/README.md)
+* **Ground Rules (Табу Git):** шесть категорий файлов, которые категорически нельзя коммитить (тяжелые медиа, дампы баз, артефакты сборки).
+* **Юридический щит (Лицензии):** парадокс «All Rights Reserved», подробный разбор MIT, Apache 2.0, GNU GPL v3 и Unlicense.
+* **Анатомия официального релиза:** Семантическое версионирование (SemVer `vMAJOR.MINOR.PATCH`), теги в терминале (`git tag`) и публикация GitHub Releases с автогенерацией Release Notes.
 
 ---
 
@@ -102,6 +107,7 @@
 | **[Lab 05](labs/lab-05-projects/README.md)** | Развернуть доску GitHub Projects, связать Issue и PR через `Closes #` | Issue Ops, Projects v2 |
 | **[Lab 06](labs/lab-06-actions/README.md)** | Написать GitHub Action с таймаутом и опубликовать сайт на Pages | CI/CD, GitHub Pages |
 | **[Lab 07](labs/lab-07-cli-mcp/README.md)** | Работа в `gh` CLI, воскрешение ветки через `reflog` и конфиг MCP | GitHub CLI, Reflog, MCP Security |
+| **[Lab 08](labs/lab-08-release/README.md)** | Добавить лицензию MIT, поставить тег `v1.0.0` и выпустить Release | Licenses, SemVer, GitHub Releases |
 
 ---
 
@@ -111,9 +117,10 @@
 github-a-to-z/
 ├── README.md                   # Главная страница и навигатор по курсу
 ├── GLOSSARY.md                 # Карманный словарь терминов с аналогиями
+├── LICENSE                     # Официальная лицензия MIT
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
-├── docs/                       # Теоретические и практические главы (00 - 07)
-├── labs/                       # Шаблоны и задания лабораторных работ (01 - 07)
+├── docs/                       # Теоретические и практические главы (00 - 08)
+├── labs/                       # Шаблоны и задания лабораторных работ (01 - 08)
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
     ├── ISSUE_TEMPLATE/
     └── workflows/
