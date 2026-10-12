@@ -114,14 +114,16 @@ git commit -m "docs(ai): establish AGENTS.md operational guardrails"
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_YOUR_TOKEN_WITH_REPO_SCOPE"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "github_pat_11A...your_fine_grained_token_here"
       }
     }
   }
 }
 ```
 
-> **Внимание (OPSEC):** Никогда не коммитьте боевой токен `ghp_...`! Файл конфигурации с реальным токеном должен быть внесен в `.gitignore`, а в репозитории хранится только `.example.json`.
+> **Внимание (OPSEC & Fine-Grained PAT):**  
+> 1. Никогда не коммитьте боевой токен! Файл с токеном должен быть надежно скрыт в `.gitignore`.  
+> 2. **Используйте Fine-Grained PAT (`github_pat_...`)**, а не устаревший Classic `ghp_...`. Настройте скоуп строго на один репозиторий с ограниченными правами (Contents: Read, Pull Requests: Read & Write) и сроком жизни не более 30 дней.
 
 ---
 

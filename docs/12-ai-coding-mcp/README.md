@@ -183,7 +183,23 @@ repository/
 3. **Prompts (Шаблоны):** заготовленные сценарии действий (например, «провести аудит безопасности PR»).
 
 ### Официальный GitHub MCP Server (`@modelcontextprotocol/server-github`):
-Позволяет любому агенту общаться с GitHub через персональный токен (PAT):
+Позволяет любому агенту общаться с GitHub через персональный токен доступа (PAT).
+
+> [!CAUTION]
+> **⚠️ OPSEC токенов для ИИ: Почему Classic PAT (`ghp_...`) опасен!**  
+> Классические токены (`Personal Access Tokens Classic`) выдают неизбирательные права сразу на **все репозитории** вашего аккаунта без гранулярных ограничений и часто создаются без срока действия (`No expiration`). Если агент скомпрометирует такой токен, атакующий получит ключи от всей вашей учетной записи.
+
+#### Золотой стандарт безопасности: Fine-Grained PAT (`github_pat_...`)
+При подключении ИИ-агентов всегда выпускайте точечный **Fine-Grained Personal Access Token**:
+1. Перейдите в **GitHub Settings ➔ Developer Settings ➔ Personal access tokens ➔ Fine-grained tokens**.
+2. **Repository access:** выберите `Only select repositories` ➔ укажите только конкретный учебный проект.
+3. **Permissions (Принцип наименьших привилегий):**
+   - **Contents:** `Read and write` (или `Read-only` для режима исследователя).
+   - **Pull requests:** `Read and write`.
+   - **Issues:** `Read and write`.
+4. **Expiration:** установите срок не более **30–90 дней** с обязательным отзывом и перевыпуском.
+
+Пример конфигурации с Fine-Grained токеном:
 ```json
 {
   "mcpServers": {
@@ -191,7 +207,7 @@ repository/
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_your_secret_pat_here"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "github_pat_11A...your_fine_grained_token_here"
       }
     }
   }

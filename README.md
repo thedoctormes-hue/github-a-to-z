@@ -238,6 +238,7 @@ github-a-to-z/
 ├── scripts/                    # Автоматизация и валидация целостности ссылок
 │   └── validate_links.py
 └── .github/                    # Рабочая конфигурация GitHub для репозитория
+    ├── CODEOWNERS              # Ответственные мейнтейнеры за архитектуру курса
     ├── dependabot.yml          # Еженедельный мониторинг версий GitHub Actions
     ├── copilot-instructions.md # Конфигурация стандартов для GitHub Copilot
     ├── PULL_REQUEST_TEMPLATE.md# Шаблон оформления Pull Request
