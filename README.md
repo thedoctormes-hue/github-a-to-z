@@ -1,14 +1,16 @@
 # 🚀 GitHub от А до Я: Полный практический курс
 
-> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга, AI-агентов через MCP и человеко-агентных команд.**  
+> **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга, AI-агентов через MCP, человеко-агентных команд и цитадели безопасности.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.3-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.4-success?style=flat-square)](#)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat-square)](CODE_OF_CONDUCT.md)
+[![Security](https://img.shields.io/badge/Security-Policy%20&%20Advisories-red?style=flat-square)](SECURITY.md)
+[![Community Profile](https://img.shields.io/badge/Community%20Profile-100%25-brightgreen?style=flat-square)](#)
 [![Audience](https://img.shields.io/badge/Level-From%20Zero%20to%20Hero-purple?style=flat-square)](#)
 
 ---
@@ -20,6 +22,7 @@
 * ⚖️ **[Лицензия проекта (MIT)](LICENSE)** — юридический статус материалов курса.
 * 🛡️ **[Кодекс поведения (CODE_OF_CONDUCT)](CODE_OF_CONDUCT.md)** — стандарты уважения, этикет и правила сообщества.
 * 🤝 **[Правила участия (CONTRIBUTING)](CONTRIBUTING.md)** — как сдавать домашние задания и оформлять PR.
+* 🛡️ **[Политика безопасности (SECURITY.md)](SECURITY.md)** — регламент ответственного раскрытия уязвимостей (Responsible Disclosure).
 
 ---
 
@@ -33,6 +36,8 @@
          └──> [Уровень 9: Архитектура] ──> [Уровень 10: Production-стандарты]
                                                         │
 [Уровень 13: Команды & Hybrid] <── [Уровень 12: AI-кодинг & MCP] <── [Уровень 11: Гигиена & Docs]
+         │
+         └──> [Уровень 14: Цитадель безопасности & Телеметрия (Security & Insights)]
 ```
 
 ### 📍 [Модуль 0: Разведка на местности (Зачем тебе GitHub)](docs/00-intro/README.md)
@@ -51,8 +56,7 @@
 
 ### 📍 [Модуль 2: Мост к терминалу (Консоль, SSH & легкий вход через gh)](docs/02-terminal-ssh/README.md)
 * Установка Git (Windows, macOS, Linux).
-* Базовая идентификация: `user.name` и `user.email`.
-* Безопасная аутентификация:
+* Базовая идентификация: `user.name` и `user.email`.\n* Безопасная аутентификация:
   * Классический путь: генерация ключей SSH (`ed25519`).
   * Современный экспресс-путь: моментальный вход через GitHub CLI (`gh auth login`).
 * Золотой цикл Git: `git init` ➔ `git status` ➔ `git add` ➔ `git commit` ➔ `git push`.
@@ -166,6 +170,22 @@
   * Опасность Automation Bias (слепое доверие человека к сгенерированному артефакту).
 * **GitHub как Single Pane of Glass:** единая панель управления для гибридной команды (Issue Ops, PR Reviews, Projects, Discussions).
 
+### 📍 [Модуль 14: Цитадель безопасности & Телеметрия штаба (Security and quality, Insights & OSINT)](docs/14-security-insights/README.md)
+* **Раздел Security and quality:**
+  * Политика безопасности `SECURITY.md` и канон Responsible Disclosure (табу на публичные тикеты с 0-day).
+  * Private Vulnerability Reporting (PVR) и совместный патчинг в секретной песочнице (Temporary Private Fork).
+  * Регистрация международных номеров CVE и публикация бюллетеней в GitHub Security Advisories (GHSA).
+  * Превентивное сканирование секретов (Secret Scanning) и Push Protection (блокировка токенов до пуша).
+  * Семантический статический анализ кода CodeQL (SAST): поиск уязвимостей (SQLi, XSS, RCE, Path Traversal) в AST-графе без запуска приложения.
+  * Активация графа зависимостей (Dependency Graph), алерты Dependabot и экспорт цифрового паспорта ПО SBOM (SPDX/CycloneDX).
+* **Раздел Insights (Аналитический радар и OSINT):**
+  * Оперативный срез Pulse (24ч, 7 дней, месяц) для статус-отчетов без созвонов.
+  * График Contributors и выявление «Bus Factor» (фактора автобуса).
+  * Чеклист Community Standards: достижение 100% рейтинга зрелости репозитория.
+  * Раздел Traffic: уникальные посетители, клоны, Top Referrers (откуда идут люди) и Popular Content (спасение данных от 14-дневного удаления).
+  * Анализ Code Frequency, рентген сети и скрытых форков (Network Graph & Forks).
+  * Экономика CI/CD минут и выявление узких мест в Actions usage & performance metrics.
+
 ---
 
 ## 🧪 Лабораторные полигоны (Hands-on Labs)
@@ -187,6 +207,7 @@
 | **[Lab 11](labs/lab-11-hygiene-docs/README.md)** | Настроить `~/.gitignore_global`, автоудаление веток, pre-commit и синхронный CHANGELOG | Pre-commit, Docs-as-Code, Keep a Changelog |
 | **[Lab 12](labs/lab-12-ai-mcp/README.md)** | Настроить `copilot-instructions.md`, `AGENTS.md`, MCP и прогнать цикл «От Issue к PR» с аудитом | AI Context, MCP, HITL Audit |
 | **[Lab 13](labs/lab-13-human-agent-teams/README.md)** | Сформировать DoD, прогнать цикл Триады (Planner ➔ Builder ➔ Auditor) и провести финальный HITL-ревью | Hybrid Engineering, Agent Triad, Sycophancy Mitigation |
+| **[Lab 14](labs/lab-14-security-insights/README.md)** | Активировать Dependency Graph, развернуть `SECURITY.md`, шаблон PR и настроить CodeQL | Security & Quality, Insights, CodeQL, SBOM, OSINT |
 
 ---
 
@@ -201,18 +222,21 @@ github-a-to-z/
 ├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
 ├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
-├── docs/                       # Теоретические и практические главы (00 - 13)
+├── SECURITY.md                 # Официальная политика безопасности (Responsible Disclosure)
+├── docs/                       # Теоретические и практические главы (00 - 14)
 │   ├── ...
-│   ├── 12-ai-coding-mcp/
-│   └── 13-human-agent-teams/
-├── labs/                       # Шаблоны и задания лабораторных работ (01 - 13)
+│   ├── 13-human-agent-teams/
+│   └── 14-security-insights/
+├── labs/                       # Шаблоны и задания лабораторных работ (01 - 14)
 │   ├── ...
-│   ├── lab-12-ai-mcp/
-│   └── lab-13-human-agent-teams/
+│   ├── lab-13-human-agent-teams/
+│   └── lab-14-security-insights/
 └── .github/                    # Рабочие шаблоны GitHub для репозитория
     ├── copilot-instructions.md # Конфигурация стандартов для GitHub Copilot
+    ├── PULL_REQUEST_TEMPLATE.md# Шаблон оформления Pull Request (100% Community Standards)
     ├── ISSUE_TEMPLATE/
     └── workflows/
+        └── codeql.yml          # Автоматический SAST-сканер уязвимостей CodeQL
 ```
 
 ---
