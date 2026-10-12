@@ -1,37 +1,16 @@
-name: "CodeQL Security Scan"
+# ==============================================================================
+# ⚠️ CodeQL Analysis: Временно отключен для приватного репозитория на тарифе Free
+# ==============================================================================
+# Причина: На приватных репозиториях GitHub Free сканирование CodeQL заблокировано
+# биллингом (требуется лицензия GitHub Advanced Security / GHAS).
+# При попытке запуска GitHub Actions выдаёт фатальную ошибку:
+# 'Code scanning is not enabled for this repository'.
+#
+# Когда репозиторий будет переведён в статус PUBLIC (где CodeQL бесплатен),
+# раскомментируйте код воркфлоу ниже.
+# ==============================================================================
+
+name: "CodeQL Security Scan (Disabled for Private Free Repo)"
 
 on:
-  push:
-    branches: [ "init", "main" ]
-  pull_request:
-    branches: [ "init", "main" ]
-  schedule:
-    - cron: '0 6 * * 1' # Запуск каждый понедельник в 06:00 UTC
-
-jobs:
-  analyze:
-    name: Analyze Code Security
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'python' ]
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: ${{ matrix.language }}
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{matrix.language}}"
+  workflow_dispatch: # Только ручной запуск, чтобы не падать на push/PR

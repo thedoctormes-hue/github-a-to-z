@@ -100,6 +100,10 @@ git push origin main
 ---
 
 ### Шаг 5. Включение хостинга GitHub Pages
+
+> [!IMPORTANT]
+> **⚠️ Тарифный радар для выполнения шага:**  
+> GitHub Pages работает бесплатно **только в публичных репозиториях**. Если ваш учебный репозиторий был создан как Private, зайдите в **Settings ➔ General ➔ Danger Zone ➔ Change repository visibility** и временно переключите его в **Public**, иначе раздел Pages потребует платный план GitHub Pro.
 1. В репозитории перейди во вкладку **Settings**.
 2. В левой колонке найди раздел **Pages**.
 3. В блоке **Build and deployment**:

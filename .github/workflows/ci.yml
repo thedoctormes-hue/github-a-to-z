@@ -1,0 +1,23 @@
+name: CI Link Integrity & Code Verification
+
+on:
+  push:
+    branches: [ main, init, feat/*, fix/* ]
+  pull_request:
+    branches: [ main, init ]
+
+jobs:
+  validate-links:
+    name: Validate Markdown Links & Structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run automated link validator
+        run: python3 scripts/validate_links.py

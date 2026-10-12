@@ -1,0 +1,41 @@
+# Operating System Junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*~
+
+# IDE and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+
+# Node / Web
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OPSEC: Never commit secrets!
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Logs & Temporary Data
+*.log

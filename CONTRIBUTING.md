@@ -39,6 +39,9 @@
 git switch -c fix/link-integrity-audit
 ```
 
+> [!TIP]
+> Для быстрого поиска нужных Git-команд, флагов и шаблонов пользуйтесь нашей **[Шпаргалкой разработчика (CHEATSHEET.md)](CHEATSHEET.md)**.
+
 ### 3. Стандарты коммитов (Conventional Commits)
 Мы придерживаемся спецификации [Conventional Commits](https://www.conventionalcommits.org/):
 * `feat:` — новый модуль, лабораторная или раздел курса.

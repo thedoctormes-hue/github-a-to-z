@@ -106,6 +106,11 @@ Thumbs.db
    * **Push protection** (блокировка отправки секретов).
 4. Нажмите **Enable** (Включить).
 
+> [!IMPORTANT]
+> **⚠️ Тарифный радар: Public против Private**  
+> Сканирование секретов и **Push protection** включены **бесплатно для всех публичных репозиториев (Public)** на GitHub.  
+> В **приватных репозиториях (Private)** на бесплатном тарифе Free эта функция недоступна: GitHub требует платную лицензию *GitHub Advanced Security (GHAS)*. Если ваш учебный репозиторий закрыт, кнопки будут неактивны. Чтобы протестировать Push Protection, временно сделайте репозиторий публичным (Settings ➔ Danger Zone ➔ Change visibility ➔ Public) либо положитесь на локальный `.gitignore` и pre-commit хуки.
+
 ### Как работает Push Protection:
 Если вы случайно попытаетесь сделать `git push` коммита, в котором содержится известный API-ключ (например, ключ OpenAI или токен GitHub), GitHub **физически отклонит команду прямо в консоли** с сообщением:  
 `Push rejected: Secret detected in file.py`.  
