@@ -3,7 +3,7 @@
 > **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга, AI-агентов через MCP, человеко-агентных команд и цитадели безопасности.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.5-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.6-success?style=flat-square)](#)
 [![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
@@ -244,7 +244,8 @@ github-a-to-z/
     ├── PULL_REQUEST_TEMPLATE.md# Шаблон оформления Pull Request
     ├── ISSUE_TEMPLATE/
     └── workflows/
-        └── ci.yml              # Автоматический CI-валидатор целостности гиперссылок
+        ├── ci.yml              # Автоматический CI-валидатор целостности гиперссылок
+        └── codeql.yml          # Автоматический SAST-сканер уязвимостей CodeQL
 ```
 
 ---
