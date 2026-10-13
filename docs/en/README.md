@@ -3,7 +3,7 @@
 > **Learn GitHub directly inside GitHub: from first browser clicks to advanced CI/CD, SemVer releases, licenses, architecture, digital hygiene, vibe coding, Model Context Protocol (MCP), human-agent teams, and DevSecOps fortress.**  
 > No disconnected slides. Only real-world repositories, hands-on labs, Git culture, and cutting-edge 2026 developer tooling.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.8-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.9-success?style=flat-square)](#)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages%20Live-brightgreen?style=flat-square)](https://thedoctormes-hue.github.io/github-a-to-z/)
 [![Language](https://img.shields.io/badge/Language-English%20%28In%20Progress%29-blue?style=flat-square)](docs/en/README.md)
 [![Main Version](https://img.shields.io/badge/Source-Russian%20%F0%9F%87%B7%F0%9F%87%BA-brightgreen?style=flat-square)](../../README.md)
