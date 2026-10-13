@@ -6,6 +6,8 @@
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.7-success?style=flat-square)](#)
 [![Graduates](https://img.shields.io/badge/Graduates-Hall%20of%20Fame-gold?style=flat-square)](GRADUATES.md)
 [![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
+[![Repo Recon](https://img.shields.io/badge/Guide-Repo%20Recon%202026-blueviolet?style=flat-square)](docs/repo-reconnaissance.md)
+[![AI Ready](https://img.shields.io/badge/AI--Ready-llms.txt%20%7C%20AGENTS.md-9cf?style=flat-square)](#скорми-этот-репозиторий-своей-нейросети-ai-readiness)
 [![English](https://img.shields.io/badge/Language-English%20%28In%20Progress%29-blue?style=flat-square)](docs/en/README.md)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
@@ -26,6 +28,8 @@
 
 * 🌐 **[Internationalization Hub (docs/en/README.md)](docs/en/README.md)** — англоязычный хаб курса и координация переводов.
 * 🎓 **[Зал славы выпускников (GRADUATES.md)](GRADUATES.md)** — интерактивный дипломный тренажёр первого Pull Request и доска почёта курсантов.
+* 🛰️ **[Скоростная разведка репозиториев (docs/repo-reconnaissance.md)](docs/repo-reconnaissance.md)** — 60-секундный протокол аудита и декомпозиции чужих проектов без клонирования.
+* 🤖 **[AI Agent Protocol (AGENTS.md)](AGENTS.md)** & **[LLM Standard (llms.txt)](llms.txt)** — инструкции для автономных агентов и открытый стандарт контекста для нейросетей.
 * ⚡ **[Шпаргалка разработчика (CHEATSHEET.md)](CHEATSHEET.md)** — карманный экспресс-навигатор по всем командам Git, GitHub CLI, трюкам и стандартам курса.
 * 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
 * 📜 **[Журнал изменений (CHANGELOG.md)](CHANGELOG.md)** — официальная хроника обновлений по канону Keep a Changelog.
@@ -33,6 +37,45 @@
 * 🛡️ **[Кодекс поведения (CODE_OF_CONDUCT)](CODE_OF_CONDUCT.md)** — стандарты уважения, этикет и правила сообщества.
 * 🤝 **[Правила участия (CONTRIBUTING)](CONTRIBUTING.md)** — как сдавать домашние задания и оформлять PR.
 * 🛡️ **[Политика безопасности (SECURITY.md)](SECURITY.md)** — регламент ответственного раскрытия уязвимостей (Responsible Disclosure).
+
+---
+
+## 🎯 Выбери свой персональный трек (Choose Your Track)
+
+Не обязательно читать всё подряд от корки до корки. Выберите маршрут под вашу текущую цель:
+
+| Роль / Цель | Рекомендуемый маршрут | Ключевой результат |
+| :--- | :--- | :--- |
+| 🐣 **Новичок в IT / Студент**<br>*«Хочу победить страх перед Git и сделать первый шаг»* | [Модуль 00](docs/00-intro/README.md) ➔ [Модуль 01](docs/01-web-basics/README.md) ➔ [Модуль 02](docs/02-terminal-ssh/README.md) ➔ [Модуль 03](docs/03-branches-pr/README.md) | Красивый профиль GitHub, первый коммит через консоль и запись в [GRADUATES.md](GRADUATES.md) |
+| ⚡ **Backend / Frontend разработчик**<br>*«Хочу писать код по взрослым стандартам и без хаоса»* | [Модуль 03](docs/03-branches-pr/README.md) ➔ [Модуль 04](docs/04-security-opsec/README.md) ➔ [Модуль 09](docs/09-architecture-hygiene/README.md) ➔ [Модуль 10](docs/10-production-standards/README.md) ➔ [Модуль 11](docs/11-hygiene-and-docs/README.md) | Conventional Commits, Squash merge, разрешение конфликтов, FSD и чистый Git-поток |
+| 🛡️ **DevOps & Security инженер**<br>*«Нужна непробиваемая автоматизация и безопасность»* | [Модуль 04](docs/04-security-opsec/README.md) ➔ [Модуль 06](docs/06-actions-pages/README.md) ➔ [Модуль 08](docs/08-releases-licenses/README.md) ➔ [Модуль 14](docs/14-security-insights/README.md) ➔ [docs/repo-reconnaissance.md](docs/repo-reconnaissance.md) | CI/CD пайплайны, SAST CodeQL, экспорт SBOM, Push Protection и OSINT-разведка чужих репозиториев |
+| 🤖 **AI-инженер & Вайбкодер 2026**<br>*«Хочу дирижировать ансамблем ИИ-агентов через MCP»* | [Модуль 07](docs/07-pro-tools/README.md) ➔ [Модуль 12](docs/12-ai-coding-mcp/README.md) ➔ [Модуль 13](docs/13-human-agent-teams/README.md) ➔ [AGENTS.md](AGENTS.md) | Model Context Protocol (MCP), Copilot Workspace, Агентная Триада (Planner/Builder/Auditor) |
+
+---
+
+## 🤖 Скорми этот репозиторий своей нейросети (AI-Readiness)
+
+Этот репозиторий спроектирован по стандартам **AI-First & Clean Context 2026 года**:
+* 📄 **[llms.txt](llms.txt)** & **[llms-full.txt](llms-full.txt)** — открытые спецификации для AI-краулеров и LLM-ингеста.
+* 🎭 **[AGENTS.md](AGENTS.md)** & **[.github/copilot-instructions.md](.github/copilot-instructions.md)** — заложенный протокол экскурсовода и стандарты для автономных агентов.
+* 📦 **[repomix.config.json](repomix.config.json)** — преднастроенная конфигурация для упаковки всего курса в один чистый текстовый контекст.
+
+### 📋 Готовые промпты для ChatGPT, Claude, Gemini, Cursor (Click & Copy):
+
+> 💬 **Промпт 1: «Персональный интерактивный ментор»**  
+> ```text
+> Ты — интерактивный наставник по курсу «GitHub от А до Я» (https://github.com/thedoctormes-hue/github-a-to-z). 
+> Ознакомься со стандартами llms.txt и AGENTS.md. Спроси мой текущий опыт разработки и предложи персональный трек обучения из 3 шагов с разбором практических полигонов!
+> ```
+
+> 💬 **Промпт 2: «Строгий экзаменатор по Git»**  
+> ```text
+> Ты — экзаменатор по курсу «GitHub от А до Я» (https://github.com/thedoctormes-hue/github-a-to-z). 
+> Задай мне 3 практические ситуационные задачи (разрешение конфликтов слияния, спасение коммитов через reflog, защита от утечки секретов) и оцени мои ответы.
+> ```
+
+> ⚡ **Промпт 3: «Мгновенный дайджест курса в 1 клик»**  
+> Откройте в браузере: **`https://gitingest.com/thedoctormes-hue/github-a-to-z`** или выполните в терминале форка **`npx repomix`** — и вы получите единый файл со всей кодовой базой и структурой курса без мусора и бинарников!
 
 ---
 
@@ -236,7 +279,12 @@ github-a-to-z/
 ├── CODE_OF_CONDUCT.md          # Кодекс поведения и стандарты сообщества
 ├── CONTRIBUTING.md             # Инструкция по выполнению домашних заданий
 ├── SECURITY.md                 # Официальная политика безопасности (Responsible Disclosure)
+├── AGENTS.md                   # Протокол взаимодействия для AI-агентов (The AI Agent Protocol)
+├── llms.txt                    # Открытый стандарт описания проекта для LLM и AI-поисковиков
+├── llms-full.txt               # Полный сжатый контекст репозитория для RAG и LLM
+├── repomix.config.json         # Конфигурация упаковщика репозитория Repomix
 ├── docs/                       # Теоретические и практические главы (00 - 14)
+│   ├── repo-reconnaissance.md  # Спецгайд скоростной разведки чужих репозиториев
 │   ├── ...
 │   ├── en/README.md            # Международный хаб интернационализации (i18n)
 │   ├── 13-human-agent-teams/

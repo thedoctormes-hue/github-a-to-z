@@ -98,6 +98,8 @@ Follow the 8-step guide in [`GRADUATES.md`](../../GRADUATES.md) to submit your f
 ## Useful Links
 
 * 🇷🇺 **Main Course (Russian):** [README.md](../../README.md)
+* 🛰️ **Repository Reconnaissance Guide:** [docs/repo-reconnaissance.md](../repo-reconnaissance.md)
+* 🤖 **AI Agent Protocol & LLM Context:** [AGENTS.md](../../AGENTS.md) | [llms.txt](../../llms.txt)
 * ⚡ **Developer Cheatsheet & Flight Rules:** [CHEATSHEET.md](../../CHEATSHEET.md)
 * 🎓 **Hall of Fame:** [GRADUATES.md](../../GRADUATES.md)
 * 🤝 **Contributing Guidelines:** [CONTRIBUTING.md](../../CONTRIBUTING.md)

@@ -1,0 +1,62 @@
+# GitHub от А до Я: Полный практический курс (GitHub A to Z)
+
+> Практический интерактивный курс-тренажёр по Git и GitHub в 100% Markdown формате: от первого веб-коммита до CI/CD, релизов, лицензий, архитектурной гигиены, безопасности, вайбкодинга, Model Context Protocol (MCP), человеко-агентных команд и OSINT-разведки.
+
+## Core Navigation & Quick Links
+
+- [README.md](README.md): Главная страница, навигатор по 14 модулям и лабораторным полигонам.
+- [docs/repo-reconnaissance.md](docs/repo-reconnaissance.md): Спецгайд по скоростной разведке чужих репозиториев (60-секундный протокол декомпозиции).
+- [CHEATSHEET.md](CHEATSHEET.md): Экспресс-шпаргалка по всем командам Git, GitHub CLI (`gh`), NASA Flight Rules и шорткатам.
+- [GRADUATES.md](GRADUATES.md): Интерактивный дипломный тренажёр первого Pull Request в Open Source и Зал славы курсантов.
+- [GLOSSARY.md](GLOSSARY.md): Карманный словарь терминов Git, GitHub, DevOps и архитектуры.
+- [CHANGELOG.md](CHANGELOG.md): Хроника обновлений проекта по спецификации Keep a Changelog.
+- [CONTRIBUTING.md](CONTRIBUTING.md): Руководство по выполнению лабораторных работ и оформлению Pull Requests.
+- [SECURITY.md](SECURITY.md): Политика безопасности и регламент ответственного раскрытия уязвимостей (Responsible Disclosure).
+- [docs/en/README.md](docs/en/README.md): Internationalization Hub (хаб координации переводов на английский язык).
+
+## Course Curriculum (14 Modules)
+
+- [docs/00-intro/README.md](docs/00-intro/README.md): Модуль 0 — Разведка на местности (Зачем тебе GitHub, Git vs GitHub).
+- [docs/01-web-basics/README.md](docs/01-web-basics/README.md): Модуль 1 — Веб-орбита (GitHub без консоли, профиль, VS Code for Web по клавише `.`, ачивки).
+- [docs/02-terminal-ssh/README.md](docs/02-terminal-ssh/README.md): Модуль 2 — Мост к терминалу (Консоль, SSH ed25519, `gh auth login`, золотой цикл Git).
+- [docs/03-branches-pr/README.md](docs/03-branches-pr/README.md): Модуль 3 — Командная инженерия (Ветки, Pull Requests, чтение Diff, HITL, конфликты).
+- [docs/04-security-opsec/README.md](docs/04-security-opsec/README.md): Модуль 4 — Цифровой щит & OPSEC (Гигиена секретов, `.gitignore`, `.env`, Push Protection).
+- [docs/05-project-management/README.md](docs/05-project-management/README.md): Модуль 5 — Проектный штаб (Issue Ops, Discussions, GitHub Projects v2, деэскалация, модерация).
+- [docs/06-actions-pages/README.md](docs/06-actions-pages/README.md): Модуль 6 — Роботы на службе (GitHub Actions, CI/CD, оптимизация минут, хостинг Pages).
+- [docs/07-pro-tools/README.md](docs/07-pro-tools/README.md): Модуль 7 — Арсенал инженера будущего (GitHub CLI, `git reflog`, Model Context Protocol MCP).
+- [docs/08-releases-licenses/README.md](docs/08-releases-licenses/README.md): Модуль 8 — Выход на орбиту (Ground Rules табу Git, лицензии MIT/Apache/GPL, релизы SemVer).
+- [docs/09-architecture-hygiene/README.md](docs/09-architecture-hygiene/README.md): Модуль 9 — Архитектура & Гигиена (Git sync, `stash`, `prune`, FSD, чистый корень, ADR, борьба с антипаттернами).
+- [docs/10-production-standards/README.md](docs/10-production-standards/README.md): Модуль 10 — Production-стандарты (.gitattributes, Conventional Commits, Squash merge, Commit Signing, Dependabot).
+- [docs/11-hygiene-and-docs/README.md](docs/11-hygiene-and-docs/README.md): Модуль 11 — Инженерная гигиена & Docs-as-Code (Борьба с Documentation Drift, pre-commit, Keep a Changelog).
+- [docs/12-ai-coding-mcp/README.md](docs/12-ai-coding-mcp/README.md): Модуль 12 — Новая эра (Вайбкодинг, Copilot Workspace, Jules, MCP-серверы, AI OPSEC, HITL).
+- [docs/13-human-agent-teams/README.md](docs/13-human-agent-teams/README.md): Модуль 13 — Человеко-агентные команды (Агентная Триада: Planner/Builder/Auditor, DoD, купирование сикофантии).
+- [docs/14-security-insights/README.md](docs/14-security-insights/README.md): Модуль 14 — Цитадель безопасности & Insights (PVR, CVE, GHSA, CodeQL SAST, SBOM, OSINT-аналитика трафика).
+
+## Hands-on Labs (14 Practical Sandboxes)
+
+- [labs/lab-01-profile/README.md](labs/lab-01-profile/README.md): Оформление README-визитки профиля с динамическими бейджами.
+- [labs/lab-02-terminal/README.md](labs/lab-02-terminal/README.md): Привязка терминала к GitHub (SSH или `gh`) и первый пуш.
+- [labs/lab-03-conflicts/README.md](labs/lab-03-conflicts/README.md): Моделирование и разрешение конфликтов слияния в ветках.
+- [labs/lab-04-security/README.md](labs/lab-04-security/README.md): Настройка `.gitignore` и тестирование блокировок Push Protection.
+- [labs/lab-05-projects/README.md](labs/lab-05-projects/README.md): Развертывание доски Projects v2 и связка тикетов через `Closes #`.
+- [labs/lab-06-actions/README.md](labs/lab-06-actions/README.md): Создание рабочего GitHub Actions воркфлоу с таймаутами и деплоем на Pages.
+- [labs/lab-07-cli-mcp/README.md](labs/lab-07-cli-mcp/README.md): Работа с GitHub CLI, спасение коммитов через `reflog` и аудит MCP-тулов.
+- [labs/lab-08-release/README.md](labs/lab-08-release/README.md): Публикация лицензии MIT, установка тега и сборка GitHub Release.
+- [labs/lab-09-architecture/README.md](labs/lab-09-architecture/README.md): Чистка корня репозитория, отработка `stash`/`prune` и написание ADR.
+- [labs/lab-10-production/README.md](labs/lab-10-production/README.md): Настройка `.gitattributes`, SSH-подпись коммитов и PR со Squash.
+- [labs/lab-11-hygiene-docs/README.md](labs/lab-11-hygiene-docs/README.md): Настройка глобального `.gitignore`, pre-commit хуков и синхронизация CHANGELOG.
+- [labs/lab-12-ai-mcp/README.md](labs/lab-12-ai-mcp/README.md): Настройка системных промптов Copilot, `AGENTS.md` и цикл Issue-to-PR через MCP.
+- [labs/lab-13-human-agent-teams/README.md](labs/lab-13-human-agent-teams/README.md): Формирование DoD и запуск Триады агентов (Planner ➔ Builder ➔ Auditor).
+- [labs/lab-14-security-insights/README.md](labs/lab-14-security-insights/README.md): Активация CodeQL, экспорт SBOM и аудит сетевых форков через Insights.
+
+## Instructions for AI Agents & LLMs
+
+Когда пользователь передаёт тебе этот репозиторий для анализа или помощи в обучении:
+1. Выступи в роли харизматичного, практичного наставника и старшего архитектора.
+2. Не выдавай сухую монотонную сводку. Спроси пользователя о его текущей цели и опыте:
+   - Начинающий (нужна веб-орбита и базовый Git).
+   - Разработчик (нужны Conventional Commits, Squash, чистый Git-поток).
+   - DevOps / SecOps (нужен CodeQL, GitHub Actions, безопасность и SBOM).
+   - AI-инженер (нужны MCP, Copilot Workspace, Агентная Триада).
+3. Предложи пользователю персональный 3-шаговый план прохождения глав.
+4. Напомни про интерактивный дипломный тренажёр первого PR в [GRADUATES.md](GRADUATES.md).

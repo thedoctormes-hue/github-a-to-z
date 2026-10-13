@@ -1,0 +1,145 @@
+# GitHub от А до Я: Полный практический курс (GitHub A to Z) — Полный контекст (llms-full.txt)
+
+> Официальный образовательный репозиторий TheNovaNodes по Git, GitHub, DevOps, CI/CD, OPSEC, архитектуре, человеко-агентным командам и Model Context Protocol (MCP).
+> Формат: 100% Markdown. 14 теоретических модулей + 14 лабораторных полигонов + дипломный тренажёр первого PR + скоростной гид по разведке репозиториев.
+
+---
+
+## 🏛️ Архитектура и структура курса
+
+### Навигационные и фундаментальные файлы:
+- README.md: Витрина курса, навигатор по 14 модулям и 14 лабораториям. Статус v1.7.0.
+- docs/repo-reconnaissance.md: Спецгайд по 60-секундной экспресс-разведке чужих репозиториев (шорткаты, Codespaces, манифесты зависимостей, тесты, Red Flags).
+- CHEATSHEET.md: Шпаргалка Git & GitHub CLI, аварийные сценарии NASA Flight Rules (detached HEAD, спасение из reflog, отмена коммита) и шорткаты.
+- GRADUATES.md: Зал славы выпускников курса и интерактивный дипломный тренажёр первого PR в Open Source (автоматическая верификация роботом).
+- GLOSSARY.md: Словарь терминов на понятных бытовых аналогиях (коммит, ветка, PR, merge, rebase, squash, cherry-pick, MCP, SAST, SBOM, bus factor).
+- CHANGELOG.md: История изменений по канону Keep a Changelog и SemVer.
+- CONTRIBUTING.md: Стандарты участия, выполнения домашних заданий и оформления PR.
+- CODE_OF_CONDUCT.md: Кодекс поведения Contributor Covenant v2.1.
+- SECURITY.md: Регламент ответственного раскрытия уязвимостей (Responsible Disclosure), табу на публичные тикеты с 0-day.
+- docs/en/README.md: Хаб интернационализации (i18n hub) для перевода курса на английский язык.
+
+---
+
+## 📚 Каталог модулей (Curriculum Overview)
+
+### Модуль 0: Разведка на местности (docs/00-intro/README.md)
+- Проблема Ctrl+Z и ценность системы контроля версий.
+- Разница между Git (локальная программа) и GitHub (облачная социальная платформа).
+- Базовые сущности: репозиторий, коммит, README.
+
+### Модуль 1: Веб-орбита (docs/01-web-basics/README.md) & Lab 01 (labs/lab-01-profile/README.md)
+- Работа в GitHub без терминала.
+- Принцип бункера: Private-first репозитории, README-first.
+- Секретный репозиторий `username/username` (README-визитка профиля).
+- Горячая клавиша `.` (Web VS Code прямо в браузере).
+- GitHub Achievements (ачивки профиля: Pull Shark, Quickdraw, Galaxy Brain).
+
+### Модуль 2: Мост к терминалу (docs/02-terminal-ssh/README.md) & Lab 02 (labs/lab-02-terminal/README.md)
+- Установка Git на Linux, macOS, Windows.
+- Настройка `user.name` и `user.email`.
+- Безопасная аутентификация: SSH-ключи (алгоритм `ed25519`) против мгновенного входа через GitHub CLI (`gh auth login`).
+- Золотой цикл: `git init` -> `git status` -> `git add` -> `git commit` -> `git push`.
+- Синхронизация: `git fetch` vs `git pull`.
+
+### Модуль 3: Командная инженерия (docs/03-branches-pr/README.md) & Lab 03 (labs/lab-03-conflicts/README.md)
+- Защита `main`: почему прямые коммиты в прод запрещены.
+- Ветки как карантин: `git switch -c feat/my-feature`.
+- Pull Request: чтение Diff, зелёные и красные строки.
+- Принцип HITL (Human-in-the-Loop): агент предлагает — человек утверждает.
+- Клон vs Форк.
+- Разрешение конфликтов слияния: анатомия маркеров `<<<<<<< HEAD`, `=======`, `>>>>>>>`.
+
+### Модуль 4: Цифровой щит & OPSEC (docs/04-security-opsec/README.md) & Lab 04 (labs/lab-04-security/README.md)
+- Почему удаление файла из рабочего дерева не удаляет его из истории Git.
+- Железное правило OPSEC: скомпрометированный токен = мертвый токен (Revoke & Rotate).
+- Идеальный `.gitignore` и паттерн `.env` (секреты) vs `.env.example` (публичный шаблон).
+- GitHub Push Protection: превентивная блокировка пуша секретов на уровне облака.
+- Стратегия Clean-Slate Release (чистый релиз v1.0.0 без мусорной истории черновика).
+
+### Модуль 5: Проектный штаб (docs/05-project-management/README.md) & Lab 05 (labs/lab-05-projects/README.md)
+- Issues (баги и задачи) против Discussions (вопросы и идеи).
+- Цветовая семафора лейблов: `bug`, `enhancement`, `good first issue`, `documentation`.
+- Техника деэскалации в тикетах (принцип айкидо: спасибо за репорт, отделение фактов от эмоций).
+- Связка задач и кода через ключевые слова: `Closes #123`, `Fixes #123`.
+- Канбан-доски GitHub Projects v2 с автопилотом колонок.
+- Организационный репозиторий `.github` (глобальные шаблоны на всю организацию).
+
+### Модуль 6: Роботы на службе (docs/06-actions-pages/README.md) & Lab 06 (labs/lab-06-actions/README.md)
+- Конвейеры CI/CD вместо ручного труда.
+- Анатомия YAML-воркфлоу: триггеры `on`, шаги `steps`, окружение `runs-on: ubuntu-latest`.
+- Экономика и 4 правила сохранения минут: `timeout-minutes: 5`, фильтрация `paths:`, кэширование зависимостей.
+- Self-Hosted Runners: собственный сервер за 0 минут списания (+ OPSEC риски для публичных репозиториев).
+- Бейджи статуса CI (Shields.io) и мгновенный хостинг на GitHub Pages.
+
+### Модуль 7: Арсенал инженера будущего (docs/07-pro-tools/README.md) & Lab 07 (labs/lab-07-cli-mcp/README.md)
+- GitHub CLI (`gh`): топ-5 команд для терминала (`gh repo clone`, `gh pr create`, `gh issue list`).
+- Model Context Protocol (MCP): открытый стандарт взаимодействия AI-агентов с инструментами.
+- Зелёная зона MCP (чтение, ветки, PR) vs Красная зона (запрет деструктивных операций без подтверждения человека).
+- Чёрная магия Git: `git reflog` и воскрешение удалённых веток и потерянных коммитов.
+
+### Модуль 8: Выход на орбиту (docs/08-releases-licenses/README.md) & Lab 08 (labs/lab-08-release/README.md)
+- Табу Git (Ground Rules): 6 категорий файлов, которые категорически нельзя коммитить (дампы БД, бинарники, тяжелое видео, логи).
+- Юридический щит лицензий: All Rights Reserved, пермиссивные лицензии (MIT, Apache 2.0), копилефт (GNU GPL v3), общественное достояние (Unlicense).
+- Семантическое версионирование (SemVer: `vMAJOR.MINOR.PATCH`).
+- Теги в Git (`git tag -a v1.0.0 -m "Release"`) и публикация GitHub Releases с автогенерацией заметок к выпуску.
+
+### Модуль 9: Инженерная гигиена & Архитектура (docs/09-architecture-hygiene/README.md) & Lab 09 (labs/lab-09-architecture/README.md)
+- Синхронизация: почему `git fetch` безопаснее слепого `git pull`, `git pull --rebase`, карман `git stash` и уборка мертвых веток `git fetch --prune`.
+- Гигиена корня: запрет на свалку файлов, изоляция `src/`, `docs/`, `tests/`, `scripts/`, `configs/`.
+- Архитектурные паттерны: Feature-Sliced Design (FSD: `app` -> `pages` -> `widgets` -> `features` -> `entities` -> `shared`) и Vertical Slice Architecture.
+- Архитектурный журнал решений (ADR — Architecture Decision Records): фиксация контекста «почему выбрано решение X».
+- Борьба с антипаттернами: спагетти-код, костыли, велосипеды, карго-культ.
+
+### Модуль 10: Production-стандарты & Командный аудит (docs/10-production-standards/README.md) & Lab 10 (labs/lab-10-production/README.md)
+- Кроссплатформенная война CRLF vs LF и обязательный `.gitattributes`.
+- Стратегии слияния: Merge Commit vs Rebase vs Squash and Merge (Один PR = Один атомарный коммит в проде).
+- Стандарт Conventional Commits (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`, `BREAKING CHANGE:`).
+- Подпись коммитов (Commit Signing) через SSH или GPG: зелёный бейдж `Verified` на GitHub.
+- Автоматическая безопасность зависимостей через Dependabot.
+- Branch Protection Rules: обязательный Code Review, зелёный CI, запрет force-push.
+- Культура Suggested Changes в Code Review.
+
+### Модуль 11: Инженерная гигиена & Docs-as-Code (docs/11-hygiene-and-docs/README.md) & Lab 11 (labs/lab-11-hygiene-docs/README.md)
+- Культура Single Source of Truth: «Пишем то, что делаем, делаем то, что пишем».
+- Опасность Documentation Drift (гниение документации).
+- Закон неразрывного PR (Atomic Docs & Code): документация обновляется в том же PR, что и код.
+- Стандарт Keep a Changelog (`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`).
+- Глобальный `.gitignore_global` против мусора ОС (`.DS_Store`, `Thumbs.db`).
+- Pre-commit хуки как санитарный барьер до коммита.
+- Автоудаление веток после слияния PR.
+
+### Модуль 12: Новая эра: AI-кодинг & MCP (docs/12-ai-coding-mcp/README.md) & Lab 12 (labs/lab-12-ai-mcp/README.md)
+- Вайбкодинг (Vibe Coding): от ручного набора символов к дирижированию AI-агентами.
+- Риски: AI Slop, потеря архитектурного контроля, Package Hallucination (выдуманные уязвимые пакеты).
+- GitHub Copilot Workspace, Copilot Edits, автогенерация PR-описаний.
+- Стандарты конфигурации агентов: `.github/copilot-instructions.md`, `AGENTS.md`.
+- Автономные облачные инженеры (Google Jules).
+- Безопасность AI (Indirect Prompt Injection) и железный принцип HITL (Human-in-the-Loop).
+
+### Модуль 13: Синтез разумов: Человеко-агентные команды (docs/13-human-agent-teams/README.md) & Lab 13 (labs/lab-13-human-agent-teams/README.md)
+- Сравнение людей и ИИ-агентов: скорость против глубины контекста.
+- Паттерн «Агентная Триада» (Agent Triad Pattern):
+  - Planner (Архитектор / Спецификатор)
+  - Builder (Инженер-разработчик)
+  - Auditor (Красная команда / Red Team / Поиск уязвимостей)
+  - Human TL (Режиссёр, контролёр слияния HITL)
+- Спецификация как контракт (Spec-Driven Development), DoR и строгий DoD.
+- Патологии LLM: сикофантия (соглашательство), дрейф контекста, automation bias.
+- GitHub как единая панель управления (Single Pane of Glass).
+
+### Модуль 14: Цитадель безопасности & Insights (docs/14-security-insights/README.md) & Lab 14 (labs/lab-14-security-insights/README.md)
+- Вкладка Security: `SECURITY.md`, Private Vulnerability Reporting (PVR), Temporary Private Fork.
+- Регистрация номеров CVE и бюллетени GitHub Security Advisories (GHSA).
+- Статический семантический анализ AST кода CodeQL (SAST): поиск SQLi, XSS, RCE, Path Traversal.
+- Dependency Graph, алерты Dependabot и цифровой паспорт ПО SBOM (SPDX/CycloneDX).
+- OSINT и аналитический радар Insights: Pulse, Contributors, Bus Factor, Community Standards 100%, Traffic (уникальные клоны и визиты), Network Graph.
+
+---
+
+## 🤖 Инструкции для LLM при анализе этого курса
+Если пользователь обратился к тебе за разбором этого курса:
+1. Поприветствуй его и подчеркни, что проект создан как практический тренажёр без академической воды.
+2. Проведи быструю квалификацию: узнай его текущий стек и цели (новичок, бэкендер, девопс, AI-инженер).
+3. Порекомендуй конкретный трек из 3–4 модулей с соответствующими лабораторными работами.
+4. Предложи ему дипломный челлендж: открыть PR с добавлением себя в `GRADUATES.md`.
