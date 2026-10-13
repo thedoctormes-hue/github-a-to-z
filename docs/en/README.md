@@ -9,6 +9,7 @@
 [![Docker Package](https://img.shields.io/badge/Package-ghcr.io%20%7C%20Docker-blue?style=flat-square&logo=docker)](https://github.com/thedoctormes-hue/github-a-to-z/pkgs/container/github-a-to-z)
 [![Certification](https://img.shields.io/badge/Certification-GitHub%20Foundations%20Prep-blueviolet?style=flat-square&logo=github)](../certification/foundations.md)
 [![Student Pack](https://img.shields.io/badge/Education-Student%20Developer%20Pack-orange?style=flat-square&logo=github)](../education/student-pack.md)
+[![Classroom](https://img.shields.io/badge/Education-GitHub%20Classroom%20Autograding-blueviolet?style=flat-square&logo=github)](../education/classroom.md)
 [![Language](https://img.shields.io/badge/Language-English%20%28In%20Progress%29-blue?style=flat-square)](README.md)
 [![Main Version](https://img.shields.io/badge/Source-Russian%20%F0%9F%87%B7%F0%9F%87%BA-brightgreen?style=flat-square)](../../README.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](../../CONTRIBUTING.md)
@@ -22,6 +23,7 @@
 * 🐳 **[Offline Docker Package (GHCR)](https://github.com/thedoctormes-hue/github-a-to-z/pkgs/container/github-a-to-z)** — Run the complete interactive course locally without internet: `docker run -d -p 3000:80 ghcr.io/thedoctormes-hue/github-a-to-z:latest`.
 * 🏅 **[GitHub Foundations Certification Prep Guide](../certification/foundations.md)** — Official exam domains, test-taking strategy, and 25-question practice exam with detailed answers.
 * 🎒 **[GitHub Education & Student Developer Pack Guide](../education/student-pack.md)** — Step-by-step guide to claiming free GitHub Pro, Copilot, and $200k+ in developer perks.
+* 🧪 **[GitHub Classroom & Autograding Guide](../education/classroom.md)** — Automating student assignments, running Autograding via GitHub Actions, and anti-cheat best practices.
 * 🇷🇺 **[Русская версия (Каноническая)](../../README.md)** — Полный курс (14 модулей + 14 лабораторий + шпаргалка + Зал славы).
 * 🇬🇧 **English Version (This Hub)** — Community-driven internationalization hub and translation roadmap.
 * 💬 **[Translation Coordination Discussion #38](https://github.com/thedoctormes-hue/github-a-to-z/discussions/38)** — Join our community call for translators and reserve chapters!
