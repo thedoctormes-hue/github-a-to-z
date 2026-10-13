@@ -44,6 +44,10 @@
 - [Лабораторная 13: Агентная Триада & DoD](labs/lab-13-human-agent-teams/README.md)
 - [Лабораторная 14: CodeQL, SBOM & Анализ сети форков](labs/lab-14-security-insights/README.md)
 
+# 🏅 СЕРТИФИКАЦИЯ И СТАНДАРТЫ
+
+- [🏅 Подготовка к сертификации GitHub Foundations](docs/certification/foundations.md)
+
 ---
 
 # 📖 СПРАВОЧНИКИ И СТАНДАРТЫ
