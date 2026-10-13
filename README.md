@@ -3,7 +3,7 @@
 > **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга, AI-агентов через MCP, человеко-агентных команд и цитадели безопасности.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.9-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.10-success?style=flat-square)](#)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages%20Live-brightgreen?style=flat-square)](https://thedoctormes-hue.github.io/github-a-to-z/)
 [![Discussions](https://img.shields.io/badge/Discussions-Join%20the%20Community-purple?style=flat-square)](https://github.com/thedoctormes-hue/github-a-to-z/discussions)
 [![Docker Package](https://img.shields.io/badge/Package-ghcr.io%20%7C%20Docker-blue?style=flat-square&logo=docker)](https://github.com/thedoctormes-hue/github-a-to-z/pkgs/container/github-a-to-z)
