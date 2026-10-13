@@ -9,6 +9,13 @@
 
 ## [Unreleased]
 
+### 🛡️ Устранение уязвимостей дипломного бота, Scope Guard и валидатора ссылок (Issue #36)
+- **Безопасная обработка форк-PR на `pull_request_target` (`.github/workflows/graduate-verifier.yml`)**: Устранён отказ в доступе `403 Forbidden` при создании комментариев и присвоении лейблов на PR из внешних форков. Конвейер переведён на `pull_request_target` с изолированным чекаутом доверенного `main` и безопасным дифф-анализом.
+- **Ужесточение Scope Guard и сверка авторства (`scripts/verify_graduate_pr.py`)**: Фиксация строгого требования 6 колонок таблицы Зала славы выпускников. Добавлена проверка `--pr-author` для предотвращения коммитов от чужого имени (Identity Spoofing).
+- **Валидация внешних URL и регулярный аудит (`scripts/validate_links.py`)**: Добавлен флаг `--check-external` для проверки внешних HTTP/HTTPS ресурсов. Развернут еженедельный крон-воркфлоу `.github/workflows/external-links-cron.yml`.
+- **Рефакторинг `AGENTS.md` к стандарту System Contract 2026**: Замена маркетингового протокола на строгий инженерный манифест с защитой от сикофантии (Anti-Sycophancy Directive) и 3 операционными режимами (`TUTOR`, `BUILDER`, `AUDITOR`).
+- **Запуск GitHub Discussions и координационный хаб локализации**: Включен раздел Discussions в репозитории и открыта первая закреплённая дискуссия [#38](https://github.com/thedoctormes-hue/github-a-to-z/discussions/38) для координации перевода глав на английский язык.
+
 ## [1.9.0] - 2026-10-13
 
 ### 🌐 Веб-портал GitHub Pages на базе mdBook (Rust)

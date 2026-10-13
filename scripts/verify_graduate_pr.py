@@ -5,7 +5,7 @@ Verification Script for Graduate Pull Requests in github-a-to-z
 Enforces Scope Guard, Anti-Vandalism, and Formatting constraints for GRADUATES.md.
 
 Usage:
-  python3 scripts/verify_graduate_pr.py [--base <base_ref>] [--head <head_ref>]
+  python3 scripts/verify_graduate_pr.py [--base <base_ref>] [--head <head_ref>] [--pr-author <author>]
 """
 
 import sys
@@ -59,8 +59,8 @@ def get_file_diff(base_ref, head_ref, file_path):
         pass
     return ""
 
-def verify_graduate_pr(base_ref="origin/main", head_ref="HEAD"):
-    print(f"🎓 Checking Pull Request changes (Base: {base_ref}, Head: {head_ref})...")
+def verify_graduate_pr(base_ref="origin/main", head_ref="HEAD", pr_author=None):
+    print(f"🎓 Checking Pull Request changes (Base: {base_ref}, Head: {head_ref}, Author: {pr_author or 'N/A'})...")
 
     # 1. Scope Guard: Check which files were changed
     changed_files = get_changed_files(base_ref, head_ref)
@@ -118,17 +118,30 @@ def verify_graduate_pr(base_ref="origin/main", head_ref="HEAD"):
     valid_rows = 0
     for row in added_table_rows:
         cols = [c.strip() for c in row.split("|")[1:-1]]
-        if len(cols) < 5:
-            print(f"🚨 Format Violation: Table row has insufficient columns (expected 6, found {len(cols)}):")
+        if len(cols) != 6:
+            print(f"🚨 Format Violation: Table row must have exactly 6 columns (found {len(cols)}):")
             print(f"   Row: {row}")
             return False
             
         first_col = cols[0]
-        if not re.search(r"\[@?[\w\-\.]+\]\(https?://github\.com/[\w\-\.]+\)", first_col):
+        match = re.search(r"\[@?([\w\-\.]+)\]\(https?://github\.com/([\w\-\.]+)\)", first_col)
+        if not match:
             print(f"🚨 Format Violation: First column must contain markdown link to GitHub profile [@username](https://github.com/username):")
             print(f"   Found: {first_col}")
             return False
-            
+
+        link_user, url_user = match.group(1), match.group(2)
+        if link_user.lower() != url_user.lower():
+            print(f"🚨 Format Violation: Username in label (@{link_user}) does not match URL username (@{url_user})")
+            return False
+
+        # Anti-Spoofing: Ensure the author of the PR is adding their own entry
+        if pr_author:
+            clean_pr_author = pr_author.strip().lstrip("@").lower()
+            if link_user.lower() != clean_pr_author:
+                print(f"🚨 Identity Spoofing Violation: Row username (@{link_user}) does not match PR author (@{pr_author})")
+                return False
+
         valid_rows += 1
 
     print(f"✅ Success! Validated {valid_rows} graduate table entry row(s).")
@@ -139,7 +152,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Verify Graduate Pull Request")
     parser.add_argument("--base", default="origin/main", help="Base git ref")
     parser.add_argument("--head", default="HEAD", help="Head git ref")
+    parser.add_argument("--pr-author", default="", help="Expected GitHub login of PR author")
     args = parser.parse_args()
 
-    success = verify_graduate_pr(base_ref=args.base, head_ref=args.head)
+    success = verify_graduate_pr(base_ref=args.base, head_ref=args.head, pr_author=args.pr_author or None)
     sys.exit(0 if success else 1)

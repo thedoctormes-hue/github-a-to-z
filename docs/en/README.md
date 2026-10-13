@@ -5,6 +5,7 @@
 
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.9-success?style=flat-square)](#)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages%20Live-brightgreen?style=flat-square)](https://thedoctormes-hue.github.io/github-a-to-z/)
+[![Discussions](https://img.shields.io/badge/Discussions-Join%20the%20Community-purple?style=flat-square)](https://github.com/thedoctormes-hue/github-a-to-z/discussions)
 [![Language](https://img.shields.io/badge/Language-English%20%28In%20Progress%29-blue?style=flat-square)](docs/en/README.md)
 [![Main Version](https://img.shields.io/badge/Source-Russian%20%F0%9F%87%B7%F0%9F%87%BA-brightgreen?style=flat-square)](../../README.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](../../CONTRIBUTING.md)
@@ -17,6 +18,7 @@
 * 📖 **[Interactive Online Book (GitHub Pages)](https://thedoctormes-hue.github.io/github-a-to-z/)** — Official web portal powered by Rust mdBook with full-text search and offline reading.
 * 🇷🇺 **[Русская версия (Каноническая)](../../README.md)** — Полный курс (14 модулей + 14 лабораторий + шпаргалка + Зал славы).
 * 🇬🇧 **English Version (This Hub)** — Community-driven internationalization hub and translation roadmap.
+* 💬 **[Translation Coordination Discussion #38](https://github.com/thedoctormes-hue/github-a-to-z/discussions/38)** — Join our community call for translators and reserve chapters!
 
 ---
 

@@ -3,6 +3,7 @@
 """
 Automated Link Integrity & Anchor Validator for github-a-to-z
 Validates all markdown relative paths, anchors, and cross-references.
+Optionally verifies external HTTP/HTTPS resources via --check-external.
 Standard library only, zero external dependencies.
 """
 
@@ -10,6 +11,9 @@ import os
 import re
 import sys
 import json
+import argparse
+import urllib.request
+import urllib.error
 from pathlib import Path
 from collections import defaultdict
 from typing import Dict, List, Set, Tuple
@@ -62,34 +66,33 @@ def parse_headings_and_anchors(file_path: Path) -> Set[str]:
         if in_code_block:
             continue
 
-        m = re.match(r'^(#{1,6})\s+(.*)$', line)
-        if m:
-            heading_text = m.group(2).strip()
-            custom_id = re.search(r'\{#([^}]+)\}\s*$', heading_text)
-            if custom_id:
-                anchors.add(custom_id.group(1))
-                heading_text = heading_text[:custom_id.start()].strip()
-            
+        match = re.match(r'^(#{1,6})\s+(.+)$', line_strip)
+        if match:
+            heading_text = match.group(2).strip()
+            # Check for custom anchor in heading e.g. {#custom-id}
+            custom_anchor = re.search(r'\{#([^\}]+)\}', heading_text)
+            if custom_anchor:
+                anchors.add(custom_anchor.group(1))
+                heading_text = re.sub(r'\{#[^\}]+\}', '', heading_text).strip()
+
             base_slug = gh_slugify(heading_text)
-            if not base_slug:
-                continue
-            
-            count = slug_counts[base_slug]
-            slug_counts[base_slug] += 1
-            if count == 0:
-                anchors.add(base_slug)
-            else:
-                anchors.add(f"{base_slug}-{count}")
+            if base_slug:
+                count = slug_counts[base_slug]
+                slug_counts[base_slug] += 1
+                final_slug = base_slug if count == 0 else f"{base_slug}-{count}"
+                anchors.add(final_slug)
 
     return anchors
 
 def find_links_in_file(file_path: Path) -> List[Tuple[int, str, str]]:
-    """Extract all markdown and html links from a file."""
+    """Return all markdown links in file: (line_num, link_text, link_target)."""
     content = file_path.read_text(encoding="utf-8", errors="ignore")
     links = []
     in_code_block = False
 
-    for line_idx, line in enumerate(content.splitlines(), start=1):
+    link_pattern = re.compile(r'(?<!!)\[([^\]]*)\]\(([^)]+)\)')
+
+    for idx, line in enumerate(content.splitlines(), start=1):
         line_strip = line.strip()
         if line_strip.startswith("```"):
             in_code_block = not in_code_block
@@ -97,24 +100,44 @@ def find_links_in_file(file_path: Path) -> List[Tuple[int, str, str]]:
         if in_code_block:
             continue
 
-        for m in re.finditer(r'(?<!!)\[([^\]]*)\]\(([^)]+)\)', line):
-            text = m.group(1)
+        for m in link_pattern.finditer(line):
+            text = m.group(1).strip()
             target = m.group(2).strip()
-            target = re.sub(r'\s+"[^"]*"$', '', target)
-            target = re.sub(r"\s+'[^']*'$", '', target)
-            links.append((line_idx, text, target))
-
-        for m in re.finditer(r'<a\s+[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', line):
-            links.append((line_idx, m.group(2), m.group(1).strip()))
+            target = target.split()[0]  # Remove optional title
+            links.append((idx, text, target))
 
     return links
 
-def validate_repository() -> int:
-    """Run full link and anchor validation across all markdown files."""
+def check_external_url(url: str, timeout: int = 5) -> Tuple[bool, str]:
+    """Test validity of external URL via HTTP HEAD / GET."""
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': '*/*'
+    }
+    try:
+        req = urllib.request.Request(url, headers=headers, method='HEAD')
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return True, f"HTTP {resp.status}"
+    except urllib.error.HTTPError as e:
+        if e.code in (403, 405, 429):
+            try:
+                req = urllib.request.Request(url, headers=headers, method='GET')
+                with urllib.request.urlopen(req, timeout=timeout) as resp:
+                    return True, f"HTTP {resp.status}"
+            except Exception as e_get:
+                return False, str(e_get)
+        elif e.code in (301, 302, 307, 308):
+            return True, f"HTTP {e.code}"
+        return False, f"HTTP {e.code}"
+    except Exception as e:
+        return False, str(e)
+
+def validate_repository(check_external: bool = False) -> int:
+    """Full repository validation of all markdown links."""
     md_files = list(REPO_ROOT.glob("**/*.md"))
-    md_files = [f for f in md_files if ".git" not in f.parts and "node_modules" not in f.parts and ".system_generated" not in f.parts]
+    md_files = [f for f in md_files if ".git" not in f.parts and "node_modules" not in f.parts and ".system_generated" not in f.parts and "book" not in f.parts]
     
-    print(f"🔍 Validating {len(md_files)} markdown files in {REPO_ROOT}...")
+    print(f"🔍 Validating {len(md_files)} markdown files in {REPO_ROOT} (Check External: {check_external})...")
 
     file_anchors: Dict[Path, Set[str]] = {}
     for md_file in md_files:
@@ -122,6 +145,7 @@ def validate_repository() -> int:
 
     issues = []
     total_links = 0
+    external_cache: Dict[str, Tuple[bool, str]] = {}
 
     for md_file in sorted(md_files):
         rel_src = md_file.relative_to(REPO_ROOT)
@@ -133,7 +157,23 @@ def validate_repository() -> int:
             if target in ("#", ""):
                 continue
 
-            if target.startswith(("http://", "https://", "mailto:")):
+            if target.startswith("mailto:"):
+                continue
+
+            if target.startswith(("http://", "https://")):
+                if check_external:
+                    clean_url = target.split('#')[0]
+                    if clean_url not in external_cache:
+                        print(f"  🌐 Checking external: {clean_url}...")
+                        external_cache[clean_url] = check_external_url(clean_url)
+                    is_ok, reason = external_cache[clean_url]
+                    if not is_ok:
+                        issues.append({
+                            "file": str(rel_src),
+                            "line": line_num,
+                            "type": "BROKEN_EXTERNAL_LINK",
+                            "target": f"{target} ({reason})"
+                        })
                 continue
 
             # Pure local anchor
@@ -202,4 +242,8 @@ def validate_repository() -> int:
     return 0
 
 if __name__ == "__main__":
-    sys.exit(validate_repository())
+    parser = argparse.ArgumentParser(description="Validate markdown links in repository")
+    parser.add_argument("--check-external", action="store_true", help="Perform live HTTP checks on external URLs")
+    args = parser.parse_args()
+
+    sys.exit(validate_repository(check_external=args.check_external))

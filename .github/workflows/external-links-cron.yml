@@ -1,0 +1,28 @@
+name: "Weekly External Links Health Check"
+
+on:
+  schedule:
+    # Every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-external-links:
+    name: Validate External Links & Outbound Health
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run External Links Validator
+        run: |
+          python3 scripts/validate_links.py --check-external

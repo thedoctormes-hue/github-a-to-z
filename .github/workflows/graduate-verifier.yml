@@ -1,7 +1,7 @@
 name: "Graduate PR Verifier & Welcome Bot"
 
 on:
-  pull_request:
+  pull_request_target:
     branches: [ "main" ]
     types: [ opened, synchronize, reopened ]
 
@@ -15,28 +15,31 @@ jobs:
       issues: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
+      - name: Checkout trusted base repository
+        uses: actions/checkout@v4
         with:
+          ref: ${{ github.base_ref }}
           fetch-depth: 0
 
-      - name: Fetch Base Branch for Diff Analysis
+      - name: Fetch PR commit for verification
         run: |
-          git fetch origin ${{ github.base_ref }}
+          git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-${{ github.event.pull_request.number }}
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Run Graduate PR Verifier
         id: verifier
         run: |
-          python3 scripts/verify_graduate_pr.py --base origin/${{ github.base_ref }} --head HEAD
+          python3 scripts/verify_graduate_pr.py \
+            --base origin/${{ github.base_ref }} \
+            --head pr-${{ github.event.pull_request.number }} \
+            --pr-author "${{ github.event.pull_request.user.login }}"
 
       - name: Welcome Comment & Label
         if: success()
-        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
@@ -63,7 +66,7 @@ jobs:
             }
 
             const author = context.payload.pull_request.user.login;
-            const welcomeMessage = `### 🎉 Поздравляем с первым Pull Request, @${author}!\n\nВаша запись в **[Зал славы выпускников](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/GRADUATES.md)** успешно прошла автоматическую верификацию роботом-ассистентом:\n- 🛡️ **Scope Guard:** затронут только файл \`GRADUATES.md\`\n- 🔒 **Anti-Vandalism:** существующие записи выпускников сохранены в целостности\n- 📋 **Format Check:** строка таблицы оформлена по канону курса\n\nМейнтейнер проверит и запечатает ваш PR в ветку \`main\` в ближайшее время.\nДобро пожаловать в ряды официальных контрибьюторов проекта! 🚀✨`;
+            const welcomeMessage = `### 🎉 Поздравляем с первым Pull Request, @${author}!\n\nВаша запись в **[Зал славы выпускников](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/GRADUATES.md)** успешно прошла автоматическую верификацию роботом-ассистентом:\n- 🛡️ **Scope Guard:** затронут только файл \`GRADUATES.md\`\n- 🔒 **Anti-Vandalism:** существующие записи выпускников сохранены в целостности\n- 📋 **Format Check:** строка таблицы оформлена строго по канону курса (6 колонок)\n- 👤 **Identity Check:** никнейм автора совпадает с логином коммита\n\nМейнтейнер проверит и запечатает ваш PR в ветку \`main\` в ближайшее время.\nДобро пожаловать в ряды официальных контрибьюторов проекта! 🚀✨`;
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
