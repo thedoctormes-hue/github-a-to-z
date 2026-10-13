@@ -9,6 +9,20 @@
 
 ## [Unreleased]
 
+### 🛡️ Устранение уязвимостей Supply Chain, жесткий SHA-пиннинг и гейткипинг CI (Issue #45)
+- **Защита цепочки поставок (Supply Chain Security)**:
+  - Внедрена обязательная криптографическая проверка SHA-256 (`sha256sum --check`) архивов mdBook в `.github/workflows/pages.yml`, `.github/workflows/ci.yml` и `Dockerfile`.
+  - Все `uses:` вызовы экшенов во всех 6 воркфлоу репозитория зафиксированы по полному 40-символьному SHA коммита с инлайн-комментарием версии (стандарт SLSA / OpenSSF Scorecard).
+  - Установлен явный принцип наименьших привилегий `permissions: contents: read` в `.github/workflows/ci.yml`.
+- **Гейткипинг качества и стабильность CI/CD**:
+  - В `.github/workflows/ci.yml` добавлен обязательный шаг `mdbook build`: компиляция книги теперь валидируется на каждом PR, исключая падения боевого деплоя в ветке `main`.
+  - Удалена неактивная ветка `init` из триггеров и настроена отмена устаревших запусков через `concurrency: cancel-in-progress: true`.
+  - Восстановлена мультиязычная матрица CodeQL (`python`, `javascript-typescript`, `actions`) для статического анализа клиентских скриптов (`theme/mermaid-init.js`) и самих workflow-файлов.
+- **Архитектурная гигиена и санация веб-артефактов**:
+  - Настроена автоматическая санация артефакта `./book` в `pages.yml` и `Dockerfile`: удалены служебные файлы (`.git`, `.github`, `scripts`, `Dockerfile`, `repomix.config.json`, `llms-full.txt`) перед публикацией на GitHub Pages и в контейнер GHCR.
+  - Добавлен `.dockerignore` для исключения `.git`, `.github` и скриптов из контекста сборки Docker-образа.
+  - Синхронизирована версия курса в `CHEATSHEET.md` (`v1.10.0`).
+
 ## [1.10.0] - 2026-10-13
 
 ### 🧪 Автоматизация обучения GitHub Classroom & Автогрейдинг

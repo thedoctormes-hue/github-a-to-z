@@ -2,22 +2,43 @@ name: CI Link Integrity & Code Verification
 
 on:
   push:
-    branches: [ main, init, feat/*, fix/* ]
+    branches: [ main, feat/*, fix/* ]
   pull_request:
-    branches: [ main, init ]
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  validate-links:
-    name: Validate Markdown Links & Structure
+  validate-and-build:
+    name: Validate Links & Build mdBook
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
           python-version: '3.11'
 
       - name: Run automated link validator
         run: python3 scripts/validate_links.py
+
+      - name: Install mdBook (Rust) with SHA-256 verification
+        run: |
+          mkdir -p ~/.local/bin
+          MDBOOK_URL="https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz"
+          MDBOOK_SHA256="9ef07fd288ba58ff3b99d1c94e6d414d431c9a61fdb20348e5beb74b823d546b"
+          curl -sSL -o /tmp/mdbook.tar.gz "$MDBOOK_URL"
+          echo "$MDBOOK_SHA256  /tmp/mdbook.tar.gz" | sha256sum --check
+          tar -xzf /tmp/mdbook.tar.gz -C ~/.local/bin
+          rm /tmp/mdbook.tar.gz
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Verify mdBook build
+        run: mdbook build

@@ -8,16 +8,22 @@ FROM alpine:3.20 AS builder
 RUN apk add --no-cache curl tar
 
 ARG MDBOOK_VERSION=v0.4.40
-RUN curl -sSL "https://github.com/rust-lang/mdBook/releases/download/${MDBOOK_VERSION}/mdbook-${MDBOOK_VERSION}-x86_64-unknown-linux-musl.tar.gz" \
-    | tar -xz -C /usr/local/bin
+ARG MDBOOK_SHA256=f7520ad60d1a6fe81c667d0da876a9ddd736f874eb61c01b025eafdc83381227
+
+# Cryptographic SHA-256 verification of mdBook binary release
+RUN curl -sSL "https://github.com/rust-lang/mdBook/releases/download/${MDBOOK_VERSION}/mdbook-${MDBOOK_VERSION}-x86_64-unknown-linux-musl.tar.gz" -o /tmp/mdbook.tar.gz && \
+    echo "${MDBOOK_SHA256}  /tmp/mdbook.tar.gz" | sha256sum -c - && \
+    tar -xzf /tmp/mdbook.tar.gz -C /usr/local/bin && \
+    rm /tmp/mdbook.tar.gz
 
 WORKDIR /app
 
 # Copy course sources
 COPY . .
 
-# Compile markdown documents into /app/book
-RUN mdbook build
+# Compile markdown documents into /app/book and sanitize output artifact
+RUN mdbook build && \
+    rm -rf /app/book/.git /app/book/.github /app/book/scripts /app/book/Dockerfile /app/book/repomix.config.json /app/book/.gitignore /app/book/.gitattributes /app/book/book.toml /app/book/llms-full.txt
 
 # ==============================================================================
 # Stage 2: Ultra-lightweight production web server
