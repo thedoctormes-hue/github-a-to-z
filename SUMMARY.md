@@ -48,6 +48,7 @@
 
 - [🏅 Подготовка к сертификации GitHub Foundations](docs/certification/foundations.md)
 - [🎒 GitHub Education & Student Developer Pack](docs/education/student-pack.md)
+- [🧪 GitHub Classroom & Автогрейдинг](docs/education/classroom.md)
 
 ---
 
