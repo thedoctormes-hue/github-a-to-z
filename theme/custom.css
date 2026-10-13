@@ -1,0 +1,23 @@
+/* Custom styling for GitHub from A to Z mdBook */
+
+.mermaid {
+  text-align: center;
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+/* Enhanced Callout / Blockquote styling */
+blockquote {
+  border-left: 4px solid var(--theme-popup-border, #3b82f6);
+  background-color: var(--theme-hover, rgba(59, 130, 246, 0.05));
+  padding: 0.6rem 1.2rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Print styling improvements */
+@media print {
+  .mermaid {
+    page-break-inside: avoid;
+  }
+}

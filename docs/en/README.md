@@ -4,7 +4,8 @@
 > No disconnected slides. Only real-world repositories, hands-on labs, Git culture, and cutting-edge 2026 developer tooling.
 
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.8-success?style=flat-square)](#)
-[![Language](https://img.shields.io/badge/Language-English%20%28In%20Progress%29-blue?style=flat-square)](#)
+[![Website](https://img.shields.io/badge/Website-GitHub%20Pages%20Live-brightgreen?style=flat-square)](https://thedoctormes-hue.github.io/github-a-to-z/)
+[![Language](https://img.shields.io/badge/Language-English%20%28In%20Progress%29-blue?style=flat-square)](docs/en/README.md)
 [![Main Version](https://img.shields.io/badge/Source-Russian%20%F0%9F%87%B7%F0%9F%87%BA-brightgreen?style=flat-square)](../../README.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](../../CONTRIBUTING.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](../../LICENSE)
@@ -13,6 +14,7 @@
 
 ## 🌐 Language Navigation / Языковая навигация
 
+* 📖 **[Interactive Online Book (GitHub Pages)](https://thedoctormes-hue.github.io/github-a-to-z/)** — Official web portal powered by Rust mdBook with full-text search and offline reading.
 * 🇷🇺 **[Русская версия (Каноническая)](../../README.md)** — Полный курс (14 модулей + 14 лабораторий + шпаргалка + Зал славы).
 * 🇬🇧 **English Version (This Hub)** — Community-driven internationalization hub and translation roadmap.
 

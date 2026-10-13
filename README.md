@@ -4,6 +4,7 @@
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.8-success?style=flat-square)](#)
+[![Website](https://img.shields.io/badge/Website-GitHub%20Pages%20Live-brightgreen?style=flat-square)](https://thedoctormes-hue.github.io/github-a-to-z/)
 [![Graduates](https://img.shields.io/badge/Graduates-Hall%20of%20Fame-gold?style=flat-square)](GRADUATES.md)
 [![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
 [![Repo Recon](https://img.shields.io/badge/Guide-Repo%20Recon%202026-blueviolet?style=flat-square)](docs/repo-reconnaissance.md)
@@ -26,6 +27,7 @@
 
 ## 🧭 Навигатор курса
 
+* 🌐 **[Интерактивная онлайн-книга (GitHub Pages)](https://thedoctormes-hue.github.io/github-a-to-z/)** — официальный веб-портал курса на базе mdBook (Rust) с полнотекстовым поиском, ночным режимом и чтением со смартфона.
 * 🌐 **[Internationalization Hub (docs/en/README.md)](docs/en/README.md)** — англоязычный хаб курса и координация переводов.
 * 🎓 **[Зал славы выпускников (GRADUATES.md)](GRADUATES.md)** — интерактивный дипломный тренажёр первого Pull Request и доска почёта курсантов.
 * 🛰️ **[Скоростная разведка репозиториев (docs/repo-reconnaissance.md)](docs/repo-reconnaissance.md)** — 60-секундный протокол аудита и декомпозиции чужих проектов без клонирования.
@@ -283,6 +285,9 @@ github-a-to-z/
 ├── llms.txt                    # Открытый стандарт описания проекта для LLM и AI-поисковиков
 ├── llms-full.txt               # Полный сжатый контекст репозитория для RAG и LLM
 ├── repomix.config.json         # Конфигурация упаковщика репозитория Repomix
+├── book.toml                   # Декларативная конфигурация книги для сборщика mdBook (Rust)
+├── SUMMARY.md                  # Оглавление и карта книги для mdBook
+├── theme/                      # Кастомные стили и легковесный Mermaid-раннер для веб-книги
 ├── docs/                       # Теоретические и практические главы (00 - 14)
 │   ├── repo-reconnaissance.md  # Спецгайд скоростной разведки чужих репозиториев
 │   ├── ...
@@ -305,7 +310,8 @@ github-a-to-z/
     └── workflows/
         ├── ci.yml              # Автоматический CI-валидатор целостности гиперссылок
         ├── codeql.yml          # Автоматический SAST-сканер уязвимостей CodeQL
-        └── graduate-verifier.yml # Робот-ассистент и валидатор дипломных PR
+        ├── graduate-verifier.yml # Робот-ассистент и валидатор дипломных PR
+        └── pages.yml           # Автоматическая сборка и деплой mdBook на GitHub Pages
 ```
 
 ---

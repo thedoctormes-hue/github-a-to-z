@@ -1,0 +1,36 @@
+[book]
+title = "GitHub от А до Я: Полный практический курс"
+authors = ["DoctorM&Ai", "TheNovaNodes Community"]
+description = "Интерактивный практический курс-тренажёр по Git и GitHub в формате цифровой книги"
+language = "ru"
+multilingual = false
+src = "."
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+theme = "theme"
+default-theme = "ayu"
+preferred-dark-theme = "ayu"
+git-repository-url = "https://github.com/thedoctormes-hue/github-a-to-z"
+edit-url-template = "https://github.com/thedoctormes-hue/github-a-to-z/edit/main/{path}"
+git-repository-icon = "fa-github"
+additional-js = ["theme/mermaid-init.js"]
+additional-css = ["theme/custom.css"]
+
+[output.html.search]
+enable = true
+limit-results = 30
+teaser-word-count = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+
+[output.html.fold]
+enable = true
+level = 1
