@@ -4,6 +4,7 @@
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.6-success?style=flat-square)](#)
+[![Graduates](https://img.shields.io/badge/Graduates-Hall%20of%20Fame-gold?style=flat-square)](GRADUATES.md)
 [![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
@@ -18,6 +19,7 @@
 
 ## 🧭 Навигатор курса
 
+* 🎓 **[Зал славы выпускников (GRADUATES.md)](GRADUATES.md)** — интерактивный дипломный тренажёр первого Pull Request и доска почёта курсантов.
 * ⚡ **[Шпаргалка разработчика (CHEATSHEET.md)](CHEATSHEET.md)** — карманный экспресс-навигатор по всем командам Git, GitHub CLI, трюкам и стандартам курса.
 * 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
 * 📜 **[Журнал изменений (CHANGELOG.md)](CHANGELOG.md)** — официальная хроника обновлений по канону Keep a Changelog.
@@ -220,6 +222,7 @@ github-a-to-z/
 ├── .gitignore                  # Первая линия обороны: исключение мусора ОС, секретов и кэша
 ├── .gitattributes              # Кроссплатформенная нормализация окончаний строк (LF)
 ├── README.md                   # Главная страница и навигатор по курсу
+├── GRADUATES.md                # Зал славы выпускников и тренажёр первого PR
 ├── CHEATSHEET.md              # Интерактивная шпаргалка и быстрый навигатор по курсу
 ├── GLOSSARY.md                 # Карманный словарь терминов с аналогиями
 ├── CHANGELOG.md                # Официальный журнал изменений (Keep a Changelog)
@@ -252,4 +255,6 @@ github-a-to-z/
 
 ## 🚦 С чего начать?
 
-Переходите к **[Модулю 0: Разведка на местности](docs/00-intro/README.md)**, держите под рукой **[Шпаргалку разработчика](CHEATSHEET.md)** или загляните в **[Словарь терминов](GLOSSARY.md)**!
+* Начинающим: переходите к **[Модулю 0: Разведка на местности](docs/00-intro/README.md)**.
+* Для быстрой справки: держите под рукой **[Шпаргалку разработчика](CHEATSHEET.md)** или загляните в **[Словарь терминов](GLOSSARY.md)**.
+* Завершили курс? Внесите своё имя в **[Зал славы выпускников (GRADUATES.md)](GRADUATES.md)** через свой первый боевой Pull Request!

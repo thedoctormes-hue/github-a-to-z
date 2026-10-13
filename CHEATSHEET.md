@@ -694,12 +694,14 @@ git cherry-pick --abort
 | **Вайбкодинг, Copilot, Jules, MCP Context** | [Модуль 12: Новая эра AI](docs/12-ai-coding-mcp/README.md) | [Lab 12: AI-контекст](labs/lab-12-ai-mcp/README.md) |
 | **Гибридные команды, Агентная Триада, DoD** | [Модуль 13: Синтез разумов](docs/13-human-agent-teams/README.md) | [Lab 13: Команды & Триада](labs/lab-13-human-agent-teams/README.md) |
 | **Security & Quality, Insights, CodeQL, SBOM** | [Модуль 14: Цитадель безопасности](docs/14-security-insights/README.md) | [Lab 14: Безопасность & Insights](labs/lab-14-security-insights/README.md) |
+| **Диплом, тренажёр первого PR, Зал Славы** | — | [Зал славы выпускников (GRADUATES.md)](GRADUATES.md) |
 
 ---
 
 ## 🧭 Навигация курса
 
 * 🔙 **Главная витрина:** [README.md](README.md)
+* 🎓 **Зал славы выпускников:** [GRADUATES.md](GRADUATES.md)
 * 📖 **Словарь терминов:** [GLOSSARY.md](GLOSSARY.md)
 * 📜 **Журнал изменений:** [CHANGELOG.md](CHANGELOG.md)
 * 🤝 **Правила участия:** [CONTRIBUTING.md](CONTRIBUTING.md)
