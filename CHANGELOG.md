@@ -9,6 +9,10 @@
 
 ## [Unreleased]
 
+### ✈️ Аварийные лётные правила & Шорткаты GitHub (Flight Rules & Superpowers)
+- **Развернут блок «Аварийные лётные правила (Git Flight Rules)» в `CHEATSHEET.md`**: По канону аварийных чек-листов NASA и `k88hudson/git-flight-rules` добавлены 8 сценариев катастроф с однострочными рецептами спасения (коммит в main, случайный коммит секретов, откат reset --hard через reflog, откат PR в main через revert -m 1, бинарные конфликты, cherry-pick и abort).
+- **Внедрен раздел «Секретные шорткаты и URL-магия GitHub» в `CHEATSHEET.md`**: По канону `tiimgreen/github-cheat-sheet` систематизированы горячие клавиши веб-интерфейса (`.`, `t`, `y`, `l`, `b`, `?`), скрытые параметры URL (`?w=1`, `.diff`, `.patch`, сравнение веток) и продвинутый Markdown в Issues/PR (спойлеры `<details>`, `diff`-подсветка, автозакрытие тикетов).
+
 ## [1.6.0] - 2026-10-12
 
 ### 🌐 Публичный релиз курса (Public Open Source Launch) & CodeQL SAST
