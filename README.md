@@ -8,6 +8,7 @@
 [![Discussions](https://img.shields.io/badge/Discussions-Join%20the%20Community-purple?style=flat-square)](https://github.com/thedoctormes-hue/github-a-to-z/discussions)
 [![Docker Package](https://img.shields.io/badge/Package-ghcr.io%20%7C%20Docker-blue?style=flat-square&logo=docker)](https://github.com/thedoctormes-hue/github-a-to-z/pkgs/container/github-a-to-z)
 [![Certification](https://img.shields.io/badge/Certification-GitHub%20Foundations%20Prep-blueviolet?style=flat-square&logo=github)](docs/certification/foundations.md)
+[![Student Pack](https://img.shields.io/badge/Education-Student%20Developer%20Pack-orange?style=flat-square&logo=github)](docs/education/student-pack.md)
 [![Graduates](https://img.shields.io/badge/Graduates-Hall%20of%20Fame-gold?style=flat-square)](GRADUATES.md)
 [![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
 [![Repo Recon](https://img.shields.io/badge/Guide-Repo%20Recon%202026-blueviolet?style=flat-square)](docs/repo-reconnaissance.md)
@@ -33,6 +34,7 @@
 * 🌐 **[Интерактивная онлайн-книга (GitHub Pages)](https://thedoctormes-hue.github.io/github-a-to-z/)** — официальный веб-портал курса на базе mdBook (Rust) с полнотекстовым поиском, ночным режимом и чтением со смартфона.
 * 🐳 **[Офлайн-контейнер курса (Docker / GHCR)](https://github.com/thedoctormes-hue/github-a-to-z/pkgs/container/github-a-to-z)** — запуск полного интерактивного портала локально без интернета: `docker run -d -p 3000:80 ghcr.io/thedoctormes-hue/github-a-to-z:latest`.
 * 🏅 **[Подготовка к сертификации GitHub Foundations (docs/certification/foundations.md)](docs/certification/foundations.md)** — официальные домены экзамена, стратегия сдачи и интерактивный тренажёр из 25 экзаменационных вопросов с разбором.
+* 🎒 **[GitHub Education & Student Developer Pack (docs/education/student-pack.md)](docs/education/student-pack.md)** — руководство по получению бесплатного GitHub Pro, Copilot и арсенала инструментов на $200,000+ для учащихся.
 * 🌐 **[Internationalization Hub (docs/en/README.md)](docs/en/README.md)** — англоязычный хаб курса и координация переводов.
 * 🎓 **[Зал славы выпускников (GRADUATES.md)](GRADUATES.md)** — интерактивный дипломный тренажёр первого Pull Request и доска почёта курсантов.
 * 🛰️ **[Скоростная разведка репозиториев (docs/repo-reconnaissance.md)](docs/repo-reconnaissance.md)** — 60-секундный протокол аудита и декомпозиции чужих проектов без клонирования.
