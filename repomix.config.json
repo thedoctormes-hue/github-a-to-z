@@ -1,0 +1,26 @@
+{
+  "output": {
+    "filePath": "repomix-output.md",
+    "style": "markdown",
+    "parsableStyle": false,
+    "headerText": "GitHub от А до Я: Полный практический курс (TheNovaNodes)\nRepomix packaged repository context for LLM ingestion.",
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "showLineNumbers": false,
+    "topFilesLength": 10
+  },
+  "include": [
+    "**/*"
+  ],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": [
+      ".git/**",
+      "__pycache__/**",
+      "*.pyc",
+      ".system_generated/**",
+      "repomix-output.*"
+    ]
+  }
+}

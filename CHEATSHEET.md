@@ -671,6 +671,10 @@ git cherry-pick --abort
   Кликните на номер строки и с зажатым `Shift` на вторую строку:  
   URL примет вид `.../file.py#L15-L35` (в PR и чатах автоматически отобразится красивый превью-сниппет).
 
+### 🛰️ Скоростная разведка любого репозитория (Repo Reconnaissance)
+* **Полный 60-секундный протокол аудита и декомпозиции:** см. отдельное руководство [docs/repo-reconnaissance.md](docs/repo-reconnaissance.md).
+* **Скормить репозиторий в LLM в 1 клик:** замените в URL `github.com` на `gitingest.com/owner/repo` или запустите `npx repomix`.
+
 ---
 
 ## 13. Карта соответствия модулям курса
@@ -694,6 +698,7 @@ git cherry-pick --abort
 | **Вайбкодинг, Copilot, Jules, MCP Context** | [Модуль 12: Новая эра AI](docs/12-ai-coding-mcp/README.md) | [Lab 12: AI-контекст](labs/lab-12-ai-mcp/README.md) |
 | **Гибридные команды, Агентная Триада, DoD** | [Модуль 13: Синтез разумов](docs/13-human-agent-teams/README.md) | [Lab 13: Команды & Триада](labs/lab-13-human-agent-teams/README.md) |
 | **Security & Quality, Insights, CodeQL, SBOM** | [Модуль 14: Цитадель безопасности](docs/14-security-insights/README.md) | [Lab 14: Безопасность & Insights](labs/lab-14-security-insights/README.md) |
+| **Скоростная разведка репозиториев (60-сек аудит)** | [Спецгайд: Разведка репозиториев](docs/repo-reconnaissance.md) | — |
 | **Диплом, тренажёр первого PR, Зал Славы** | — | [Зал славы выпускников (GRADUATES.md)](GRADUATES.md) |
 
 ---
@@ -701,6 +706,7 @@ git cherry-pick --abort
 ## 🧭 Навигация курса
 
 * 🔙 **Главная витрина:** [README.md](README.md)
+* 🛰️ **Разведка репозиториев:** [docs/repo-reconnaissance.md](docs/repo-reconnaissance.md)
 * 🎓 **Зал славы выпускников:** [GRADUATES.md](GRADUATES.md)
 * 📖 **Словарь терминов:** [GLOSSARY.md](GLOSSARY.md)
 * 📜 **Журнал изменений:** [CHANGELOG.md](CHANGELOG.md)
