@@ -3,9 +3,10 @@
 > **Изучаем GitHub прямо внутри GitHub: от первого клика в браузере до CI/CD, релизов, лицензий, архитектуры, цифровой гигиены, вайбкодинга, AI-агентов через MCP, человеко-агентных команд и цитадели безопасности.**  
 > Никаких оторванных от жизни слайдов. Только живые репозитории, практические полигоны, культура Git и реальные инструменты 2026 года.
 
-[![Status](https://img.shields.io/badge/Status-Complete%20v1.6-success?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20v1.7-success?style=flat-square)](#)
 [![Graduates](https://img.shields.io/badge/Graduates-Hall%20of%20Fame-gold?style=flat-square)](GRADUATES.md)
 [![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
+[![English](https://img.shields.io/badge/Language-English%20%28In%20Progress%29-blue?style=flat-square)](docs/en/README.md)
 [![Format](https://img.shields.io/badge/Format-100%25%20Markdown-blue?style=flat-square)](#)
 [![Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-blueviolet?style=flat-square)](CHANGELOG.md)
 [![Glossary](https://img.shields.io/badge/Glossary-Словарь%20терминов-orange?style=flat-square)](GLOSSARY.md)
@@ -17,8 +18,13 @@
 
 ---
 
+> **🌐 Языки / Languages:** **Русский (Основной) 🇷🇺** | **[English (Work in progress) 🇬🇧](docs/en/README.md)**
+
+---
+
 ## 🧭 Навигатор курса
 
+* 🌐 **[Internationalization Hub (docs/en/README.md)](docs/en/README.md)** — англоязычный хаб курса и координация переводов.
 * 🎓 **[Зал славы выпускников (GRADUATES.md)](GRADUATES.md)** — интерактивный дипломный тренажёр первого Pull Request и доска почёта курсантов.
 * ⚡ **[Шпаргалка разработчика (CHEATSHEET.md)](CHEATSHEET.md)** — карманный экспресс-навигатор по всем командам Git, GitHub CLI, трюкам и стандартам курса.
 * 📖 **[Словарь терминов (Глоссарий)](GLOSSARY.md)** — карманный переводчик с языка программистов на понятный русский.
@@ -232,6 +238,7 @@ github-a-to-z/
 ├── SECURITY.md                 # Официальная политика безопасности (Responsible Disclosure)
 ├── docs/                       # Теоретические и практические главы (00 - 14)
 │   ├── ...
+│   ├── en/README.md            # Международный хаб интернационализации (i18n)
 │   ├── 13-human-agent-teams/
 │   └── 14-security-insights/
 ├── labs/                       # Шаблоны и задания лабораторных работ (01 - 14)
