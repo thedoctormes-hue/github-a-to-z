@@ -238,8 +238,9 @@ github-a-to-z/
 │   ├── ...
 │   ├── lab-13-human-agent-teams/
 │   └── lab-14-security-insights/
-├── scripts/                    # Автоматизация и валидация целостности ссылок
-│   └── validate_links.py
+├── scripts/                    # Автоматизация и валидаторы качества
+│   ├── validate_links.py       # Валидатор целостности ссылок и графа документов
+│   └── verify_graduate_pr.py   # Санитарный валидатор PR выпускников (Scope Guard)
 └── .github/                    # Рабочая конфигурация GitHub для репозитория
     ├── CODEOWNERS              # Ответственные мейнтейнеры за архитектуру курса
     ├── dependabot.yml          # Еженедельный мониторинг версий GitHub Actions
@@ -248,7 +249,8 @@ github-a-to-z/
     ├── ISSUE_TEMPLATE/
     └── workflows/
         ├── ci.yml              # Автоматический CI-валидатор целостности гиперссылок
-        └── codeql.yml          # Автоматический SAST-сканер уязвимостей CodeQL
+        ├── codeql.yml          # Автоматический SAST-сканер уязвимостей CodeQL
+        └── graduate-verifier.yml # Робот-ассистент и валидатор дипломных PR
 ```
 
 ---
