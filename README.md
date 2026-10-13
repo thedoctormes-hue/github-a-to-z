@@ -5,6 +5,7 @@
 
 [![Status](https://img.shields.io/badge/Status-Complete%20v1.9-success?style=flat-square)](#)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages%20Live-brightgreen?style=flat-square)](https://thedoctormes-hue.github.io/github-a-to-z/)
+[![Discussions](https://img.shields.io/badge/Discussions-Join%20the%20Community-purple?style=flat-square)](https://github.com/thedoctormes-hue/github-a-to-z/discussions)
 [![Graduates](https://img.shields.io/badge/Graduates-Hall%20of%20Fame-gold?style=flat-square)](GRADUATES.md)
 [![CheatSheet](https://img.shields.io/badge/CheatSheet-Шпаргалка%20Git%20&%20GitHub-yellow?style=flat-square)](CHEATSHEET.md)
 [![Repo Recon](https://img.shields.io/badge/Guide-Repo%20Recon%202026-blueviolet?style=flat-square)](docs/repo-reconnaissance.md)
