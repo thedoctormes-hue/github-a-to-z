@@ -1,0 +1,96 @@
+name: "Graduate PR Verifier & Welcome Bot"
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  verify-graduate:
+    name: Verify Graduate Submission & Welcome
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Fetch Base Branch for Diff Analysis
+        run: |
+          git fetch origin ${{ github.base_ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Run Graduate PR Verifier
+        id: verifier
+        run: |
+          python3 scripts/verify_graduate_pr.py --base origin/${{ github.base_ref }} --head HEAD
+
+      - name: Welcome Comment & Label
+        if: success()
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            const hasGraduates = files.some(f => f.filename === 'GRADUATES.md');
+            if (!hasGraduates) {
+              console.log('PR does not modify GRADUATES.md. Skipping welcome comment.');
+              return;
+            }
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            const alreadyCommented = comments.some(c => c.body.includes('Зал славы выпускников'));
+            if (alreadyCommented) {
+              console.log('Already commented on this PR.');
+              return;
+            }
+
+            const author = context.payload.pull_request.user.login;
+            const welcomeMessage = `### 🎉 Поздравляем с первым Pull Request, @${author}!\n\nВаша запись в **[Зал славы выпускников](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/GRADUATES.md)** успешно прошла автоматическую верификацию роботом-ассистентом:\n- 🛡️ **Scope Guard:** затронут только файл \`GRADUATES.md\`\n- 🔒 **Anti-Vandalism:** существующие записи выпускников сохранены в целостности\n- 📋 **Format Check:** строка таблицы оформлена по канону курса\n\nМейнтейнер проверит и запечатает ваш PR в ветку \`main\` в ближайшее время.\nДобро пожаловать в ряды официальных контрибьюторов проекта! 🚀✨`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: welcomeMessage
+            });
+
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'graduate',
+                color: 'ffd700',
+                description: 'Pull Request выпускника курса в Зал славы (GRADUATES.md)'
+              });
+            } catch (err) {
+              // Label might already exist
+            }
+
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: ['graduate']
+              });
+            } catch (err) {
+              console.log('Notice: Could not assign label:', err.message);
+            }
