@@ -6,6 +6,9 @@
 
 - [README.md](README.md): Главная страница, навигатор по 14 модулям и лабораторным полигонам.
 - [docs/repo-reconnaissance.md](docs/repo-reconnaissance.md): Спецгайд по скоростной разведке чужих репозиториев (60-секундный протокол декомпозиции).
+- [docs/certification/foundations.md](docs/certification/foundations.md): Официальный тренажёр и руководство по сертификации GitHub Foundations GH-100 (25 вопросов).
+- [docs/education/student-pack.md](docs/education/student-pack.md): Студенческий пакет инструментов, бесплатный GitHub Pro и Copilot на $200k+.
+- [docs/education/classroom.md](docs/education/classroom.md): Архитектура учебных полигонов GitHub Classroom и автогрейдинг через GitHub Actions.
 - [CHEATSHEET.md](CHEATSHEET.md): Экспресс-шпаргалка по всем командам Git, GitHub CLI (`gh`), NASA Flight Rules и шорткатам.
 - [GRADUATES.md](GRADUATES.md): Интерактивный дипломный тренажёр первого Pull Request в Open Source и Зал славы курсантов.
 - [GLOSSARY.md](GLOSSARY.md): Карманный словарь терминов Git, GitHub, DevOps и архитектуры.
@@ -31,6 +34,12 @@
 - [docs/12-ai-coding-mcp/README.md](docs/12-ai-coding-mcp/README.md): Модуль 12 — Новая эра (Вайбкодинг, Copilot Workspace, Jules, MCP-серверы, AI OPSEC, HITL).
 - [docs/13-human-agent-teams/README.md](docs/13-human-agent-teams/README.md): Модуль 13 — Человеко-агентные команды (Агентная Триада: Planner/Builder/Auditor, DoD, купирование сикофантии).
 - [docs/14-security-insights/README.md](docs/14-security-insights/README.md): Модуль 14 — Цитадель безопасности & Insights (PVR, CVE, GHSA, CodeQL SAST, SBOM, OSINT-аналитика трафика).
+
+## Certification & Education Modules
+
+- [docs/certification/foundations.md](docs/certification/foundations.md): Подготовка к сертификации GitHub Foundations GH-100 (25 вопросов).
+- [docs/education/student-pack.md](docs/education/student-pack.md): Студенческий пакет инструментов и GitHub Pro на $200k+.
+- [docs/education/classroom.md](docs/education/classroom.md): Архитектура учебных полигонов GitHub Classroom и автогрейдинг.
 
 ## Hands-on Labs (14 Practical Sandboxes)
 
