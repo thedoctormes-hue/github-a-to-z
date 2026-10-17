@@ -9,6 +9,16 @@
 
 ## [Unreleased]
 
+### 🧼 Санация и паритет документации (Doc-to-Code Reality Parity v1.10.0, Issue #48)
+- **Синхронизация AI-Readiness манифеста (`llms.txt`)**:
+  - В манифест `llms.txt` интегрированы недостающие образовательные модули v1.10.0 (`docs/certification/foundations.md`, `docs/education/student-pack.md`, `docs/education/classroom.md`) в секции быстрой навигации и каталога курсов.
+- **Актуализация матрицы интернационализации (`docs/en/README.md`)**:
+  - Таблица координации перевода расширена новыми главами v1.10.0 (Certification, Student Pack, Classroom) со статусом `🟡 Help Wanted`.
+- **Ликвидация Documentation Drift в GitHub Discussions (#38)**:
+  - Тело координационной дискуссии #38 обновлено: устаревшие имена каталогов синхронизированы с физической файловой структурой `docs/`, добавлены образовательные модули v1.10.0.
+- **Санация проектного бэклога (GitHub Projects #3)**:
+  - Ликвидирован дубликат карточки draft-issue `🌐 [i18n]: English Localization Modules 00-05` на доске проекта.
+
 ### 🛡️ Устранение уязвимостей Supply Chain, жесткий SHA-пиннинг и гейткипинг CI (Issue #45)
 - **Защита цепочки поставок (Supply Chain Security)**:
   - Внедрена обязательная криптографическая проверка SHA-256 (`sha256sum --check`) архивов mdBook в `.github/workflows/pages.yml`, `.github/workflows/ci.yml` и `Dockerfile`.

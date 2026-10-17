@@ -96,6 +96,9 @@ We invite the global Open Source community to translate this course into English
 | **Module 12** | AI Coding, Vibe Coding, Copilot, Jules & MCP | [docs/12-ai-coding-mcp](../../docs/12-ai-coding-mcp/README.md) | 🟡 Help Wanted |
 | **Module 13** | Hybrid Teams & Agent Triad | [docs/13-human-agent-teams](../../docs/13-human-agent-teams/README.md) | 🟡 Help Wanted |
 | **Module 14** | Security Fortress & Telemetry (Security & Insights) | [docs/14-security-insights](../../docs/14-security-insights/README.md) | 🟡 Help Wanted |
+| **Certification** | GitHub Foundations Prep (GH-100 Practice Exam) | [docs/certification](../../docs/certification/foundations.md) | 🟡 Help Wanted |
+| **Student Pack** | GitHub Education & Student Developer Pack | [docs/education](../../docs/education/student-pack.md) | 🟡 Help Wanted |
+| **Classroom** | GitHub Classroom & Autograding Architecture | [docs/education](../../docs/education/classroom.md) | 🟡 Help Wanted |
 
 ---
 
