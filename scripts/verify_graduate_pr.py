@@ -100,18 +100,20 @@ def verify_graduate_pr(base_ref="origin/main", head_ref="HEAD", pr_author=None):
             if content:
                 added_lines.append(content)
 
-    # Anti-Vandalism Check: No existing table rows can be removed or altered
-    deleted_table_rows = [l for l in deleted_lines if l.startswith("|")]
-    if deleted_table_rows:
-        print(f"🚨 Anti-Vandalism Violation: Detected deletion or alteration of existing rows in GRADUATES.md:")
-        for r in deleted_table_rows:
+    # Anti-Vandalism Check: Strictly zero deletions allowed in GRADUATES.md!
+    if deleted_lines:
+        print("🚨 Anti-Vandalism Violation: Deletions from GRADUATES.md are strictly prohibited.")
+        for r in deleted_lines[:5]:
             print(f"   - {r}")
+        if len(deleted_lines) > 5:
+            print(f"   ... and {len(deleted_lines) - 5} more lines.")
         return False
 
-    # Check additions: Must add table row(s)
+    # Check additions: Must add EXACTLY ONE single row, and it must be a table row!
     added_table_rows = [l for l in added_lines if l.startswith("|")]
-    if not added_table_rows:
-        print("🚨 Format Violation: No new graduate table row found in GRADUATES.md additions.")
+    if len(added_lines) != 1 or len(added_table_rows) != 1:
+        print("🚨 Scope & Format Violation: Graduate PR must contain exactly 1 added line (the single graduate table entry row).")
+        print(f"   Detected {len(added_lines)} total added lines, {len(added_table_rows)} table rows.")
         return False
 
     # Validate each added row format

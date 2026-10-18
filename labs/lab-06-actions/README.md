@@ -56,6 +56,13 @@ on:
       - 'index.html'
       - '.github/workflows/**'
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -63,14 +70,14 @@ jobs:
 
     steps:
       - name: 1. Скачать репозиторий
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: 2. Проверить наличие главного файла
+      - name: 2. Проверить HTML разметку
         run: |
-          if [ -f index.html ]; then
-            echo "✅ Файл index.html успешно найден!"
+          if grep -q "<h1>" index.html; then
+            echo "✅ Заголовок h1 найден!"
           else
-            echo "❌ Ошибка: файл index.html отсутствует!"
+            echo "❌ Ошибка: заголовок h1 не найден в index.html!"
             exit 1
           fi
 

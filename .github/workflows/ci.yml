@@ -17,6 +17,7 @@ jobs:
   validate-and-build:
     name: Validate Links & Build mdBook
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -29,10 +30,11 @@ jobs:
       - name: Run automated link validator
         run: python3 scripts/validate_links.py
 
-      - name: Verify repository quality auditor CLI
+      - name: Verify repository quality auditor CLI & wrapper
         run: |
-          python3 -m py_compile scripts/audit_repo.py
+          python3 -m py_compile scripts/audit_repo.py .agents/skills/githubrepo/scripts/audit_repo.py
           python3 scripts/audit_repo.py --help
+          python3 .agents/skills/githubrepo/scripts/audit_repo.py --help
 
       - name: Install mdBook (Rust) with SHA-256 verification
         run: |

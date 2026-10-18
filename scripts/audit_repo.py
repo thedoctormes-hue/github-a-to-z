@@ -23,7 +23,7 @@ import json
 import subprocess
 import argparse
 import base64
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Dict, Any, List, Optional, Tuple, Set
 
 COURSE_URL = "https://github.com/thedoctormes-hue/github-a-to-z"
 
@@ -91,6 +91,26 @@ def parse_repo_slug(raw_input: Optional[str]) -> Optional[Tuple[str, str]]:
         return slug_match.group(1), slug_match.group(2)
     return None
 
+def fetch_repo_tree(owner: str, repo: str, default_branch: str = "main") -> Optional[Set[str]]:
+    """Fetch complete repository tree in a single recursive API call (O(1) lookups)."""
+    ok, data, _ = run_gh_api(f"repos/{owner}/{repo}/git/trees/{default_branch}?recursive=1")
+    if ok and isinstance(data, dict) and "tree" in data:
+        return {item["path"] for item in data["tree"] if "path" in item}
+    return None
+
+def is_file_present(tree: Optional[Set[str]], path: str, owner: str, repo: str) -> bool:
+    """Check file presence via git tree cache, falling back to contents API if needed."""
+    if tree is not None:
+        return path in tree
+    return check_file_exists(owner, repo, path)[0]
+
+def has_directory_contents(tree: Optional[Set[str]], prefix: str, owner: str, repo: str) -> bool:
+    """Check if any file exists under directory prefix."""
+    if tree is not None:
+        clean_prefix = prefix.rstrip("/") + "/"
+        return any(p.startswith(clean_prefix) for p in tree)
+    return check_file_exists(owner, repo, prefix)[0]
+
 def check_file_exists(owner: str, repo: str, file_path: str) -> Tuple[bool, Optional[str]]:
     """Check if file exists in the repository and return (exists, content_str)."""
     ok, data, err = run_gh_api(f"repos/{owner}/{repo}/contents/{file_path}")
@@ -153,19 +173,32 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     health_pct = comm.get("health_percentage", 0) if (ok_comm and comm) else 0
     report["details"]["community_health"] = health_pct
 
+    # 3. Fetch Repository Tree for fast O(1) in-memory checks
+    default_branch = report["meta"]["default_branch"]
+    repo_tree = fetch_repo_tree(owner, repo, default_branch)
+
     # ==========================================
     # DIMENSION 1: Presentation & Community (L1)
     # ==========================================
     l1_score = 0
-    has_readme = bool(comm_files.get("readme") or check_file_exists(owner, repo, "README.md")[0])
-    has_license = bool(report["meta"]["license"])
+    has_readme = bool(comm_files.get("readme") or is_file_present(repo_tree, "README.md", owner, repo))
+    has_license = bool(report["meta"]["license"] or is_file_present(repo_tree, "LICENSE", owner, repo) or is_file_present(repo_tree, "LICENSE.md", owner, repo))
     has_desc = bool(report["meta"]["description"].strip())
     has_topics = len(report["meta"]["topics"]) > 0
-    has_contributing = bool(comm_files.get("contributing") or check_file_exists(owner, repo, "CONTRIBUTING.md")[0] or check_file_exists(owner, repo, ".github/CONTRIBUTING.md")[0])
-    has_coc = bool(comm_files.get("code_of_conduct") or check_file_exists(owner, repo, "CODE_OF_CONDUCT.md")[0] or check_file_exists(owner, repo, ".github/CODE_OF_CONDUCT.md")[0])
+    has_contributing = bool(
+        comm_files.get("contributing") or
+        is_file_present(repo_tree, "CONTRIBUTING.md", owner, repo) or
+        is_file_present(repo_tree, ".github/CONTRIBUTING.md", owner, repo)
+    )
+    has_coc = bool(
+        comm_files.get("code_of_conduct") or
+        is_file_present(repo_tree, "CODE_OF_CONDUCT.md", owner, repo) or
+        is_file_present(repo_tree, ".github/CODE_OF_CONDUCT.md", owner, repo)
+    )
 
+    # 1. README.md (5 pts)
     if has_readme:
-        l1_score += 4
+        l1_score += 5
     else:
         report["remediations"].append({
             "level": "P0",
@@ -174,8 +207,9 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
             "fix": "Создайте README.md с описанием, быстрым стартом, архитектурой и бейджами статуса."
         })
 
+    # 2. LICENSE (5 pts)
     if has_license:
-        l1_score += 4
+        l1_score += 5
     else:
         report["remediations"].append({
             "level": "P1",
@@ -184,28 +218,38 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
             "fix": "Добавьте файл LICENSE (MIT, Apache 2.0 или GPLv3), чтобы код имел легальный статус Open Source."
         })
 
-    if has_desc:
-        l1_score += 4
+    # 3. About & Topics (5 pts)
+    if has_desc and has_topics:
+        l1_score += 5
+    elif has_desc or has_topics:
+        l1_score += 2.5
+        missing = "тематические теги (Topics)" if not has_topics else "описание (About / Description)"
+        report["remediations"].append({
+            "level": "P2",
+            "title": f"Частично заполнена шапка репозитория (отсутствуют {missing})",
+            "guide": f"{COURSE_URL}/blob/main/docs/01-web-basics/README.md",
+            "fix": f"Заполните {missing} в блоке About для лучшей индексации в поиске GitHub."
+        })
     else:
         report["remediations"].append({
             "level": "P2",
-            "title": "Пустое поле 'About / Description' в шапке репозитория",
+            "title": "Не заполнены описание (About) и тематические теги (Topics)",
             "guide": f"{COURSE_URL}/blob/main/docs/01-web-basics/README.md",
-            "fix": "Заполните краткое описание репозитория и ссылку на сайт в блоке 'About'."
+            "fix": "Заполните краткое описание репозитория и добавьте 3-5 тегов (Topics) в блоке 'About'."
         })
 
-    if has_topics:
-        l1_score += 4
-    else:
+    # 4. Community Standards (5 pts)
+    if has_contributing and has_coc:
+        l1_score += 5
+    elif has_contributing or has_coc:
+        l1_score += 2.5
+        missing = "CODE_OF_CONDUCT.md" if not has_coc else "CONTRIBUTING.md"
         report["remediations"].append({
             "level": "P2",
-            "title": "Не настроены тематические теги (Topics)",
-            "guide": f"{COURSE_URL}/blob/main/docs/01-web-basics/README.md",
-            "fix": "Добавьте 3-5 тематических тегов (например: ai, python, devops, mcp) для индексации в поиске."
+            "title": f"Частичные правила сообщества (рекомендуется добавить {missing})",
+            "guide": f"{COURSE_URL}/blob/main/docs/05-project-management/README.md",
+            "fix": f"Добавьте {missing} для полноценного управления вкладом сообщества."
         })
-
-    if has_contributing or has_coc:
-        l1_score += 4
     else:
         report["remediations"].append({
             "level": "P1",
@@ -220,10 +264,18 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     # DIMENSION 2: Git Flow & Root Hygiene (L2)
     # ==========================================
     l2_score = 0
-    has_gitignore = check_file_exists(owner, repo, ".gitignore")[0]
-    has_gitattributes = check_file_exists(owner, repo, ".gitattributes")[0]
-    has_issue_template = bool(comm_files.get("issue_template") or check_file_exists(owner, repo, ".github/ISSUE_TEMPLATE.md")[0] or check_file_exists(owner, repo, ".github/ISSUE_TEMPLATE")[0])
-    has_pr_template = bool(comm_files.get("pull_request_template") or check_file_exists(owner, repo, ".github/PULL_REQUEST_TEMPLATE.md")[0])
+    has_gitignore = is_file_present(repo_tree, ".gitignore", owner, repo)
+    has_gitattributes = is_file_present(repo_tree, ".gitattributes", owner, repo)
+    has_issue_template = bool(
+        comm_files.get("issue_template") or
+        is_file_present(repo_tree, ".github/ISSUE_TEMPLATE.md", owner, repo) or
+        has_directory_contents(repo_tree, ".github/ISSUE_TEMPLATE", owner, repo)
+    )
+    has_pr_template = bool(
+        comm_files.get("pull_request_template") or
+        is_file_present(repo_tree, ".github/PULL_REQUEST_TEMPLATE.md", owner, repo) or
+        has_directory_contents(repo_tree, ".github/PULL_REQUEST_TEMPLATE", owner, repo)
+    )
 
     if has_gitignore:
         l2_score += 5
@@ -245,8 +297,17 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
             "fix": "Добавьте .gitattributes с директивой '* text=auto eol=lf' для предотвращения конфликтов CRLF/LF."
         })
 
-    if has_issue_template or has_pr_template:
+    if has_issue_template and has_pr_template:
         l2_score += 5
+    elif has_issue_template or has_pr_template:
+        l2_score += 2.5
+        missing = "PULL_REQUEST_TEMPLATE.md" if not has_pr_template else "ISSUE_TEMPLATE"
+        report["remediations"].append({
+            "level": "P2",
+            "title": f"Частичные шаблоны тикетов (отсутствует {missing})",
+            "guide": f"{COURSE_URL}/blob/main/docs/05-project-management/README.md",
+            "fix": f"Добавьте {missing} для стандартизации входящих тикетов и PR."
+        })
     else:
         report["remediations"].append({
             "level": "P2",
@@ -301,7 +362,7 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     report["details"]["active_workflows_count"] = len(active_workflows)
 
     has_active_ci = len(active_workflows) > 0
-    has_timeouts = False
+    all_workflows_have_timeouts = True
     has_concurrency = False
     has_minimal_permissions = False
     all_actions_sha_pinned = True
@@ -313,7 +374,6 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     has_fake_tests = False
 
     if has_active_ci:
-        # Inspect workflow contents
         for wf in active_workflows:
             wf_path = wf.get("path")
             if not wf_path or not wf_path.startswith(".github/workflows"):
@@ -321,13 +381,30 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
             exists, content = check_file_exists(owner, repo, wf_path)
             if exists and content:
                 analyzed_workflow_count += 1
-                if "timeout-minutes:" in content or "timeout:" in content:
-                    has_timeouts = True
-                if "concurrency:" in content:
-                    has_concurrency = True
-                if "permissions:" in content:
-                    has_minimal_permissions = True
                 
+                # Check timeout-minutes in this workflow (ignoring comments)
+                wf_has_timeout = False
+                wf_has_concurrency = False
+                wf_has_permissions = False
+                
+                for line in content.splitlines():
+                    stripped = line.strip()
+                    if stripped.startswith("#"):
+                        continue
+                    if "timeout-minutes:" in stripped or "timeout:" in stripped:
+                        wf_has_timeout = True
+                    if "concurrency:" in stripped:
+                        wf_has_concurrency = True
+                    if "permissions:" in stripped and "write-all" not in content:
+                        wf_has_permissions = True
+                
+                if not wf_has_timeout:
+                    all_workflows_have_timeouts = False
+                if wf_has_concurrency:
+                    has_concurrency = True
+                if wf_has_permissions:
+                    has_minimal_permissions = True
+
                 # Check SHA pinning
                 uses_lines = [l for l in content.splitlines() if "uses:" in l and not l.strip().startswith("#")]
                 for u in uses_lines:
@@ -339,9 +416,17 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
                 # Detect CodeQL vs SAST
                 if "codeql-action" in content or "codeql" in wf_path.lower():
                     has_codeql = True
-                    # Detect cargo-cult suppression of CodeQL failures in private repos
-                    if re.search(r"upload:\s*['\"]?(never|false)['\"]?", content, re.IGNORECASE) or \
-                       re.search(r"continue-on-error:\s*true", content, re.IGNORECASE):
+                    # Check for cargo-cult in CodeQL:
+                    # 1. upload: never or upload: false
+                    if re.search(r"upload:\s*['\"]?(never|false)['\"]?", content, re.IGNORECASE):
+                        has_codeql_cargo_cult = True
+                    # 2. continue-on-error: true strictly associated with CodeQL step
+                    codeql_steps = re.findall(
+                        r"uses:\s+github/codeql-action[^\n]+\n(?:[ \t]+[^\n]+\n)*?[ \t]+continue-on-error:\s*true",
+                        content,
+                        re.IGNORECASE
+                    )
+                    if codeql_steps:
                         has_codeql_cargo_cult = True
 
                 # Detect alternative open SAST tools
@@ -356,7 +441,11 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
                     ]
                 ):
                     has_fake_tests = True
+
+        if analyzed_workflow_count == 0:
+            all_workflows_have_timeouts = False
     else:
+        all_workflows_have_timeouts = False
         all_actions_sha_pinned = False
         report["remediations"].append({
             "level": "P0",
@@ -365,7 +454,7 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
             "fix": "Настройте базовый CI воркфлоу (.github/workflows/ci.yml) для автопроверки тестов и линтеров."
         })
 
-    # Automated check / build in CI
+    # 1. Active CI with real tests (5 pts)
     if has_active_ci:
         if has_fake_tests:
             report["remediations"].append({
@@ -377,49 +466,57 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
         else:
             l3_score += 5
 
-    # Timeouts & Concurrency
-    if has_timeouts or has_concurrency:
+    # 2. Timeout protection (5 pts)
+    if has_active_ci and all_workflows_have_timeouts:
         l3_score += 5
     elif has_active_ci:
         report["remediations"].append({
             "level": "P1",
-            "title": "В GitHub Actions отсутствуют лимиты времени (timeout-minutes) и защита от гонок (concurrency)",
+            "title": "В воркфлоу отсутствуют обязательные лимиты времени (timeout-minutes)",
             "guide": f"{COURSE_URL}/blob/main/docs/06-actions-pages/README.md",
-            "fix": "Добавьте 'timeout-minutes: 5-10' и блок 'concurrency: cancel-in-progress: true' для экономии минут раннеров."
+            "fix": "Добавьте 'timeout-minutes: 5-10' во все джобы для защиты от зависаний и перерасхода квоты минут."
         })
 
-    # Minimal permissions
-    if has_minimal_permissions:
+    # 3. Concurrency protection (5 pts)
+    if has_active_ci and has_concurrency:
+        l3_score += 5
+    elif has_active_ci:
+        report["remediations"].append({
+            "level": "P1",
+            "title": "Отсутствует управление параллельными сборками (concurrency: cancel-in-progress: true)",
+            "guide": f"{COURSE_URL}/blob/main/docs/06-actions-pages/README.md",
+            "fix": "Настройте блок concurrency с 'cancel-in-progress: true' для автоматической отмены устаревших очередей."
+        })
+
+    # 4. Minimal permissions (5 pts)
+    if has_active_ci and has_minimal_permissions:
         l3_score += 5
     elif has_active_ci:
         report["remediations"].append({
             "level": "P1",
             "title": "В воркфлоу не зафиксирован принцип наименьших привилегий (permissions: contents: read)",
             "guide": f"{COURSE_URL}/blob/main/docs/14-security-insights/README.md",
-            "fix": "Явно задайте 'permissions: contents: read' на уровне файла воркфлоу, чтобы защититься от захвата токена GITHUB_TOKEN."
+            "fix": "Явно задайте 'permissions: contents: read' на уровне файла воркфлоу (или джобы), избегая антипаттерна write-all."
         })
 
-    # Basic active CI bonus
-    if has_active_ci:
-        l3_score += 5
-
-    report["scores"]["l3_cicd"] = min(l3_score, 20)
+    report["scores"]["l3_cicd"] = l3_score
 
     # ==========================================
     # DIMENSION 4: DevSecOps Fortress (L4)
     # ==========================================
     l4_score = 0
-    has_security_policy = check_file_exists(owner, repo, "SECURITY.md")[0] or check_file_exists(owner, repo, ".github/SECURITY.md")[0]
-    has_dependabot = (
-        check_file_exists(owner, repo, ".github/dependabot.yml")[0] or
-        check_file_exists(owner, repo, ".github/dependabot.yaml")[0] or
-        check_file_exists(owner, repo, "renovate.json")[0] or
-        check_file_exists(owner, repo, "renovate.json5")[0] or
-        check_file_exists(owner, repo, ".github/renovate.json")[0] or
-        check_file_exists(owner, repo, ".github/renovate.json5")[0] or
-        check_file_exists(owner, repo, ".renovaterc")[0] or
-        check_file_exists(owner, repo, ".renovaterc.json")[0]
+    has_security_policy = (
+        is_file_present(repo_tree, "SECURITY.md", owner, repo) or
+        is_file_present(repo_tree, ".github/SECURITY.md", owner, repo)
     )
+    
+    dependabot_paths = [
+        ".github/dependabot.yml", ".github/dependabot.yaml",
+        "renovate.json", "renovate.json5",
+        ".github/renovate.json", ".github/renovate.json5",
+        ".renovaterc", ".renovaterc.json"
+    ]
+    has_dependabot = any(is_file_present(repo_tree, p, owner, repo) for p in dependabot_paths)
 
     if has_security_policy:
         l4_score += 5
@@ -485,12 +582,19 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     # DIMENSION 5: AI-Ready 2026 (L5)
     # ==========================================
     l5_score = 0
-    has_agents_md = check_file_exists(owner, repo, "AGENTS.md")[0]
-    has_llms_txt = check_file_exists(owner, repo, "llms.txt")[0] or check_file_exists(owner, repo, ".well-known/llms.txt")[0]
+    has_agents_md = (
+        is_file_present(repo_tree, "AGENTS.md", owner, repo) or
+        is_file_present(repo_tree, ".github/AGENTS.md", owner, repo)
+    )
+    has_llms_txt = (
+        is_file_present(repo_tree, "llms.txt", owner, repo) or
+        is_file_present(repo_tree, ".well-known/llms.txt", owner, repo) or
+        has_directory_contents(repo_tree, "docs", owner, repo)
+    )
     has_copilot_instructions = (
-        check_file_exists(owner, repo, ".github/copilot-instructions.md")[0] or
-        check_file_exists(owner, repo, ".cursorrules")[0] or
-        check_file_exists(owner, repo, ".cursor/rules")[0]
+        is_file_present(repo_tree, ".github/copilot-instructions.md", owner, repo) or
+        is_file_present(repo_tree, ".cursorrules", owner, repo) or
+        has_directory_contents(repo_tree, ".cursor/rules", owner, repo)
     )
 
     if has_agents_md:
@@ -500,7 +604,7 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
             "level": "P1",
             "title": "Отсутствует системный контракт для ИИ-агентов (AGENTS.md)",
             "guide": f"{COURSE_URL}/blob/main/AGENTS.md",
-            "fix": "Создайте AGENTS.md со стандартами архитектуры, директивой против сикофантии и рабочими режимами агентов."
+            "fix": "Создайте AGENTS.md (в корне или .github/) со стандартами архитектуры, директивой против сикофантии и рабочими режимами агентов."
         })
 
     if has_llms_txt:
@@ -508,9 +612,9 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     else:
         report["remediations"].append({
             "level": "P2",
-            "title": "Отсутствует открытый контекстный стандарт для нейросетей (llms.txt)",
+            "title": "Отсутствует открытый контекстный стандарт для нейросетей (llms.txt или архитектура в docs/)",
             "guide": f"{COURSE_URL}/blob/main/llms.txt",
-            "fix": "Добавьте манифест llms.txt для эффективного RAG и скармливания контекста LLM-ассистентам без мусора."
+            "fix": "Добавьте манифест llms.txt или структурированную документацию в docs/ для скармливания контекста LLM без шума."
         })
 
     if has_copilot_instructions:
@@ -605,94 +709,51 @@ def format_markdown_report(report: Dict[str, Any]) -> str:
             lines.append(f"• 📖 **Канон курса:** [Изучить в «GitHub от А до Я»]({rem['guide']})")
             lines.append("")
 
+    # Dynamic Drop-in Snippets (only render if relevant remediations exist)
+    snippets_to_show = []
+    
+    if any("gitattributes" in r["title"].lower() for r in report["remediations"]):
+        snippets_to_show.append((
+            "Кроссплатформенный `.gitattributes` (LF Normalization):",
+            "gitattributes",
+            "* text=auto eol=lf\n*.py text eol=lf\n*.js text eol=lf\n*.ts text eol=lf\n*.md text eol=lf\n*.sh text eol=lf\n*.yml text eol=lf\n*.png binary\n*.jpg binary\n*.tar.gz binary"
+        ))
+
+    if any("agents.md" in r["title"].lower() for r in report["remediations"]):
+        snippets_to_show.append((
+            "Минимальный шаблон `AGENTS.md` (System Contract 2026):",
+            "markdown",
+            "# 🤖 AGENTS.md — Системный контракт для ИИ-агентов\n> Стандарт взаимодействия для автономных LLM-ассистентов (Cursor, Windsurf, Claude Code, Copilot, Antigravity).\n\n## 1. Архитектура и Grounding\n- Стек: [Укажите язык, фреймворки и структуру папок]\n- CWD: Рабочая директория проекта\n\n## 2. Директива против сикофантии (Anti-Sycophancy)\n- Никакого маркетингового шума («AI slop»).\n- Честно указывать на баги, утечки и неоптимальности.\n\n## 3. Правила изменений\n- Ветки feat/*, fix/*, коммиты по Conventional Commits.\n- Обязательный запуск линтеров и тестов перед PR."
+        ))
+
+    if any("sast" in r["title"].lower() or "codeql" in r["title"].lower() for r in report["remediations"]):
+        snippets_to_show.append((
+            "Открытый SAST воркфлоу для Go (.github/workflows/security.yml):",
+            "yaml",
+            "name: Security Scan\non:\n  push:\n    branches: [ main, master ]\n  pull_request:\n    branches: [ main, master ]\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\npermissions:\n  contents: read\njobs:\n  gosec:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2\n      - uses: securego/gosec@58ebae0d0b6748ae43d8ef4751f04cf30b0a8e1b # v2.22.1\n        with:\n          args: ./..."
+        ))
+        snippets_to_show.append((
+            "Открытый SAST воркфлоу для Python (.github/workflows/security.yml):",
+            "yaml",
+            "name: Security Scan\non:\n  push:\n    branches: [ main, master ]\n  pull_request:\n    branches: [ main, master ]\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\npermissions:\n  contents: read\njobs:\n  security:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2\n      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0\n        with:\n          python-version: '3.11'\n      - run: |\n          pip install bandit ruff\n          ruff check .\n          bandit -r . -ll"
+        ))
+
+    if snippets_to_show:
+        lines.extend([
+            "---",
+            "",
+            "### 📦 Готовые Рецепты для Внедрения (Drop-in Snippets)",
+            "",
+        ])
+        for idx, (title, lang, content) in enumerate(snippets_to_show, 1):
+            lines.append(f"#### {idx}. {title}")
+            lines.append(f"```{lang}")
+            lines.append(content)
+            lines.append("```")
+            lines.append("")
+
     lines.extend([
         "---",
-        "",
-        "### 📦 Готовые Рецепты для Внедрения (Drop-in Snippets)",
-        "",
-        "#### 1. Кроссплатформенный `.gitattributes` (LF Normalization):",
-        "```gitattributes",
-        "* text=auto eol=lf",
-        "*.py text eol=lf",
-        "*.js text eol=lf",
-        "*.ts text eol=lf",
-        "*.md text eol=lf",
-        "*.sh text eol=lf",
-        "*.yml text eol=lf",
-        "*.png binary",
-        "*.jpg binary",
-        "*.tar.gz binary",
-        "```",
-        "",
-        "#### 2. Минимальный шаблон `AGENTS.md` (System Contract 2026):",
-        "```markdown",
-        "# 🤖 AGENTS.md — Системный контракт для ИИ-агентов",
-        "> Стандарт взаимодействия для автономных LLM-ассистентов (Cursor, Windsurf, Claude Code, Copilot, Antigravity).",
-        "",
-        "## 1. Архитектура и Grounding",
-        "- Стек: [Укажите язык, фреймворки и структуру папок]",
-        "- CWD: Рабочая директория проекта",
-        "",
-        "## 2. Директива против сикофантии (Anti-Sycophancy)",
-        "- Никакого маркетингового шума («AI slop»).",
-        "- Честно указывать на баги, утечки и неоптимальности.",
-        "",
-        "## 3. Правила изменений",
-        "- Ветки feat/*, fix/*, коммиты по Conventional Commits.",
-        "- Обязательный запуск линтеров и тестов перед PR.",
-        "```",
-        "",
-        "#### 3. Открытый SAST воркфлоу для Go (.github/workflows/security.yml):",
-        "```yaml",
-        "name: Security Scan",
-        "on:",
-        "  push:",
-        "    branches: [ main, master ]",
-        "  pull_request:",
-        "    branches: [ main, master ]",
-        "concurrency:",
-        "  group: ${{ github.workflow }}-${{ github.ref }}",
-        "  cancel-in-progress: true",
-        "permissions:",
-        "  contents: read",
-        "jobs:",
-        "  gosec:",
-        "    runs-on: ubuntu-latest",
-        "    timeout-minutes: 10",
-        "    steps:",
-        "      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2",
-        "      - uses: securego/gosec@master",
-        "        with:",
-        "          args: ./...",
-        "```",
-        "",
-        "#### 4. Открытый SAST воркфлоу для Python (.github/workflows/security.yml):",
-        "```yaml",
-        "name: Security Scan",
-        "on:",
-        "  push:",
-        "    branches: [ main, master ]",
-        "  pull_request:",
-        "    branches: [ main, master ]",
-        "concurrency:",
-        "  group: ${{ github.workflow }}-${{ github.ref }}",
-        "  cancel-in-progress: true",
-        "permissions:",
-        "  contents: read",
-        "jobs:",
-        "  security:",
-        "    runs-on: ubuntu-latest",
-        "    timeout-minutes: 10",
-        "    steps:",
-        "      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2",
-        "      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0",
-        "        with:",
-        "          python-version: '3.11'",
-        "      - run: |",
-        "          pip install bandit ruff",
-        "          ruff check .",
-        "          bandit -r . -ll",
-        "```",
         "",
         f"Стандарт качества: [«GitHub от А до Я»]({COURSE_URL}) | TheNovaNodes Network 🛸"
     ])
