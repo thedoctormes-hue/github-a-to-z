@@ -3,7 +3,7 @@
     "filePath": "repomix-output.md",
     "style": "markdown",
     "parsableStyle": false,
-    "headerText": "GitHub от А до Я: Полный практический курс (TheNovaNodes)\nRepomix packaged repository context for LLM ingestion.",
+    "headerText": "🛸 GitHub от А до Я (TheNovaNodes) — Репозиторий Канона + Агентный Скилл GITHUBREPO\nАрхитектурный дайджест для внешнего аудита: связь образовательного стандарта и автономного CLI-инструмента.\n\nАрхитектурная триада:\n1. КАНОН (docs/ & labs/): 15 теоретических модулей и практических полигонов.\n2. ЛИНТЕР (scripts/audit_repo.py): исполняемый CLI-движок скоринга 0-100 с поддержкой открытого SAST, Renovate, .github/ стандартов и AppSec-санитизацией.\n3. СКИЛЛ (.agents/skills/githubrepo/SKILL.md): оркестрационный протокол для LLM-агентов экосистемы.\n4. КОНТРАКТЫ (AGENTS.md, llms.txt, .github/copilot-instructions.md): бескомпромиссный 100/100 Diamond стандарт без карго-культа.",
     "removeComments": false,
     "removeEmptyLines": false,
     "showLineNumbers": false,
