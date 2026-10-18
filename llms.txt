@@ -5,6 +5,7 @@
 ## Core Navigation & Quick Links
 
 - [README.md](README.md): Главная страница, навигатор по 14 модулям и лабораторным полигонам.
+- [scripts/audit_repo.py](scripts/audit_repo.py): Официальный автономный CLI-аудитор качества репозиториев (Scorecard 0-100 по 5 измерениям).
 - [docs/repo-reconnaissance.md](docs/repo-reconnaissance.md): Спецгайд по скоростной разведке чужих репозиториев (60-секундный протокол декомпозиции).
 - [docs/certification/foundations.md](docs/certification/foundations.md): Официальный тренажёр и руководство по сертификации GitHub Foundations GH-100 (25 вопросов).
 - [docs/education/student-pack.md](docs/education/student-pack.md): Студенческий пакет инструментов, бесплатный GitHub Pro и Copilot на $200k+.
