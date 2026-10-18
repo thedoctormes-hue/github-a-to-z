@@ -23,7 +23,7 @@ COPY . .
 
 # Compile markdown documents into /app/book and sanitize output artifact
 RUN mdbook build && \
-    rm -rf /app/book/.git /app/book/.github /app/book/scripts /app/book/Dockerfile /app/book/repomix.config.json /app/book/.gitignore /app/book/.gitattributes /app/book/book.toml /app/book/llms-full.txt
+    rm -rf /app/book/.git /app/book/.github /app/book/scripts /app/book/Dockerfile /app/book/repomix.config.json /app/book/.gitignore /app/book/.gitattributes /app/book/book.toml /app/book/llms-full.txt /app/book/.agents /app/book/.dockerignore
 
 # ==============================================================================
 # Stage 2: Ultra-lightweight production web server

@@ -19,6 +19,7 @@ jobs:
   build-and-push:
     name: Build & Push OCI Image to GHCR
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
