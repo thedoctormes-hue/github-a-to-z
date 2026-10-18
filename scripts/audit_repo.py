@@ -74,6 +74,9 @@ def parse_repo_slug(raw_input: Optional[str]) -> Optional[Tuple[str, str]]:
         return None
 
     raw = raw_input.strip().rstrip("/")
+    # AppSec: Reject shell injection characters
+    if re.search(r"[\$`;&|<>\r\n]", raw):
+        return None
     # Handle git clone URLs: git@github.com:owner/repo.git
     ssh_match = re.search(r"github\.com:([\w\-\.]+)/([\w\-\.]+?)(?:\.git)?$", raw)
     if ssh_match:
@@ -158,8 +161,8 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     has_license = bool(report["meta"]["license"])
     has_desc = bool(report["meta"]["description"].strip())
     has_topics = len(report["meta"]["topics"]) > 0
-    has_contributing = bool(comm_files.get("contributing") or check_file_exists(owner, repo, "CONTRIBUTING.md")[0])
-    has_coc = bool(comm_files.get("code_of_conduct") or check_file_exists(owner, repo, "CODE_OF_CONDUCT.md")[0])
+    has_contributing = bool(comm_files.get("contributing") or check_file_exists(owner, repo, "CONTRIBUTING.md")[0] or check_file_exists(owner, repo, ".github/CONTRIBUTING.md")[0])
+    has_coc = bool(comm_files.get("code_of_conduct") or check_file_exists(owner, repo, "CODE_OF_CONDUCT.md")[0] or check_file_exists(owner, repo, ".github/CODE_OF_CONDUCT.md")[0])
 
     if has_readme:
         l1_score += 4
@@ -407,7 +410,16 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     # ==========================================
     l4_score = 0
     has_security_policy = check_file_exists(owner, repo, "SECURITY.md")[0] or check_file_exists(owner, repo, ".github/SECURITY.md")[0]
-    has_dependabot = check_file_exists(owner, repo, ".github/dependabot.yml")[0] or check_file_exists(owner, repo, ".github/dependabot.yaml")[0]
+    has_dependabot = (
+        check_file_exists(owner, repo, ".github/dependabot.yml")[0] or
+        check_file_exists(owner, repo, ".github/dependabot.yaml")[0] or
+        check_file_exists(owner, repo, "renovate.json")[0] or
+        check_file_exists(owner, repo, "renovate.json5")[0] or
+        check_file_exists(owner, repo, ".github/renovate.json")[0] or
+        check_file_exists(owner, repo, ".github/renovate.json5")[0] or
+        check_file_exists(owner, repo, ".renovaterc")[0] or
+        check_file_exists(owner, repo, ".renovaterc.json")[0]
+    )
 
     if has_security_policy:
         l4_score += 5
@@ -451,9 +463,9 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     else:
         report["remediations"].append({
             "level": "P1",
-            "title": "Не настроен автоматический мониторинг зависимостей (Dependabot)",
+            "title": "Не настроен автоматический мониторинг зависимостей (Dependabot / Renovate)",
             "guide": f"{COURSE_URL}/blob/main/docs/10-production-standards/README.md",
-            "fix": "Создайте .github/dependabot.yml для регулярного авто-сканирования библиотек и экшенов на CVE."
+            "fix": "Создайте .github/dependabot.yml или renovate.json для регулярного авто-сканирования библиотек и экшенов на CVE."
         })
 
     if analyzed_workflow_count > 0 and all_actions_sha_pinned:
@@ -474,8 +486,12 @@ def audit_repository(owner: str, repo: str) -> Dict[str, Any]:
     # ==========================================
     l5_score = 0
     has_agents_md = check_file_exists(owner, repo, "AGENTS.md")[0]
-    has_llms_txt = check_file_exists(owner, repo, "llms.txt")[0]
-    has_copilot_instructions = check_file_exists(owner, repo, ".github/copilot-instructions.md")[0]
+    has_llms_txt = check_file_exists(owner, repo, "llms.txt")[0] or check_file_exists(owner, repo, ".well-known/llms.txt")[0]
+    has_copilot_instructions = (
+        check_file_exists(owner, repo, ".github/copilot-instructions.md")[0] or
+        check_file_exists(owner, repo, ".cursorrules")[0] or
+        check_file_exists(owner, repo, ".cursor/rules")[0]
+    )
 
     if has_agents_md:
         l5_score += 8
