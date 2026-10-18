@@ -308,6 +308,7 @@ github-a-to-z/
 │   ├── lab-13-human-agent-teams/
 │   └── lab-14-security-insights/
 ├── scripts/                    # Автоматизация и валидаторы качества
+│   ├── audit_repo.py           # Интеллектуальный CLI-аудитор качества репозиториев (Scorecard 0-100)
 │   ├── validate_links.py       # Валидатор целостности ссылок и графа документов
 │   └── verify_graduate_pr.py   # Санитарный валидатор PR выпускников (Scope Guard)
 └── .github/                    # Рабочая конфигурация GitHub для репозитория
@@ -322,6 +323,31 @@ github-a-to-z/
         ├── graduate-verifier.yml # Робот-ассистент и валидатор дипломных PR
         └── pages.yml           # Автоматическая сборка и деплой mdBook на GitHub Pages
 ```
+
+---
+
+## 🛸 Встроенный CLI-аудитор: `scripts/audit_repo.py`
+
+Репозиторий курса оснащён автономным инструментом аудита качества и соответствия индустриальным стандартам:
+
+```bash
+# Экспресс-аудит текущего проекта (автоопределение origin):
+python3 scripts/audit_repo.py
+
+# Аудит любого репозитория на GitHub:
+python3 scripts/audit_repo.py owner/repository
+python3 scripts/audit_repo.py https://github.com/owner/repository
+
+# Выгрузка отчёта в формате JSON:
+python3 scripts/audit_repo.py owner/repository --json
+```
+
+**Шкала зрелости (5 измерений, 0–100 баллов):**
+* **L1: Витрина & Сообщество (0–20):** `README.md`, `LICENSE`, описание, топики, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`.
+* **L2: Чистота Git Flow (0–20):** `.gitignore`, `.gitattributes` (LF), семантические коммиты (Conventional Commits), шаблоны Issue/PR.
+* **L3: Устойчивость CI/CD (0–20):** активные GitHub Actions, лимиты времени (`timeout-minutes`), защита от гонок (`concurrency`), минимизация прав (`permissions: contents: read`).
+* **L4: DevSecOps Цитадель (0–20):** `SECURITY.md`, мониторинг Dependabot, жесткий SHA-пиннинг сторонних экшенов, SAST без карго-культа (открытые сканеры `gosec`/`bandit`/`trivy` в приватных репозиториях).
+* **L5: AI-Ready 2026 (0–20):** системные контракты `AGENTS.md`, контекст `llms.txt`, проектные правила `.github/copilot-instructions.md`.
 
 ---
 

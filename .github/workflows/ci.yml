@@ -29,6 +29,11 @@ jobs:
       - name: Run automated link validator
         run: python3 scripts/validate_links.py
 
+      - name: Verify repository quality auditor CLI
+        run: |
+          python3 -m py_compile scripts/audit_repo.py
+          python3 scripts/audit_repo.py --help
+
       - name: Install mdBook (Rust) with SHA-256 verification
         run: |
           mkdir -p ~/.local/bin
